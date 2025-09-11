@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <base href="./">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smile Tunisia — Centre Dentaire Jasmin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- RELATIVE paths -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="assets/img/logo-stack.jpg" sizes="32x32">
+  <link rel="icon" type="image/png" href="assets/img/logo-stack.jpg" sizes="192x192">
+  <meta property="og:image" content="assets/img/logo-stack.jpg">
+  <meta name="twitter:image" content="assets/img/logo-stack.jpg">
+</head>
+<body data-whatsapp="21600000000">
+<header>
+  <nav>
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo-horiz.jpg" alt="Smile Tunisia" />
+      </a>
+
+      <!-- Burger (hidden on desktop) -->
+      <button class="burger" id="burger"
+              aria-label="Ouvrir le menu" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Wrap your existing links so we can slide them on mobile -->
+      <div class="nav-links" id="navLinks">
+        <a href="#why">Pourquoi-Nous</a>
+        <a href="#trust">Notre-Centre</a>
+        <a href="#proof">Avis</a>
+        <a href="#prices">Tarifs</a>
+        <a href="#process">Procédure</a>
+        <a href="#tourism">Sousse</a>
+        <a href="#qualifs">Qualifications</a>
+        <div class="spacer"></div>
+        <a class="btn btn-turq cta" href="devis/index.html">Obtenir mon devis</a>
+        <a class="btn btn-outline" href="javascript:void(0)" onclick="openWhatsApp()">Parler à un conseiller</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <!-- HERO with photo background -->
+  <section class="hero hero-photo section" id="hero">
+    <div class="container wrap">
+      <div>
+        <span class="badge">Devis sous 24h</span>
+        <h1>Souriez à nouveau — recevez votre devis gratuit en 24h</h1>
+        <p class="lead">Implants, facettes, bridges, aligneurs… Des soins dentaires de qualité internationale en Tunisie. Accompagnement complet en tourisme médical.</p>
+        <div style="display:flex;gap:12px;margin-top:14px">
+          <a href="devis/index.html" class="btn btn-turq">Obtenir mon devis gratuit</a>
+          <a href="javascript:void(0)" class="btn btn-outline" onclick="openWhatsApp()">Parler à un conseiller</a>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><b>+500</b><br/>patients accompagnés</div>
+          <div class="kpi"><b>Jusqu'à 70%</b><br/>d'économies vs UE</div>
+          <div class="kpi"><b>24h</b><br/>pour un devis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- “Pourquoi” -->
+<section class="why section" id="why">
+  <div class="container">
+    <h2>Pourquoi Smile Tunisia&nbsp;?</h2>
+    <p class="lead">Des soins dentaires de niveau international à Sousse, avec un accompagnement transparent et humain.</p>
+
+    <div class="chips">
+      <span class="chip">Devis en 24h</span>
+      <span class="chip">Planification 3D (CBCT)</span>
+      <span class="chip">Stérilisation conforme</span>
+      <span class="chip">Suivi WhatsApp</span>
+      <span class="chip">Économies jusqu’à 70%</span>
+    </div>
+
+    <div class="points">
+      <!-- Expertise -->
+      <div class="point" data-theme="expertise" tabindex="0"
+           data-photos="assets/img/why/expertise-1.webp,
+                        assets/img/why/expertise-2.webp,
+                        assets/img/why/expertise-3.webp,
+                        assets/img/why/expertise-4.webp">
+        <div class="icn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M8 4c2-1 6-1 8 0 2 1 3 4 1.5 6-1.2 1.7-1.5 6.5-3.5 9.5-.9 1.3-2.6 1.3-3.5 0C8.5 16.5 8.2 11.7 7 10 5.5 8 6 5 8 4z"/>
+          </svg>
+        </div>
+        <h3>Expertise clinique</h3>
+        <ul>
+          <li>Implants unitaires &amp; All-on-4/6</li>
+          <li>Facettes, couronnes, bridges</li>
+          <li>Aligneurs transparents</li>
+        </ul>
+      </div>
+
+      <!-- Technology -->
+      <div class="point" data-theme="tech" tabindex="0"
+           data-photos="assets/img/why/tech-1.webp,
+                        assets/img/why/tech-2.webp,
+                        assets/img/why/tech-3.webp">
+        <div class="icn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2l9 5-9 5-9-5 9-5z"/>
+            <path d="M3 7v10l9 5 9-5V7"/>
+          </svg>
+        </div>
+        <h3>Technologie &amp; protocoles</h3>
+        <ul>
+          <li>Planification 3D (CBCT)</li>
+          <li>Matériaux éprouvés</li>
+          <li>Hygiène &amp; stérilisation strictes</li>
+        </ul>
+      </div>
+
+      <!-- Care -->
+      <div class="point" data-theme="care" tabindex="0"
+           data-photos="assets/img/why/care-1.webp,
+                        assets/img/why/care-2.webp,
+                        assets/img/why/care-3.webp">
+        <div class="icn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 17l-1 4 4-1c2 1 4 1 6 0 5 0 9-3 9-7s-4-7-9-7-9 3-9 7c0 2 1 4 3 5z"/>
+            <path d="M10 11c1 2 3 2 4 0"/>
+          </svg>
+        </div>
+        <h3>Accompagnement personnalisé</h3>
+        <ul>
+          <li>Devis sous 24h</li>
+          <li>Assistance séjour (vols/hôtels/transfers)</li>
+          <li>Suivi post-op WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+
+<div class="mini-reviews">
+  <div class="review-mini"><div class="avatar">SB</div><div class="txt"><b>5.0 ★</b> — <q>Facettes impeccables, équipe pro.</q></div></div>
+  <div class="review-mini"><div class="avatar">ML</div><div class="txt"><b>5.0 ★</b> — <q>All-on-4 en 5 jours, top orga.</q></div></div>
+  <div class="review-mini"><div class="avatar">AK</div><div class="txt"><b>5.0 ★</b> — <q>Suivi WhatsApp rassurant.</q></div></div>
+</div>
+
+
+    <div class="why-cta">
+      <a class="btn btn-turq" href="devis/index.html">Obtenir mon devis gratuit</a>
+      <a class="btn btn-outline" href="javascript:void(0)" onclick="openWhatsApp()">Parler à un conseiller</a>
+    </div>
+
+    <p class="note" style="margin-top:10px">* Devis personnalisé selon examens, matériaux et protocole clinique.</p>
+  </div>
+</section>
+
+
+  <!-- TRUST -->
+<section class="trust section" id="trust">
+  <div class="container">
+    <h2>Une équipe de dentistes qualifiés — un réseau de cliniques certifiées</h2>
+    <p>
+      Notre réseau réunit des chirurgiens-dentistes diplômés et expérimentés, exerçant dans des
+      cliniques auditées et équipées (CBCT 3D, empreintes numériques, blocs stériles). Les soins
+      sont réalisés avec des matériaux <b>CE/FDA</b> et des protocoles d’hygiène stricts pour une
+      qualité constante et des résultats durables.
+    </p>
+
+    <div class="trust-rail">
+      <span class="t-badge">Dentistes diplômés & spécialisés</span>
+      <span class="t-badge">Cliniques certifiées & auditées</span>
+      <span class="t-badge">Planification 3D (CBCT)</span>
+      <span class="t-badge">Matériaux CE / FDA</span>
+      <span class="t-badge">Stérilisation conforme</span>
+      <span class="t-badge">Garantie écrite</span>
+    </div>
+
+    <!-- VIDEO (compact, with overlay play) -->
+    <div class="trust-video-card">
+      <video id="clinicVideo"
+             class="trust-video"
+             preload="metadata"
+             playsinline
+             muted
+             controls>
+        <source src="assets/video/clinic-tour.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo HTML5.
+      </video>
+
+      <!-- Clickable overlay play (hidden while playing) -->
+      <button class="v-overlay" id="vOverlay" type="button" aria-label="Lire la vidéo">
+        <span class="v-play">▶</span>
+      </button>
+    </div>
+
+    <div class="grid-3" style="margin-top:16px">
+      <div class="card trust-card" tabindex="0"
+           data-photos="assets/img/trust/implant/cbct.jpg,
+                        assets/img/trust/implant/consult.jpg,
+                        assets/img/trust/implant/shade.jpg">
+        <h3>Implantologie avancée</h3>
+        <ul class="list">
+          <li>All-on-4/6 & implants unitaires</li>
+          <li>Planification 3D (CBCT) & guides</li>
+          <li>Marques reconnues, matériaux CE/FDA</li>
+        </ul>
+      </div>
+
+      <div class="card trust-card" tabindex="0"
+           data-photos="assets/img/trust/esthetic/smile-macro-aqua.jpg,
+                        assets/img/trust/esthetic/patiente-miroir.jpg,
+                        assets/img/trust/esthetic/sourire-closeup.jpg">
+        <h3>Esthétique du sourire</h3>
+        <ul class="list">
+          <li>Facettes & couronnes haute précision</li>
+          <li>Analyse du sourire & wax-up</li>
+          <li>Résultats naturels & durables</li>
+        </ul>
+      </div>
+
+      <div class="card trust-card" tabindex="0"
+           data-photos="assets/img/trust/ortho/aligner-main.jpg,
+                        assets/img/trust/ortho/dentures-demo.jpg,
+                        assets/img/trust/ortho/denture-tray.jpg">
+        <h3>Orthodontie & prothèses</h3>
+        <ul class="list">
+          <li>Aligneurs transparents & traitements laser</li>
+          <li>Prothèses fixes et amovibles</li>
+          <li>Suivi post-op & maintenance</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px">
+      Transparence & sécurité : devis détaillé avant tout soin, consentement éclairé, traçabilité
+      des matériaux et <b>garantie écrite</b> sur les travaux prothétiques.
+    </div>
+
+    <div style="margin-top:16px">
+      <a class="btn" href="devis/index.html">Demander mon devis gratuit</a>
+      <a class="btn btn-outline" href="javascript:void(0)" onclick="openWhatsApp()">Discuter avec un conseiller</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- RESULTS -->
+  <section class="results section" id="results" style="background:var(--lav)">
+    <div class="container">
+      <h2>Résultats avant / après</h2>
+      <p class="lead">Glissez le curseur pour comparer. Utilisez les flèches pour changer de cas.</p>
+
+      <div class="ba-viewport">
+        <div class="ba-track">
+          <figure class="ba-slide" style="--fx:55%; --fy:58%;">
+            <div class="ba-frame" style="--pos:50%">
+              <img class="ba__after ba__img"  src="assets/img/ba/case2-after.webp"  alt="Après — cas 1" loading="lazy">
+              <img class="ba__before ba__img" src="assets/img/ba/case2-before.webp" alt="Avant — cas 1"  loading="lazy">
+              <button class="ba__handle" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                      aria-label="Glisser pour comparer"></button>
+            </div>
+          </figure>
+
+          <figure class="ba-slide" style="--fx:55%; --fy:58%;">
+            <div class="ba-frame" style="--pos:50%">
+              <img class="ba__after ba__img"  src="assets/img/ba/case1-after.webp"  alt="Après — cas 2" loading="lazy">
+              <img class="ba__before ba__img" src="assets/img/ba/case1-before.webp" alt="Avant — cas 2"  loading="lazy">
+              <button class="ba__handle" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                      aria-label="Glisser pour comparer"></button>
+            </div>
+          </figure>
+
+          <figure class="ba-slide" style="--fx:55%; --fy:58%;">
+            <div class="ba-frame" style="--pos:50%">
+              <img class="ba__after ba__img"  src="assets/img/ba/case3-after.webp"  alt="Après — cas 3" loading="lazy">
+              <img class="ba__before ba__img" src="assets/img/ba/case3-before.webp" alt="Avant — cas 3"  loading="lazy">
+              <button class="ba__handle" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                      aria-label="Glisser pour comparer"></button>
+            </div>
+          </figure>
+        </div>
+
+        <button class="ba-nav ba-prev" type="button" aria-label="Cas précédent">‹</button>
+        <button class="ba-nav ba-next" type="button" aria-label="Cas suivant">›</button>
+
+        <div class="ba-dots" role="tablist" aria-label="Choisir un cas">
+          <button class="ba-dot is-active" type="button" role="tab" aria-selected="true" tabindex="0"></button>
+          <button class="ba-dot" type="button" role="tab" aria-selected="false" tabindex="-1"></button>
+          <button class="ba-dot" type="button" role="tab" aria-selected="false" tabindex="-1"></button>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:10px">* Photos publiées avec consentement. Résultats variables selon l’état initial et le protocole clinique.</p>
+
+      <div style="margin-top:16px">
+        <a class="btn btn-turq" href="devis/index.html">Obtenir mon devis gratuit</a>
+        <a class="btn btn-outline" href="javascript:void(0)" onclick="openWhatsApp()">Parler à un conseiller</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICES -->
+  <section class="prices section" id="prices">
+    <div class="container">
+      <h2>Comparez nos tarifs</h2>
+      <p>Des soins dentaires alignés sur les standards européens, à des prix accessibles.</p>
+      <div class="card">
+        <table class="table">
+          <thead>
+            <tr><th>Traitement</th><th>France</th><th>Belgique</th><th>Luxembourg</th><th class="tn">Tunisie</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Implant unitaire</td><td>2 000 €</td><td>1 800 €</td><td>2 200 €</td><td class="tn">650 €</td></tr>
+            <tr><td>All-on-4 (arcade)</td><td>15–30 k€</td><td>14–25 k€</td><td>16–28 k€</td><td class="tn">3 000–4 000 €</td></tr>
+            <tr><td>Facette céramique (dent)</td><td>1 000 €</td><td>950 €</td><td>1 100 €</td><td class="tn">350 €</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Indications tarifaires à titre comparatif; devis personnalisé nécessaire.</p>
+      </div>
+      <div style="margin-top:16px">
+        <a class="btn" href="devis/index.html">Obtenir un devis adapté à mon cas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process section" id="process" style="background:var(--lav)">
+    <div class="container">
+      <h2>Comment ça se passe ?</h2>
+      <div class="grid-2">
+        <div class="step"><div class="em">📤</div><div><b>1) Envoi de vos photos/radio</b><br/>Téléversez une photo de votre bouche ou une radio panoramique.</div></div>
+        <div class="step"><div class="em">📩</div><div><b>2) Devis sous 24h</b><br/>Vous recevez un devis clair, avec estimation des coûts et de la durée.</div></div>
+        <div class="step"><div class="em">🛫</div><div><b>3) Organisation du séjour</b><br/>Assistée par notre équipe ou indépendante selon votre préférence.</div></div>
+        <div class="step"><div class="em">🦷</div><div><b>4) Soins au Centre</b><br/>Traitement + suivi post-op sur place puis à distance.</div></div>
+      </div>
+      <div class="callout" style="margin-top:16px">
+        <p><em>Transparent :</em> aucun frais avant la première visite. Les réservations personnelles (vols, hôtel) restent à votre charge si vous organisez seul.</p>
+      </div>
+      <div style="margin-top:16px">
+        <a class="btn btn-outline" href="devis/index.html">Commencer ma procédure</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOURISM -->
+  <section class="tourism hero-tourism section" id="tourism">
+    <div class="tourism-viewport" aria-label="Soins & découverte à Sousse">
+      <div class="tourism-track">
+<!-- Slide 1 — Médina -->
+<article class="t-slide"
+         data-img="assets/img/sousse/sousse-medina-collage-2200x1100.webp"
+         style="--img: url('assets/img/sousse/sousse-medina-collage-2200x1100.webp')">
+  <div class="t-bg"></div>
+  <div class="container t-copy">
+    <span class="badge">Médina de Sousse · UNESCO</span>
+    <h3>Ruelles blanches, ribat & grande mosquée</h3>
+    <p class="lead">Vieilles ruelles blanches, ribat millénaire et vues mer — le cœur vivant de Sousse.</p>
+    <a class="btn btn-turq" href="blog/sousse.html#medina">Découvrir</a>
+  </div>
+</article>
+
+<!-- Slide 2 — Plage -->
+<article class="t-slide"
+         data-img="assets/img/sousse/plages-collage-2x2-2200x1100.webp"
+         style="--img: url('assets/img/sousse/plages-collage-2x2-2200x1100.webp')">
+  <div class="t-bg"></div>
+  <div class="container t-copy">
+    <span class="badge">Plage de Sousse</span>
+    <h3>Sable fin & eaux claires</h3>
+    <p class="lead">Sable blond, eau cristalline et brise marine — farniente du matin au coucher du soleil.</p>
+    <a class="btn btn-turq" href="blog/sousse.html#plage">Voir la plage</a>
+  </div>
+</article>
+
+<!-- Slide 3 — Marina -->
+<article class="t-slide"
+         data-img="assets/img/sousse/kantaoui-collage-2x2-v2-2200x1100-matched-to-medina.webp"
+         style="--img: url('assets/img/sousse/kantaoui-collage-2x2-v2-2200x1100-matched-to-medina.webp')">
+  <div class="t-bg"></div>
+  <div class="container t-copy">
+    <span class="badge">Port El Kantaoui</span>
+    <h3>Promenade, restaurants & yachts</h3>
+    <p class="lead">Hôtels 4–5★, marina scintillante et tables de poissons frais – ambiance chic au coucher du soleil.</p>
+    <a class="btn btn-turq" href="blog/sousse.html#kantaoui">Explorer</a>
+  </div>
+</article>
+
+      </div>
+
+      <button class="t-nav t-prev" aria-label="Précédent">‹</button>
+      <button class="t-nav t-next" aria-label="Suivant">›</button>
+
+      <div class="t-dots" role="tablist" aria-label="Choisir une vue">
+        <button class="t-dot is-active" role="tab" aria-selected="true" tabindex="0"></button>
+        <button class="t-dot" role="tab" aria-selected="false" tabindex="-1"></button>
+        <button class="t-dot" role="tab" aria-selected="false" tabindex="-1"></button>
+      </div>
+    </div>
+  </section>
+<!-- QUALIFS -->
+<section class="qualifs section" id="qualifs" style="background:var(--lav)">
+  <div class="container">
+    <h2>Des médecins hautement qualifiés</h2>
+    <p>
+      Formation universitaire d’au moins 6 ans, spécialisations possibles en implantologie,
+      orthodontie et esthétique. Accès aux technologies modernes et à la formation continue.
+    </p>
+
+    <div class="q3">
+      <!-- Diplômes & formations -->
+      <article class="qcard" tabindex="0"
+        style="--q-bg: url('assets/img/qualifs/diplomes-1.webp')"
+        data-photos="assets/img/qualifs/diplomes-1.webp,
+                     assets/img/qualifs/diplomes-2.webp,
+                     assets/img/qualifs/diplomes-3.webp">
+        <div class="q-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 3L2 7l10 4 10-4-6-2.4"/>
+            <path d="M6 10v4c0 2.2 3 4 6 4s6-1.8 6-4v-4"/>
+          </svg>
+        </div>
+        <h3>Diplômes & formations</h3>
+        <ul class="list">
+          <li>Diplôme national de docteur en médecine dentaire (≥ 6&nbsp;ans).</li>
+          <li>Spécialisations hospitalo-universitaires (implantologie, ortho, esthétique).</li>
+          <li>Formation continue & participation à des congrès internationaux.</li>
+        </ul>
+        <div class="q-stamps">
+          <span class="stamp">6+ ans</span>
+          <span class="stamp">Spécialisations</span>
+          <span class="stamp">Formation continue</span>
+        </div>
+      </article>
+
+      <!-- Portraits professionnels -->
+      <article class="qcard" tabindex="0"
+        style="--q-bg: url('assets/img/qualifs/portraits-1.webp')"
+        data-photos="assets/img/qualifs/portraits-1.webp,
+                     assets/img/qualifs/portraits-2.webp,
+                     assets/img/qualifs/portraits-3.webp">
+        <div class="q-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="8" cy="8" r="3"/><circle cx="16" cy="7" r="2.5"/>
+            <path d="M3 18c0-3 3-5 5-5s5 2 5 5v1H3v-1z"/>
+            <path d="M14 18c.3-2.2 2.1-3.7 4-3.7 2 0 3.7 1.5 4 3.7v1h-8v-1z"/>
+          </svg>
+        </div>
+        <h3>Portraits professionnels</h3>
+        <ul class="list">
+          <li>Approche centrée patient, écoute & plan de traitement personnalisé.</li>
+          <li>Cas cliniques & résultats avant/après (photos anonymisées) disponibles.</li>
+          <li>Suivi clair&nbsp;: explications, consentement & accompagnement WhatsApp.</li>
+        </ul>
+        <div class="q-stamps">
+          <span class="stamp">Éthique</span>
+          <span class="stamp">Transparence</span>
+          <span class="stamp">Suivi</span>
+        </div>
+      </article>
+
+      <!-- Normes & protocoles -->
+      <article class="qcard" tabindex="0"
+        style="--q-bg: url('assets/img/qualifs/protocoles-1.webp')"
+        data-photos="assets/img/qualifs/protocoles-1.webp,
+                     assets/img/qualifs/protocoles-2.webp,
+                     assets/img/qualifs/protocoles-3.webp">
+        <div class="q-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z"/>
+            <path d="M8 12l2.5 2.5L16 9"/>
+          </svg>
+        </div>
+        <h3>Normes & protocoles</h3>
+        <ul class="list">
+          <li>Stérilisation stricte, traçabilité, salle propre/zone stérile.</li>
+          <li>Imagerie <b>CBCT 3D</b>, empreintes numériques, planification guidée.</li>
+          <li>Matériaux conformes <b>CE/FDA</b> & garantie écrite prothétique.</li>
+        </ul>
+        <div class="q-stamps">
+          <span class="stamp">CBCT&nbsp;3D</span>
+          <span class="stamp">CE / FDA</span>
+          <span class="stamp">Garantie</span>
+        </div>
+      </article>
+    </div>
+
+    <p class="note" style="margin-top:12px">
+      * Documents disponibles sur demande&nbsp;: diplômes, attestations de formation, protocoles d’hygiène,
+      fiches matériaux et exemples de cas (anonymisés).
+    </p>
+
+    <div class="why-cta" style="margin-top:12px">
+      <a class="btn btn-turq" href="devis/index.html">Obtenir mon devis gratuit</a>
+      <a class="btn btn-outline" href="javascript:void(0)" onclick="openWhatsApp()">Parler à un conseiller</a>
+    </div>
+  </div>
+</section>
+
+
+
+  <footer>
+    <div class="container grid-3">
+      <div class="footer-col">
+        <b>Smile Tunisia</b><br/>
+        <a href="devis/index.html">Demander un devis</a>
+      </div>
+      <div class="footer-col">
+        <b>Contact</b><br/>
+        WhatsApp: <a href="javascript:void(0)" onclick="openWhatsApp()">+216 00 000 000</a><br/>
+        Email: contact@smile.tn
+      </div>
+      <div class="footer-col">
+        <b>Légal</b><br/>
+        <a href="#">Politique de confidentialité</a><br/>
+        <a href="#">CGU</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- RELATIVE script -->
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
+<!-- Language FAB + i18n -->
+<!-- Language FAB + i18n (SVG flags + KPI#2 bold fix) -->
+<style>
+  #langFab{position:fixed;right:16px;bottom:16px;z-index:50}
+  #langFab .fab{
+    width:52px;height:52px;border-radius:50%;
+    background:#fff;border:2px solid #e5e7eb;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    display:flex;align-items:center;justify-content:center;cursor:pointer
+  }
+  #langFab .menu{
+    position:absolute;right:0;bottom:60px;background:#111827;color:#fff;
+    border-radius:12px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.35);
+    opacity:0;transform:translateY(8px);transition:.15s;pointer-events:none
+  }
+  #langFab.open .menu{opacity:1;transform:translateY(0);pointer-events:auto}
+  #langFab .menu button{
+    display:flex;align-items:center;gap:8px;background:transparent;color:#fff;
+    border:0;padding:8px 10px;border-radius:10px;cursor:pointer;font-weight:700
+  }
+  #langFab .menu button:hover{background:#1f2937}
+  #langFab .menu .active{background:#0f172a}
+
+  /* flag image sizes */
+  #langFab .flag-img{width:24px;height:24px;border-radius:50%}
+  #langFab .menu .flag-img{width:18px;height:18px}
+</style>
+
+<div id="langFab" aria-label="Choose language">
+  <button class="fab" id="langFabBtn" title="Language"></button>
+  <div class="menu" id="langMenu" role="menu" aria-label="Languages"></div>
+</div>
+
+<script>
+(function(){
+  // reuse your page's apply(lang) — it already updates all strings
+  const LANGS = [
+    { code:'fr', fi:'fr', label:'Français' },
+    { code:'en', fi:'gb', label:'English' },   // or 'us' if you prefer
+    { code:'es', fi:'es', label:'Español' },
+    { code:'de', fi:'de', label:'Deutsch' },
+    { code:'it', fi:'it', label:'Italiano' },
+    { code:'ar', fi:'tn', label:'العربية' },   // Arabic (Tunisia)
+  ];
+
+  /* =========================
+     TRANSLATIONS (all sections)
+     ========================= */
+  const T = {
+    fr:{ /* --- NAV + HERO + KPI (unchanged) --- */
+      'nav.why':'Pourquoi-Nous','nav.center':'Notre-Centre','nav.reviews':'Avis','nav.prices':'Tarifs','nav.process':'Procédure','nav.tourism':'Sousse','nav.qualifs':'Qualifications','nav.cta':'Obtenir mon devis','nav.advisor':'Parler à un conseiller',
+      'hero.badge':'Devis sous 24h','hero.title':'Souriez à nouveau — recevez votre devis gratuit en 24h',
+      'hero.lead':'Implants, facettes, bridges, aligneurs… Des soins dentaires de qualité internationale en Tunisie. Accompagnement complet en tourisme médical.',
+      'hero.cta1':'Obtenir mon devis gratuit','hero.cta2':'Parler à un conseiller',
+      'kpi1.label':'patients accompagnés','kpi2.value':"Jusqu'à 70%", 'kpi2.label':"d'économies vs UE",'kpi3.label':'pour un devis',
+
+      /* WHY */
+      'why.h2':'Pourquoi Smile Tunisia ?','why.lead':'Des soins dentaires de niveau international à Sousse, avec un accompagnement transparent et humain.',
+      'why.chips':['Devis en 24h','Planification 3D (CBCT)','Stérilisation conforme','Suivi WhatsApp','Économies jusqu’à 70%'],
+      'why.exp.h3':'Expertise clinique','why.exp.list':['Implants unitaires & All-on-4/6','Facettes, couronnes, bridges','Aligneurs transparents'],
+      'why.tech.h3':'Technologie & protocoles','why.tech.list':['Planification 3D (CBCT)','Matériaux éprouvés','Hygiène & stérilisation strictes'],
+      'why.care.h3':'Accompagnement personnalisé','why.care.list':['Devis sous 24h','Assistance séjour (vols/hôtels/transfers)','Suivi post-op WhatsApp'],
+      'why.note':'* Devis personnalisé selon examens, matériaux et protocole clinique.',
+      'why.cta1':'Obtenir mon devis gratuit','why.cta2':'Parler à un conseiller',
+      'reviews.r1': 'Suivi WhatsApp rassurant.',
+      'reviews.r2': 'All-on-4 en 5 jours, top orga.',
+      'reviews.r3': 'Facettes impeccables, équipe pro.',
+      /* TRUST */
+      'trust.h2':'Une équipe de dentistes qualifiés — un réseau de cliniques certifiées',
+      'trust.p':'Notre réseau réunit des chirurgiens-dentistes diplômés et expérimentés, exerçant dans des cliniques auditées et équipées (CBCT 3D, empreintes numériques, blocs stériles). Les soins sont réalisés avec des matériaux <b>CE/FDA</b> et des protocoles d’hygiène stricts pour une qualité constante et des résultats durables.',
+      'trust.badges':['Dentistes diplômés & spécialisés','Cliniques certifiées & auditées','Planification 3D (CBCT)','Matériaux CE / FDA','Stérilisation conforme','Garantie écrite'],
+      'trust.c1.h3':'Implantologie avancée','trust.c1.list':['All-on-4/6 & implants unitaires','Planification 3D (CBCT) & guides','Marques reconnues, matériaux CE/FDA'],
+      'trust.c2.h3':'Esthétique du sourire','trust.c2.list':['Facettes & couronnes haute précision','Analyse du sourire & wax-up','Résultats naturels & durables'],
+      'trust.c3.h3':'Orthodontie & prothèses','trust.c3.list':['Aligneurs transparents & traitements laser','Prothèses fixes et amovibles','Suivi post-op & maintenance'],
+      'trust.callout':'Transparence & sécurité : devis détaillé avant tout soin, consentement éclairé, traçabilité des matériaux et <b>garantie écrite</b> sur les travaux prothétiques.',
+      'trust.btn1':'Demander mon devis gratuit','trust.btn2':'Discuter avec un conseiller',
+
+      /* RESULTS */
+      'res.h2':'Résultats avant / après','res.lead':'Glissez le curseur pour comparer. Utilisez les flèches pour changer de cas.',
+      'res.note':'* Photos publiées avec consentement. Résultats variables selon l’état initial et le protocole clinique.',
+      'res.btn1':'Obtenir mon devis gratuit','res.btn2':'Parler à un conseiller',
+
+      /* PRICES */
+      'prices.h2':'Comparez nos tarifs','prices.p':'Des soins dentaires alignés sur les standards européens, à des prix accessibles.',
+      'prices.head':['Traitement','France','Belgique','Luxembourg','Tunisie'],
+      'prices.row1':'Implant unitaire','prices.row2':'All-on-4 (arcade)','prices.row3':'Facette céramique (dent)',
+      'prices.note':'Indications tarifaires à titre comparatif; devis personnalisé nécessaire.',
+      'prices.btn':'Obtenir un devis adapté à mon cas',
+
+      /* PROCESS */
+      'proc.h2':'Comment ça se passe ?',
+      'proc.s1':{title:'1) Envoi de vos photos/radio',text:'Téléversez une photo de votre bouche ou une radio panoramique.'},
+      'proc.s2':{title:'2) Devis sous 24h',text:'Vous recevez un devis clair, avec estimation des coûts et de la durée.'},
+      'proc.s3':{title:'3) Organisation du séjour',text:'Assistée par notre équipe ou indépendante selon votre préférence.'},
+      'proc.s4':{title:'4) Soins au Centre',text:'Traitement + suivi post-op sur place puis à distance.'},
+      'proc.callout':'<em>Transparent :</em> aucun frais avant la première visite. Les réservations personnelles (vols, hôtel) restent à votre charge si vous organisez seul.',
+      'proc.btn':'Commencer ma procédure',
+
+      /* TOURISM (3 slides) */
+      'tour1.badge':'Médina de Sousse · UNESCO','tour1.h3':'Ruelles blanches, ribat & grande mosquée','tour1.lead':'Vieilles ruelles blanches, ribat millénaire et vues mer — le cœur vivant de Sousse.','tour1.btn':'Découvrir',
+      'tour2.badge':'Plage de Sousse','tour2.h3':'Sable fin & eaux claires','tour2.lead':'Sable blond, eau cristalline et brise marine — farniente du matin au coucher du soleil.','tour2.btn':'Voir la plage',
+      'tour3.badge':'Port El Kantaoui','tour3.h3':'Promenade, restaurants & yachts','tour3.lead':'Hôtels 4–5★, marina scintillante et tables de poissons frais – ambiance chic au coucher du soleil.','tour3.btn':'Explorer',
+
+      /* QUALIFS */
+      'qual.h2':'Des médecins hautement qualifiés',
+      'qual.p':'Formation universitaire d’au moins 6 ans, spécialisations possibles en implantologie, orthodontie et esthétique. Accès aux technologies modernes et à la formation continue.',
+      'qual.c1.h3':'Diplômes & formations','qual.c1.list':['Diplôme national de docteur en médecine dentaire (≥ 6 ans).','Spécialisations hospitalo-universitaires (implantologie, ortho, esthétique).','Formation continue & participation à des congrès internationaux.'],
+      'qual.c1.stamps':['6+ ans','Spécialisations','Formation continue'],
+      'qual.c2.h3':'Portraits professionnels','qual.c2.list':['Approche centrée patient, écoute & plan de traitement personnalisé.','Cas cliniques & résultats avant/après (photos anonymisées) disponibles.','Suivi clair : explications, consentement & accompagnement WhatsApp.'],
+      'qual.c2.stamps':['Éthique','Transparence','Suivi'],
+      'qual.c3.h3':'Normes & protocoles','qual.c3.list':['Stérilisation stricte, traçabilité, salle propre/zone stérile.','Imagerie <b>CBCT 3D</b>, empreintes numériques, planification guidée.','Matériaux conformes <b>CE/FDA</b> & garantie écrite prothétique.'],
+      'qual.c3.stamps':['CBCT 3D','CE / FDA','Garantie'],
+      'qual.note':'* Documents disponibles sur demande : diplômes, attestations de formation, protocoles d’hygiène, fiches matériaux et exemples de cas (anonymisés).',
+      'qual.cta1':'Obtenir mon devis gratuit','qual.cta2':'Parler à un conseiller'
+    },
+
+    /* ================= EN ================= */
+    en:{
+      'nav.why':'Why Us','nav.center':'Our Center','nav.reviews':'Reviews','nav.prices':'Prices','nav.process':'Process','nav.tourism':'Sousse','nav.qualifs':'Qualifications','nav.cta':'Get my quote','nav.advisor':'Talk to an advisor',
+      'hero.badge':'Quote within 24h','hero.title':'Smile again — get your free quote in 24 hours',
+      'hero.lead':'Implants, veneers, crowns, aligners… International-quality dental care in Tunisia. Full support for medical tourism.',
+      'hero.cta1':'Get my free quote','hero.cta2':'Talk to an advisor',
+      'kpi1.label':'patients assisted','kpi2.value':'Up to 70%','kpi2.label':'savings vs EU','kpi3.label':'for a quote',
+
+      'why.h2':'Why Smile Tunisia?','why.lead':'International-level dentistry in Sousse with transparent, human support.',
+      'why.chips':['Quote in 24h','3D planning (CBCT)','Sterilization compliant','WhatsApp follow-up','Up to 70% savings'],
+      'why.exp.h3':'Clinical expertise','why.exp.list':['Single implants & All-on-4/6','Veneers, crowns, bridges','Clear aligners'],
+      'why.tech.h3':'Technology & protocols','why.tech.list':['3D planning (CBCT)','Proven materials','Strict hygiene & sterilization'],
+      'why.care.h3':'Personalized support','why.care.list':['Quote within 24h','Trip assistance (flights/hotels/transfers)','Post-op WhatsApp follow-up'],
+      'why.note':'* Personalised quote depending on exams, materials and clinical protocol.',
+      'why.cta1':'Get my free quote','why.cta2':'Talk to an advisor',
+      'reviews.r1': 'Reassuring WhatsApp follow-up.',
+      'reviews.r2': 'All-on-4 in 5 days, great orga.',
+      'reviews.r3': 'Impeccable veneers, pro team.',
+
+      'trust.h2':'Qualified dentists — a network of certified clinics',
+      'trust.p':'Our network brings together qualified, experienced dentists working in audited, well-equipped clinics (3D CBCT, digital impressions, sterile rooms). Care is provided with <b>CE/FDA</b> materials and strict hygiene protocols for consistent quality and lasting results.',
+      'trust.badges':['Qualified & specialised dentists','Certified & audited clinics','3D planning (CBCT)','CE / FDA materials','Compliant sterilization','Written warranty'],
+      'trust.c1.h3':'Advanced implantology','trust.c1.list':['All-on-4/6 & single implants','3D planning (CBCT) & guides','Trusted brands, CE/FDA materials'],
+      'trust.c2.h3':'Smile aesthetics','trust.c2.list':['High-precision veneers & crowns','Smile analysis & wax-up','Natural, long-lasting results'],
+      'trust.c3.h3':'Orthodontics & prosthetics','trust.c3.list':['Clear aligners & laser treatments','Fixed and removable prostheses','Post-op follow-up & maintenance'],
+      'trust.callout':'Transparency & safety: detailed quote before any treatment, informed consent, material traceability, and a <b>written warranty</b> on prosthetic work.',
+      'trust.btn1':'Request my free quote','trust.btn2':'Chat with an advisor',
+
+      'res.h2':'Before / after results','res.lead':'Drag the slider to compare. Use arrows to change case.',
+      'res.note':'* Photos published with consent. Results vary with initial condition and clinical protocol.',
+      'res.btn1':'Get my free quote','res.btn2':'Talk to an advisor',
+
+      'prices.h2':'Compare our prices','prices.p':'European-standard dentistry at accessible prices.',
+      'prices.head':['Treatment','France','Belgium','Luxembourg','Tunisia'],
+      'prices.row1':'Single implant','prices.row2':'All-on-4 (arch)','prices.row3':'Ceramic veneer (tooth)',
+      'prices.note':'Indicative prices for comparison; a personalised quote is required.',
+      'prices.btn':'Get a quote for my case',
+
+      'proc.h2':'How does it work?',
+      'proc.s1':{title:'1) Send your photos/X-ray',text:'Upload a mouth photo or a panoramic X-ray.'},
+      'proc.s2':{title:'2) Quote within 24h',text:'You receive a clear estimate with costs and timing.'},
+      'proc.s3':{title:'3) Trip organisation',text:'Assisted by our team or independently — your choice.'},
+      'proc.s4':{title:'4) Care at the Center',text:'Treatment + post-op follow-up on site then remotely.'},
+      'proc.callout':'<em>Transparent:</em> no fees before the first visit. Personal bookings (flights, hotel) are at your expense if you organise them yourself.',
+      'proc.btn':'Start my process',
+
+      'tour1.badge':'Sousse Medina · UNESCO','tour1.h3':'White alleys, ribat & Great Mosque','tour1.lead':'Whitewashed lanes, a thousand-year-old ribat and sea views — the living heart of Sousse.','tour1.btn':'Discover',
+      'tour2.badge':'Sousse Beach','tour2.h3':'Fine sand & clear waters','tour2.lead':'Blond sand, crystal water and sea breeze — relax from sunrise to sunset.','tour2.btn':'See the beach',
+      'tour3.badge':'Port El Kantaoui','tour3.h3':'Promenade, restaurants & yachts','tour3.lead':'4–5★ hotels, a sparkling marina and fresh-fish restaurants — chic sunset vibes.','tour3.btn':'Explore',
+
+      'qual.h2':'Highly qualified doctors',
+      'qual.p':'At least 6 years of university training, with options to specialise in implantology, orthodontics and aesthetics. Access to modern technologies and continuing education.',
+      'qual.c1.h3':'Degrees & training','qual.c1.list':['National DDS degree (≥ 6 years).','University-hospital specialisations (implantology, ortho, aesthetics).','Continuing education & participation in international congresses.'],
+      'qual.c1.stamps':['6+ years','Specialisations','Continuing education'],
+      'qual.c2.h3':'Professional portraits','qual.c2.list':['Patient-centred approach, listening & personalised plan.','Clinical cases & before/after results (anonymised) available.','Clear follow-up: explanations, consent & WhatsApp support.'],
+      'qual.c2.stamps':['Ethics','Transparency','Follow-up'],
+      'qual.c3.h3':'Standards & protocols','qual.c3.list':['Strict sterilisation, traceability, clean room/sterile zone.','<b>3D CBCT</b> imaging, digital impressions, guided planning.','<b>CE/FDA</b> compliant materials & written prosthetic warranty.'],
+      'qual.c3.stamps':['3D CBCT','CE / FDA','Warranty'],
+      'qual.note':'* Documents available on request: degrees, training certificates, hygiene protocols, material sheets and anonymised case examples.',
+      'qual.cta1':'Get my free quote','qual.cta2':'Talk to an advisor'
+    },
+
+    /* ================= ES ================= */
+    es:{
+      'nav.why':'Por qué nosotros','nav.center':'Nuestro centro','nav.reviews':'Opiniones','nav.prices':'Precios','nav.process':'Proceso','nav.tourism':'Susa','nav.qualifs':'Cualificaciones','nav.cta':'Obtener mi presupuesto','nav.advisor':'Hablar con un asesor',
+      'hero.badge':'Presupuesto en 24h','hero.title':'Vuelve a sonreír — recibe tu presupuesto gratis en 24 horas',
+      'hero.lead':'Implantes, carillas, coronas, alineadores… Odontología de calidad internacional en Túnez. Acompañamiento completo en turismo médico.',
+      'hero.cta1':'Presupuesto gratuito','hero.cta2':'Hablar con un asesor',
+      'kpi1.label':'pacientes acompañados','kpi2.value':'Hasta 70%','kpi2.label':'de ahorro vs UE','kpi3.label':'para un presupuesto',
+
+      'why.h2':'¿Por qué Smile Tunisia?','why.lead':'Odontología de nivel internacional en Susa con acompañamiento transparente y humano.',
+      'why.chips':['Presupuesto en 24h','Planificación 3D (CBCT)','Esterilización conforme','Seguimiento por WhatsApp','Hasta un 70% de ahorro'],
+      'why.exp.h3':'Experiencia clínica','why.exp.list':['Implantes unitarios y All-on-4/6','Carillas, coronas y puentes','Alineadores transparentes'],
+      'why.tech.h3':'Tecnología y protocolos','why.tech.list':['Planificación 3D (CBCT)','Materiales probados','Higiene y esterilización estrictas'],
+      'why.care.h3':'Acompañamiento personalizado','why.care.list':['Presupuesto en 24h','Asistencia de viaje (vuelos/hoteles/traslados)','Seguimiento post-op por WhatsApp'],
+      'why.note':'* Presupuesto personalizado según exámenes, materiales y protocolo clínico.',
+      'why.cta1':'Presupuesto gratuito','why.cta2':'Hablar con un asesor',
+      'reviews.r1': 'Seguimiento por WhatsApp tranquilizador.',
+      'reviews.r2': 'All-on-4 en 5 días, gran organización.',
+      'reviews.r3': 'Carillas impecables, equipo profesional.',
+
+      'trust.h2':'Dentistas cualificados — red de clínicas certificadas',
+      'trust.p':'Nuestra red reúne odontólogos titulados y con experiencia que trabajan en clínicas auditadas y equipadas (CBCT 3D, impresiones digitales, salas estériles). Los tratamientos se realizan con materiales <b>CE/FDA</b> y protocolos estrictos de higiene.',
+      'trust.badges':['Dentistas titulados y especializados','Clínicas certificadas y auditadas','Planificación 3D (CBCT)','Materiales CE / FDA','Esterilización conforme','Garantía por escrito'],
+      'trust.c1.h3':'Implantología avanzada','trust.c1.list':['All-on-4/6 e implantes unitarios','Planificación 3D (CBCT) y guías','Marcas reconocidas, materiales CE/FDA'],
+      'trust.c2.h3':'Estética de la sonrisa','trust.c2.list':['Carillas y coronas de alta precisión','Análisis de la sonrisa y wax-up','Resultados naturales y duraderos'],
+      'trust.c3.h3':'Ortodoncia y prótesis','trust.c3.list':['Alineadores transparentes y tratamientos láser','Prótesis fijas y removibles','Seguimiento post-op y mantenimiento'],
+      'trust.callout':'Transparencia y seguridad: presupuesto detallado, consentimiento informado, trazabilidad de materiales y <b>garantía por escrito</b> en prótesis.',
+      'trust.btn1':'Solicitar presupuesto','trust.btn2':'Hablar con un asesor',
+
+      'res.h2':'Resultados antes / después','res.lead':'Desliza para comparar. Usa las flechas para cambiar de caso.',
+      'res.note':'* Fotos publicadas con consentimiento. Los resultados varían según el estado inicial y el protocolo.',
+      'res.btn1':'Presupuesto gratuito','res.btn2':'Hablar con un asesor',
+
+      'prices.h2':'Compara nuestros precios','prices.p':'Odontología con estándares europeos a precios accesibles.',
+      'prices.head':['Tratamiento','Francia','Bélgica','Luxemburgo','Túnez'],
+      'prices.row1':'Implante unitario','prices.row2':'All-on-4 (arcada)','prices.row3':'Carilla cerámica (diente)',
+      'prices.note':'Precios indicativos; se requiere presupuesto personalizado.',
+      'prices.btn':'Obtener presupuesto para mi caso',
+
+      'proc.h2':'¿Cómo funciona?',
+      'proc.s1':{title:'1) Envío de fotos/radiografía',text:'Sube una foto de la boca o una panorámica.'},
+      'proc.s2':{title:'2) Presupuesto en 24h',text:'Recibirás una estimación clara con costes y duración.'},
+      'proc.s3':{title:'3) Organización del viaje',text:'Con ayuda de nuestro equipo o por tu cuenta.'},
+      'proc.s4':{title:'4) Tratamiento en el centro',text:'Tratamiento + seguimiento post-op presencial y a distancia.'},
+      'proc.callout':'<em>Transparente:</em> sin pagos antes de la primera visita. Reservas personales (vuelos, hotel) a tu cargo si las gestionas tú.',
+      'proc.btn':'Empezar mi proceso',
+
+      'tour1.badge':'Medina de Susa · UNESCO','tour1.h3':'Callejuelas blancas, ribat y gran mezquita','tour1.lead':'Calles encaladas, ribat milenario y vistas al mar — el corazón de Susa.','tour1.btn':'Descubrir',
+      'tour2.badge':'Playa de Susa','tour2.h3':'Arena fina y aguas claras','tour2.lead':'Arena dorada y agua cristalina — relax todo el día.','tour2.btn':'Ver la playa',
+      'tour3.badge':'Port El Kantaoui','tour3.h3':'Paseo, restaurantes y yates','tour3.lead':'Hoteles 4–5★, marina brillante y pescado fresco — ambiente chic al atardecer.','tour3.btn':'Explorar',
+
+      'qual.h2':'Médicos altamente cualificados',
+      'qual.p':'Al menos 6 años de formación universitaria, con especialización posible en implantología, ortodoncia y estética. Acceso a tecnologías modernas y formación continua.',
+      'qual.c1.h3':'Títulos y formación','qual.c1.list':['Título nacional de odontología (≥ 6 años).','Especialidades hospitalarias-universitarias (implantes, ortodoncia, estética).','Formación continua y congresos internacionales.'],
+      'qual.c1.stamps':['6+ años','Especialidades','Formación continua'],
+      'qual.c2.h3':'Retratos profesionales','qual.c2.list':['Enfoque centrado en el paciente y plan personalizado.','Casos clínicos y resultados antes/después (anonimizados).','Seguimiento claro: explicaciones, consentimiento y WhatsApp.'],
+      'qual.c2.stamps':['Ética','Transparencia','Seguimiento'],
+      'qual.c3.h3':'Normas y protocolos','qual.c3.list':['Esterilización estricta, trazabilidad, sala limpia/zona estéril.','Imágenes <b>CBCT 3D</b>, impresiones digitales, planificación guiada.','Materiales <b>CE/FDA</b> y garantía escrita.'],
+      'qual.c3.stamps':['CBCT 3D','CE / FDA','Garantía'],
+      'qual.note':'* Documentos disponibles a solicitud: títulos, certificados, protocolos de higiene, fichas de material y casos anonimizados.',
+      'qual.cta1':'Presupuesto gratuito','qual.cta2':'Hablar con un asesor'
+    },
+
+    /* ================= DE ================= */
+    de:{
+      'nav.why':'Warum wir','nav.center':'Unser Zentrum','nav.reviews':'Bewertungen','nav.prices':'Preise','nav.process':'Ablauf','nav.tourism':'Sousse','nav.qualifs':'Qualifikationen','nav.cta':'Kostenvoranschlag','nav.advisor':'Mit Berater sprechen',
+      'hero.badge':'Angebot in 24 Std.','hero.title':'Wieder lächeln — erhalten Sie Ihr kostenloses Angebot in 24 Stunden',
+      'hero.lead':'Implantate, Veneers, Kronen, Aligner – Zahnmedizin in internationaler Qualität in Tunesien. Umfassende Betreuung für Medizintourismus.',
+      'hero.cta1':'Kostenloses Angebot','hero.cta2':'Mit Berater sprechen',
+      'kpi1.label':'begleitete Patienten','kpi2.value':'Bis zu 70%','kpi2.label':'Ersparnis ggü. EU','kpi3.label':'für ein Angebot',
+
+      'why.h2':'Warum Smile Tunisia?','why.lead':'Zahnmedizin auf internationalem Niveau in Sousse – transparent und menschlich.',
+      'why.chips':['Angebot in 24 Std.','3D-Planung (CBCT)','Konforme Sterilisation','WhatsApp-Nachsorge','Bis zu 70 % Ersparnis'],
+      'why.exp.h3':'Klinische Expertise','why.exp.list':['Einzelimplantate & All-on-4/6','Veneers, Kronen, Brücken','Transparente Aligner'],
+      'why.tech.h3':'Technologie & Protokolle','why.tech.list':['3D-Planung (CBCT)','Bewährte Materialien','Strenge Hygiene & Sterilisation'],
+      'why.care.h3':'Persönliche Betreuung','why.care.list':['Angebot binnen 24 Std.','Reisehilfe (Flüge/Hotels/Transfers)','Post-OP-Nachsorge per WhatsApp'],
+      'why.note':'* Individuelles Angebot je nach Befunden, Materialien und klinischem Protokoll.',
+      'why.cta1':'Kostenloses Angebot','why.cta2':'Mit Berater sprechen',
+      'reviews.r1': 'Beruhigende WhatsApp-Nachsorge.',
+      'reviews.r2': 'All-on-4 in 5 Tagen, top Organisation.',
+      'reviews.r3': 'Makellose Veneers, Profi-Team.',   
+
+      'trust.h2':'Qualifizierte Zahnärzte — Netzwerk zertifizierter Kliniken',
+      'trust.p':'Unser Netzwerk vereint erfahrene Zahnärzte in geprüften, modern ausgestatteten Kliniken (3D-CBCT, digitale Abdrücke, sterile Bereiche). Behandlungen erfolgen mit <b>CE/FDA</b>-Materialien und strengen Hygiene-Protokollen.',
+      'trust.badges':['Qualifizierte & spezialisierte Zahnärzte','Zertifizierte & geprüfte Kliniken','3D-Planung (CBCT)','CE/FDA-Materialien','Konforme Sterilisation','Schriftliche Garantie'],
+      'trust.c1.h3':'Fortgeschrittene Implantologie','trust.c1.list':['All-on-4/6 & Einzelimplantate','3D-Planung (CBCT) & Schienen','Markenprodukte, CE/FDA-Materialien'],
+      'trust.c2.h3':'Smile-Ästhetik','trust.c2.list':['Präzisions-Veneers & Kronen','Smile-Analyse & Wax-Up','Natürliche, langlebige Ergebnisse'],
+      'trust.c3.h3':'KFO & Prothetik','trust.c3.list':['Transparente Aligner & Laser','Festsitzende und herausnehmbare Prothesen','Post-OP-Nachsorge & Wartung'],
+      'trust.callout':'Transparenz & Sicherheit: detaillierter Kostenvoranschlag, informierte Einwilligung, Material-Nachverfolgung und <b>schriftliche Garantie</b>.',
+      'trust.btn1':'Kostenlosen Kostenvoranschlag anfordern','trust.btn2':'Mit Berater sprechen',
+
+      'res.h2':'Vorher / Nachher','res.lead':'Zum Vergleichen ziehen. Mit Pfeilen den Fall wechseln.',
+      'res.note':'* Fotos mit Einwilligung. Ergebnisse variieren je nach Ausgangslage und Protokoll.',
+      'res.btn1':'Kostenloses Angebot','res.btn2':'Mit Berater sprechen',
+
+      'prices.h2':'Vergleichen Sie unsere Preise','prices.p':'Zahnmedizin nach EU-Standards zu fairen Preisen.',
+      'prices.head':['Behandlung','Frankreich','Belgien','Luxemburg','Tunesien'],
+      'prices.row1':'Einzelimplantat','prices.row2':'All-on-4 (Kiefer)','prices.row3':'Keramikveneers (Zahn)',
+      'prices.note':'Richtpreise zum Vergleich; individuelles Angebot erforderlich.',
+      'prices.btn':'Angebot für meinen Fall erhalten',
+
+      'proc.h2':'So läuft es ab',
+      'proc.s1':{title:'1) Fotos/Röntgen senden',text:'Mundfoto oder Panorama-Röntgen hochladen.'},
+      'proc.s2':{title:'2) Angebot in 24 Std.',text:'Sie erhalten eine klare Kostenschätzung mit Dauer.'},
+      'proc.s3':{title:'3) Reiseorganisation',text:'Mit unserem Team oder eigenständig – Sie entscheiden.'},
+      'proc.s4':{title:'4) Behandlung im Zentrum',text:'Behandlung + Nachsorge vor Ort und aus der Ferne.'},
+      'proc.callout':'<em>Transparent:</em> keine Gebühren vor dem ersten Termin. Eigene Buchungen (Flug, Hotel) auf eigene Kosten.',
+      'proc.btn':'Ablauf starten',
+
+      'tour1.badge':'Medina von Sousse · UNESCO','tour1.h3':'Weiße Gassen, Ribat & Große Moschee','tour1.lead':'Weiß getünchte Gassen, jahrtausendealter Ribat und Meeresblicke.','tour1.btn':'Entdecken',
+      'tour2.badge':'Strand von Sousse','tour2.h3':'Feiner Sand & klares Wasser','tour2.lead':'Goldener Sand, klares Wasser und Meeresbrise – Entspannung pur.','tour2.btn':'Zum Strand',
+      'tour3.badge':'Port El Kantaoui','tour3.h3':'Promenade, Restaurants & Yachten','tour3.lead':'4–5★ Hotels, funkelnde Marina und frischer Fisch – chic zum Sonnenuntergang.','tour3.btn':'Erkunden',
+
+      'qual.h2':'Hochqualifizierte Ärzte',
+      'qual.p':'Mindestens 6 Jahre Studium, Spezialisierung in Implantologie, KFO und Ästhetik möglich. Moderne Technologien & Fortbildung.',
+      'qual.c1.h3':'Abschlüsse & Ausbildung','qual.c1.list':['Staatsexamen Zahnmedizin (≥ 6 Jahre).','Universitäre Spezialisierungen (Implantologie, KFO, Ästhetik).','Fortbildung & internationale Kongresse.'],
+      'qual.c1.stamps':['6+ Jahre','Spezialisierungen','Fortbildung'],
+      'qual.c2.h3':'Professionelle Porträts','qual.c2.list':['Patientenzentrierter Ansatz & individueller Plan.','Klinische Fälle & Vorher/Nachher (anonymisiert).','Klare Nachbetreuung: Aufklärung & WhatsApp.'],
+      'qual.c2.stamps':['Ethik','Transparenz','Nachsorge'],
+      'qual.c3.h3':'Standards & Protokolle','qual.c3.list':['Strenge Sterilisation, Nachverfolgbarkeit, Reinraum.','<b>3D-CBCT</b>, digitale Abdrücke, geführte Planung.','<b>CE/FDA</b>-konforme Materialien & schriftliche Garantie.'],
+      'qual.c3.stamps':['3D CBCT','CE / FDA','Garantie'],
+      'qual.note':'* Dokumente auf Anfrage: Abschlüsse, Zertifikate, Hygieneprotokolle, Materialblätter, anonymisierte Fälle.',
+      'qual.cta1':'Kostenloses Angebot','qual.cta2':'Mit Berater sprechen'
+    },
+
+    /* ================= IT ================= */
+    it:{
+      'nav.why':'Perché noi','nav.center':'Il nostro centro','nav.reviews':'Recensioni','nav.prices':'Prezzi','nav.process':'Procedura','nav.tourism':'Susa','nav.qualifs':'Qualifiche','nav.cta':'Ottieni il preventivo','nav.advisor':'Parla con un consulente',
+      'hero.badge':'Preventivo in 24h','hero.title':'Torna a sorridere — ricevi il preventivo gratuito in 24 ore',
+      'hero.lead':'Impianti, faccette, corone, aligner… Odontoiatria di qualità internazionale in Tunisia. Supporto completo per turismo medico.',
+      'hero.cta1':'Preventivo gratuito','hero.cta2':'Parla con un consulente',
+      'kpi1.label':'pazienti accompagnati','kpi2.value':'Fino al 70%','kpi2.label':'di risparmio vs UE','kpi3.label':'per un preventivo',
+
+      'why.h2':'Perché Smile Tunisia?','why.lead':'Odontoiatria di livello internazionale a Susa con accompagnamento trasparente e umano.',
+      'why.chips':['Preventivo in 24h','Pianificazione 3D (CBCT)','Sterilizzazione conforme','Follow-up WhatsApp','Risparmio fino al 70%'],
+      'why.exp.h3':'Esperienza clinica','why.exp.list':['Impianti singoli & All-on-4/6','Faccette, corone, ponti','Aligner trasparenti'],
+      'why.tech.h3':'Tecnologia & protocolli','why.tech.list':['Pianificazione 3D (CBCT)','Materiali collaudati','Igiene e sterilizzazione rigorose'],
+      'why.care.h3':'Accompagnamento personalizzato','why.care.list':['Preventivo in 24h','Assistenza viaggio (voli/hotel/transfer)','Follow-up post-op su WhatsApp'],
+      'why.note':'* Preventivo personalizzato in base a esami, materiali e protocollo clinico.',
+      'why.cta1':'Preventivo gratuito','why.cta2':'Parla con un consulente',
+      'reviews.r1': 'Follow-up WhatsApp rassicurante.',
+      'reviews.r2': 'All-on-4 in 5 giorni, ottima organizzazione.',
+      'reviews.r3': 'Faccette impeccabili, team professionale.',
+
+      'trust.h2':'Dentisti qualificati — rete di cliniche certificate',
+      'trust.p':'Rete di odontoiatri qualificati con cliniche verificate e attrezzate (CBCT 3D, impronte digitali, aree sterili). Trattamenti con materiali <b>CE/FDA</b> e protocolli rigorosi.',
+      'trust.badges':['Dentisti qualificati e specializzati','Cliniche certificate e audit','Pianificazione 3D (CBCT)','Materiali CE / FDA','Sterilizzazione conforme','Garanzia scritta'],
+      'trust.c1.h3':'Implantologia avanzata','trust.c1.list':['All-on-4/6 e impianti singoli','Pianificazione 3D (CBCT) e guide','Marche riconosciute, materiali CE/FDA'],
+      'trust.c2.h3':'Estetica del sorriso','trust.c2.list':['Faccette e corone di alta precisione','Analisi del sorriso e wax-up','Risultati naturali e duraturi'],
+      'trust.c3.h3':'Ortodonzia & protesi','trust.c3.list':['Aligner trasparenti e trattamenti laser','Protesi fisse e mobili','Follow-up e manutenzione'],
+      'trust.callout':'Trasparenza e sicurezza: preventivo dettagliato, consenso informato, tracciabilità dei materiali e <b>garanzia scritta</b>.',
+      'trust.btn1':'Richiedi il preventivo','trust.btn2':'Parla con un consulente',
+
+      'res.h2':'Risultati prima / dopo','res.lead':'Trascina per confrontare. Usa le frecce per cambiare caso.',
+      'res.note':'* Foto pubblicate con consenso. I risultati variano in base al caso clinico.',
+      'res.btn1':'Preventivo gratuito','res.btn2':'Parla con un consulente',
+
+      'prices.h2':'Confronta i nostri prezzi','prices.p':'Odontoiatria agli standard europei a prezzi accessibili.',
+      'prices.head':['Trattamento','Francia','Belgio','Lussemburgo','Tunisia'],
+      'prices.row1':'Impianto singolo','prices.row2':'All-on-4 (arcata)','prices.row3':'Faccetta ceramica (dente)',
+      'prices.note':'Prezzi indicativi; è necessario un preventivo personalizzato.',
+      'prices.btn':'Preventivo per il mio caso',
+
+      'proc.h2':'Come funziona?',
+      'proc.s1':{title:'1) Invio di foto/radiografia',text:'Carica una foto della bocca o una panoramica.'},
+      'proc.s2':{title:'2) Preventivo in 24h',text:'Ricevi una stima chiara di costi e tempi.'},
+      'proc.s3':{title:'3) Organizzazione del viaggio',text:'Assistita dal nostro team o in autonomia.'},
+      'proc.s4':{title:'4) Trattamento al Centro',text:'Terapia + follow-up post-op in sede e a distanza.'},
+      'proc.callout':'<em>Trasparente:</em> nessun costo prima della prima visita. Prenotazioni personali (voli, hotel) a tuo carico se gestite in autonomia.',
+      'proc.btn':'Inizia la procedura',
+
+      'tour1.badge':'Medina di Susa · UNESCO','tour1.h3':'Vicoli bianchi, ribat e grande moschea','tour1.lead':'Vicoli imbiancati a calce, ribat millenario e viste sul mare.','tour1.btn':'Scopri',
+      'tour2.badge':'Spiaggia di Susa','tour2.h3':'Sabbia fine e acque limpide','tour2.lead':'Sabbia dorata e acqua cristallina — relax tutto il giorno.','tour2.btn':'Vedi la spiaggia',
+      'tour3.badge':'Port El Kantaoui','tour3.h3':'Passeggiata, ristoranti e yacht','tour3.lead':'Hotel 4–5★, marina scintillante e pesce fresco — atmosfera chic al tramonto.','tour3.btn':'Esplora',
+
+      'qual.h2':'Medici altamente qualificati',
+      'qual.p':'Almeno 6 anni di formazione universitaria, con possibili specializzazioni in implantologia, ortodonzia ed estetica. Accesso a tecnologie moderne e formazione continua.',
+      'qual.c1.h3':'Titoli & formazione','qual.c1.list':['Laurea in odontoiatria (≥ 6 anni).','Specializzazioni ospedaliere-universitarie (impianti, ortodonzia, estetica).','Formazione continua e congressi internazionali.'],
+      'qual.c1.stamps':['6+ anni','Specializzazioni','Formazione continua'],
+      'qual.c2.h3':'Ritratti professionali','qual.c2.list':['Approccio centrato sul paziente & piano personalizzato.','Casi clinici e risultati prima/dopo (anonimizzati).','Follow-up chiaro: spiegazioni, consenso & WhatsApp.'],
+      'qual.c2.stamps':['Etica','Trasparenza','Follow-up'],
+      'qual.c3.h3':'Standard & protocolli','qual.c3.list':['Sterilizzazione rigorosa, tracciabilità, sala pulita/area sterile.','Imaging <b>CBCT 3D</b>, impronte digitali, pianificazione guidata.','Materiali <b>CE/FDA</b> e garanzia scritta.'],
+      'qual.c3.stamps':['CBCT 3D','CE / FDA','Garanzia'],
+      'qual.note':'* Documenti disponibili su richiesta: titoli, attestati, protocolli di igiene, schede materiali e casi anonimi.',
+      'qual.cta1':'Preventivo gratuito','qual.cta2':'Parla con un consulente'
+    },
+
+    /* ================= AR ================= */
+    ar:{
+      'nav.why':'لماذا نحن','nav.center':'مركزنا','nav.reviews':'التقييمات','nav.prices':'الأسعار','nav.process':'الإجراء','nav.tourism':'سوسة','nav.qualifs':'المؤهلات','nav.cta':'احصل على العرض','nav.advisor':'التحدث مع مستشار',
+      'hero.badge':'عرض خلال 24 ساعة','hero.title':'ابتسم من جديد — احصل على عرض مجاني خلال 24 ساعة',
+      'hero.lead':'زرعات، فينير، تيجان، مقومات شفافة… رعاية أسنان بمعايير دولية في تونس. دعم كامل للسياحة العلاجية.',
+      'hero.cta1':'احصل على عرضي المجاني','hero.cta2':'تحدث مع مستشار',
+      'kpi1.label':'مرضى تم مرافقتهم','kpi2.value':'حتى 70٪','kpi2.label':'توفير مقارنة بالاتحاد الأوروبي','kpi3.label':'للحصول على عرض',
+
+      'why.h2':'لماذا سمايل تونسيا؟','why.lead':'طب أسنان بمستوى دولي في سوسة مع دعم شفاف وإنساني.',
+      'why.chips':['عرض خلال 24 ساعة','تخطيط ثلاثي الأبعاد (CBCT)','تعقيم مطابق','متابعة عبر واتساب','توفير حتى 70٪'],
+      'why.exp.h3':'خبرة سريرية','why.exp.list':['زرعات فردية و All-on-4/6','فينير، تيجان وجسور','مقومات شفافة'],
+      'why.tech.h3':'التقنيات والبروتوكولات','why.tech.list':['تخطيط ثلاثي الأبعاد (CBCT)','مواد موثوقة','نظافة وتعقيم صارمان'],
+      'why.care.h3':'مرافقة شخصية','why.care.list':['عرض خلال 24 ساعة','مساعدة في الرحلة (طيران/فنادق/نقل)','متابعة ما بعد الجراحة عبر واتساب'],
+      'why.note':'* عرض مخصص حسب الفحوصات والمواد والبروتوكول السريري.',
+      'why.cta1':'احصل على عرضي المجاني','why.cta2':'تحدث مع مستشار',
+      'reviews.r1': 'متابعة عبر واتساب مطمئنة.',
+      'reviews.r2': 'All-on-4 خلال 5 أيام، تنظيم ممتاز.',
+      'reviews.r3': 'فينيرات متقنة، فريق محترف.',
+
+      'trust.h2':'أطباء أسنان مؤهلون — شبكة عيادات معتمدة',
+      'trust.p':'شبكتنا تضم أطباء أسنان مؤهلين وذوي خبرة يعملون في عيادات مُدققة ومجهزة (CBCT ثلاثي الأبعاد، طبعات رقمية، غرف معقمة). تُجرى العلاجات بمواد معتمدة <b>CE/FDA</b> وبروتوكولات نظافة صارمة.',
+      'trust.badges':['أطباء متخصصون','عيادات معتمدة ومُدققة','تخطيط ثلاثي الأبعاد (CBCT)','مواد CE / FDA','تعقيم مطابق','ضمان كتابي'],
+      'trust.c1.h3':'زراعة الأسنان المتقدمة','trust.c1.list':['All-on-4/6 وزرعات فردية','تخطيط ثلاثي الأبعاد (CBCT) ومرشدات','ماركات موثوقة ومواد CE/FDA'],
+      'trust.c2.h3':'تجميل الابتسامة','trust.c2.list':['فينير وتيجان عالية الدقة','تحليل الابتسامة & wax-up','نتائج طبيعية وطويلة الأمد'],
+      'trust.c3.h3':'تقويم الأسنان والأطراف','trust.c3.list':['مقومات شفافة وعلاجات ليزر','أطراف ثابتة ومتحركة','متابعة وصيانة بعد العلاج'],
+      'trust.callout':'شفافية وأمان: عرض مفصل قبل أي علاج، موافقة مستنيرة، تتبع للمواد و<b>ضمان كتابي</b> للأعمال التعويضية.',
+      'trust.btn1':'اطلب عرضًا مجانيًا','trust.btn2':'تحدث مع مستشار',
+
+      'res.h2':'نتائج قبل / بعد','res.lead':'اسحب للمقارنة. استخدم الأسهم لتغيير الحالة.',
+      'res.note':'* صور منشورة بموافقة أصحابها. النتائج تختلف حسب الحالة الأولية والبروتوكول.',
+      'res.btn1':'احصل على عرضي المجاني','res.btn2':'تحدث مع مستشار',
+
+      'prices.h2':'قارن أسعارنا','prices.p':'رعاية أسنان بمعايير أوروبية وبأسعار مناسبة.',
+      'prices.head':['العلاج','فرنسا','بلجيكا','لوكسمبورغ','تونس'],
+      'prices.row1':'زرعة سن واحدة','prices.row2':'All-on-4 (فك كامل)','prices.row3':'فينير خزفي (سن)',
+      'prices.note':'الأسعار إرشادية للمقارنة؛ يلزم عرض مخصص.',
+      'prices.btn':'احصل على عرض مناسب لحالتي',
+
+      'proc.h2':'كيف تتم العملية؟',
+      'proc.s1':{title:'1) إرسال الصور/الأشعة',text:'ارفع صورة للفم أو أشعة بانورامية.'},
+      'proc.s2':{title:'2) عرض خلال 24 ساعة',text:'ستتلقى تقديرًا واضحًا للتكلفة والمدة.'},
+      'proc.s3':{title:'3) تنظيم الرحلة',text:'بدعم فريقنا أو بشكل مستقل — حسب رغبتك.'},
+      'proc.s4':{title:'4) العلاج في المركز',text:'علاج + متابعة بعد العملية حضوريًا ثم عن بُعد.'},
+      'proc.callout':'<em>بشفافية:</em> لا توجد رسوم قبل الزيارة الأولى. الحجوزات الشخصية (الطيران، الفندق) على نفقتك إذا نظمتها بنفسك.',
+      'proc.btn':'ابدأ الإجراء',
+
+      'tour1.badge':'مدينة سوسة · اليونسكو','tour1.h3':'أزقة بيضاء، رباط ومسجد كبير','tour1.lead':'أزقة مطلية بالكلس ورباط عتيق وإطلالات على البحر — قلب سوسة النابض.','tour1.btn':'اكتشف',
+      'tour2.badge':'شاطئ سوسة','tour2.h3':'رمال ناعمة ومياه صافية','tour2.lead':'رمال ذهبية ومياه صافية ونسيم بحري — استرخاء طوال اليوم.','tour2.btn':'شاهد الشاطئ',
+      'tour3.badge':'ميناء القنطاوي','tour3.h3':'ممشى ومطاعم ويخوت','tour3.lead':'فنادق 4–5★ ومارينا لامعة ومطاعم أسماك طازجة — أجواء أنيقة عند الغروب.','tour3.btn':'استكشف',
+
+      'qual.h2':'أطباء على درجة عالية من التأهيل',
+      'qual.p':'ما لا يقل عن 6 سنوات من الدراسة الجامعية مع إمكانية التخصص في الزراعة والتقويم والتجميل. الوصول إلى تقنيات حديثة وتعليم مستمر.',
+      'qual.c1.h3':'الشهادات والتدريب','qual.c1.list':['دكتوراه وطنية في طب الأسنان (≥ 6 سنوات).','تخصصات جامعية-استشفائية (زراعة، تقويم، تجميل).','تعليم مستمر ومؤتمرات دولية.'],
+      'qual.c1.stamps':['+6 سنوات','تخصصات','تعليم مستمر'],
+      'qual.c2.h3':'صور احترافية','qual.c2.list':['نهج يركز على المريض وخطة علاج شخصية.','حالات سريرية ونتائج قبل/بعد (مجهّلة).','متابعة واضحة: شرح، موافقة، ودعم عبر واتساب.'],
+      'qual.c2.stamps':['أخلاق','شفافية','متابعة'],
+      'qual.c3.h3':'المعايير والبروتوكولات','qual.c3.list':['تعقيم صارم وتتبع وغرفة نظيفة/منطقة معقمة.','تصوير <b>CBCT ثلاثي الأبعاد</b> وبصمات رقمية وتخطيط موجّه.','مواد مطابقة <b>CE/FDA</b> وضمان كتابي.'],
+      'qual.c3.stamps':['CBCT ثلاثي الأبعاد','CE / FDA','ضمان'],
+      'qual.note':'* وثائق متاحة عند الطلب: شهادات، بروتوكولات نظافة، نشرات المواد، وأمثلة حالات مجهّلة.',
+      'qual.cta1':'احصل على عرضي المجاني','qual.cta2':'تحدث مع مستشار'
+    }
+  };
+
+  /* ========= SELECTORS ========= */
+  const S = {
+    /* nav */
+    'nav.why':'a[href="#why"]','nav.center':'a[href="#trust"]','nav.reviews':'a[href="#proof"]','nav.prices':'a[href="#prices"]','nav.process':'a[href="#process"]','nav.tourism':'a[href="#tourism"]','nav.qualifs':'a[href="#qualifs"]','nav.cta':'.nav-links .btn.btn-turq.cta','nav.advisor':'.nav-links .btn.btn-outline',
+
+    /* hero + kpis */
+    'hero.badge':'.hero .badge','hero.title':'.hero h1','hero.lead':'.hero .lead','hero.cta1':'.hero .btn.btn-turq','hero.cta2':'.hero .btn.btn-outline',
+    'kpi1.container':'.hero .kpis .kpi:nth-child(1)', 'kpi2.value':'.hero .kpis .kpi:nth-child(2) b', 'kpi2.container':'.hero .kpis .kpi:nth-child(2)', 'kpi3.container':'.hero .kpis .kpi:nth-child(3)',
+
+    /* why */
+    'why.h2':'#why h2','why.lead':'#why .lead',
+    'why.chips':'#why .chips',
+    'why.exp.h3':'#why .point[data-theme="expertise"] h3','why.exp.list':'#why .point[data-theme="expertise"] ul',
+    'why.tech.h3':'#why .point[data-theme="tech"] h3','why.tech.list':'#why .point[data-theme="tech"] ul',
+    'why.care.h3':'#why .point[data-theme="care"] h3','why.care.list':'#why .point[data-theme="care"] ul',
+    'why.note':'#why .note','why.cta1':'#why .why-cta .btn.btn-turq','why.cta2':'#why .why-cta .btn.btn-outline',
+    // reviews (note the order!)
+    'reviews.r3': '#why .mini-reviews .review-mini:nth-child(1) .txt q',
+    'reviews.r2': '#why .mini-reviews .review-mini:nth-child(2) .txt q',
+    'reviews.r1': '#why .mini-reviews .review-mini:nth-child(3) .txt q',
+
+    /* trust */
+    'trust.h2':'#trust h2','trust.p':'#trust p:first-of-type','trust.badges':'#trust .trust-rail',
+    'trust.c1.h3':'#trust .grid-3 .trust-card:nth-of-type(1) h3','trust.c1.list':'#trust .grid-3 .trust-card:nth-of-type(1) ul',
+    'trust.c2.h3':'#trust .grid-3 .trust-card:nth-of-type(2) h3','trust.c2.list':'#trust .grid-3 .trust-card:nth-of-type(2) ul',
+    'trust.c3.h3':'#trust .grid-3 .trust-card:nth-of-type(3) h3','trust.c3.list':'#trust .grid-3 .trust-card:nth-of-type(3) ul',
+    'trust.callout':'#trust .callout','trust.btn1':'#trust .btn','trust.btn2':'#trust .btn.btn-outline',
+
+    /* results */
+    'res.h2':'#results h2','res.lead':'#results .lead','res.note':'#results .note','res.btn1':'#results .btn.btn-turq','res.btn2':'#results .btn.btn-outline',
+
+    /* prices */
+    'prices.h2':'#prices h2','prices.p':'#prices > .container > p',
+    'prices.th1':'#prices thead th:nth-child(1)','prices.th2':'#prices thead th:nth-child(2)','prices.th3':'#prices thead th:nth-child(3)','prices.th4':'#prices thead th:nth-child(4)','prices.th5':'#prices thead th:nth-child(5)',
+    'prices.row1':'#prices tbody tr:nth-child(1) td:nth-child(1)','prices.row2':'#prices tbody tr:nth-child(2) td:nth-child(1)','prices.row3':'#prices tbody tr:nth-child(3) td:nth-child(1)',
+    'prices.note':'#prices .note','prices.btn':'#prices .btn',
+
+    /* process */
+    'proc.h2':'#process h2',
+    'proc.s1':'#process .grid-2 .step:nth-child(1) > div:nth-child(2)',
+    'proc.s2':'#process .grid-2 .step:nth-child(2) > div:nth-child(2)',
+    'proc.s3':'#process .grid-2 .step:nth-child(3) > div:nth-child(2)',
+    'proc.s4':'#process .grid-2 .step:nth-child(4) > div:nth-child(2)',
+    'proc.callout':'#process .callout p','proc.btn':'#process .btn.btn-outline',
+
+    /* tourism (3 slides) */
+    'tour1.badge':'#tourism .t-slide:nth-of-type(1) .badge','tour1.h3':'#tourism .t-slide:nth-of-type(1) h3','tour1.lead':'#tourism .t-slide:nth-of-type(1) .lead','tour1.btn':'#tourism .t-slide:nth-of-type(1) .btn',
+    'tour2.badge':'#tourism .t-slide:nth-of-type(2) .badge','tour2.h3':'#tourism .t-slide:nth-of-type(2) h3','tour2.lead':'#tourism .t-slide:nth-of-type(2) .lead','tour2.btn':'#tourism .t-slide:nth-of-type(2) .btn',
+    'tour3.badge':'#tourism .t-slide:nth-of-type(3) .badge','tour3.h3':'#tourism .t-slide:nth-of-type(3) h3','tour3.lead':'#tourism .t-slide:nth-of-type(3) .lead','tour3.btn':'#tourism .t-slide:nth-of-type(3) .btn',
+
+    /* qualifs */
+    'qual.h2':'#qualifs h2','qual.p':'#qualifs > .container > p',
+    'qual.c1.h3':'#qualifs .q3 .qcard:nth-of-type(1) h3','qual.c1.list':'#qualifs .q3 .qcard:nth-of-type(1) ul','qual.c1.stamps':'#qualifs .q3 .qcard:nth-of-type(1) .q-stamps',
+    'qual.c2.h3':'#qualifs .q3 .qcard:nth-of-type(2) h3','qual.c2.list':'#qualifs .q3 .qcard:nth-of-type(2) ul','qual.c2.stamps':'#qualifs .q3 .qcard:nth-of-type(2) .q-stamps',
+    'qual.c3.h3':'#qualifs .q3 .qcard:nth-of-type(3) h3','qual.c3.list':'#qualifs .q3 .qcard:nth-of-type(3) ul','qual.c3.stamps':'#qualifs .q3 .qcard:nth-of-type(3) .q-stamps',
+    'qual.note':'#qualifs .note','qual.cta1':'#qualifs .why-cta .btn.btn-turq','qual.cta2':'#qualifs .why-cta .btn.btn-outline'
+  };
+
+  /* ===== helpers ===== */
+  function setText(sel, txt){
+    const el = document.querySelector(sel); if(!el) return;
+    el.textContent = txt;
+  }
+  function setHTML(sel, html){
+    const el = document.querySelector(sel); if(!el) return;
+    el.innerHTML = html;
+  }
+  function setList(sel, arr){
+    const el = document.querySelector(sel); if(!el) return;
+    el.innerHTML = (arr||[]).map(x=> `<li>${x}</li>`).join('');
+  }
+  function setChips(sel, arr){
+    const el = document.querySelector(sel); if(!el) return;
+    el.innerHTML = (arr||[]).map(x=> `<span class="chip">${x}</span>`).join('');
+  }
+  function setStamps(sel, arr){
+    const el = document.querySelector(sel); if(!el) return;
+    el.innerHTML = (arr||[]).map(x=> `<span class="stamp">${x}</span>`).join('');
+  }
+  function apply(lang){
+    const P = T[lang] || T.fr;
+
+    // dir/lang
+    document.documentElement.lang = lang;
+    const dir = (lang==='ar') ? 'rtl' : 'ltr';
+    document.documentElement.dir = dir;
+    document.body.style.direction = dir;
+
+    /* nav + hero  */
+    ['nav.why','nav.center','nav.reviews','nav.prices','nav.process','nav.tourism','nav.qualifs','nav.cta','nav.advisor','hero.badge','hero.title','hero.lead','hero.cta1','hero.cta2'].forEach(k=> P[k] && setText(S[k], P[k]));
+
+    // KPIs (preserve <b> values except #2 value which changes)
+    if (P['kpi1.label']) setHTML(S['kpi1.container'], (document.querySelector(S['kpi1.container']).querySelector('b')?.outerHTML||'') + '<br/>' + P['kpi1.label']);
+    if (P['kpi3.label']) setHTML(S['kpi3.container'], (document.querySelector(S['kpi3.container']).querySelector('b')?.outerHTML||'') + '<br/>' + P['kpi3.label']);
+    if (P['kpi2.value']) setText(S['kpi2.value'], P['kpi2.value']);
+    if (P['kpi2.label']) setHTML(S['kpi2.container'], (document.querySelector(S['kpi2.container']).querySelector('b')?.outerHTML||'') + '<br/>' + P['kpi2.label']);
+
+    /* why */
+    ['why.h2','why.lead','why.exp.h3','why.tech.h3','why.care.h3','why.note','why.cta1','why.cta2'].forEach(k=> P[k] && setText(S[k], P[k]));
+    if (P['why.chips']) setChips(S['why.chips'], P['why.chips']);
+    if (P['why.exp.list']) setList(S['why.exp.list'], P['why.exp.list']);
+    if (P['why.tech.list']) setList(S['why.tech.list'], P['why.tech.list']);
+    if (P['why.care.list']) setList(S['why.care.list'], P['why.care.list']);
+      // mini reviews
+['reviews.r1','reviews.r2','reviews.r3'].forEach(k => {
+  if (P[k]) setText(S[k], P[k]);
+});
+
+    /* trust */
+    if (P['trust.h2']) setText(S['trust.h2'], P['trust.h2']);
+    if (P['trust.p']) setHTML(S['trust.p'], P['trust.p']);
+    if (P['trust.badges']){
+      const rail = document.querySelector(S['trust.badges']); if (rail) rail.innerHTML = P['trust.badges'].map(x=> `<span class="t-badge">${x}</span>`).join('');
+    }
+    [['c1'],['c2'],['c3']].forEach((id,i)=>{
+      if (P[`trust.${id}.h3`]) setText(S[`trust.${id}.h3`], P[`trust.${id}.h3`]);
+      if (P[`trust.${id}.list`]) setList(S[`trust.${id}.list`], P[`trust.${id}.list`]);
+    });
+    if (P['trust.callout']) setHTML(S['trust.callout'], P['trust.callout']);
+    if (P['trust.btn1']) setText(S['trust.btn1'], P['trust.btn1']);
+    if (P['trust.btn2']) setText(S['trust.btn2'], P['trust.btn2']);
+
+    /* results */
+    ['res.h2','res.lead','res.note','res.btn1','res.btn2'].forEach(k=> P[k] && setText(S[k], P[k]));
+
+    /* prices */
+    if (P['prices.h2']) setText(S['prices.h2'], P['prices.h2']);
+    if (P['prices.p']) setText(S['prices.p'], P['prices.p']);
+    if (P['prices.head']){
+      setText(S['prices.th1'], P['prices.head'][0]);
+      setText(S['prices.th2'], P['prices.head'][1]);
+      setText(S['prices.th3'], P['prices.head'][2]);
+      setText(S['prices.th4'], P['prices.head'][3]);
+      setText(S['prices.th5'], P['prices.head'][4]);
+    }
+    ['row1','row2','row3'].forEach((r,i)=> P[`prices.${r}`] && setText(S[`prices.${r}`], P[`prices.${r}`]));
+    if (P['prices.note']) setText(S['prices.note'], P['prices.note']);
+    if (P['prices.btn']) setText(S['prices.btn'], P['prices.btn']);
+
+    /* process */
+    if (P['proc.h2']) setText(S['proc.h2'], P['proc.h2']);
+    [1,2,3,4].forEach(n=>{
+      const v = P[`proc.s${n}`]; if(!v) return;
+      setHTML(S[`proc.s${n}`], `<b>${v.title}</b><br/>${v.text}`);
+    });
+    if (P['proc.callout']) setHTML(S['proc.callout'], P['proc.callout']);
+    if (P['proc.btn']) setText(S['proc.btn'], P['proc.btn']);
+
+    /* tourism */
+    [1,2,3].forEach(n=>{
+      ['badge','h3','lead','btn'].forEach(f=>{
+        const k = `tour${n}.${f}`;
+        if (P[k]) setText(S[k], P[k]);
+      });
+    });
+
+    /* qualifs */
+    if (P['qual.h2']) setText(S['qual.h2'], P['qual.h2']);
+    if (P['qual.p']) setText(S['qual.p'], P['qual.p']);
+    [1,2,3].forEach(n=>{
+      if (P[`qual.c${n}.h3`]) setText(S[`qual.c${n}.h3`], P[`qual.c${n}.h3`]);
+      if (P[`qual.c${n}.list`]) setList(S[`qual.c${n}.list`], P[`qual.c${n}.list`]);
+      if (P[`qual.c${n}.stamps`]) setStamps(S[`qual.c${n}.stamps`], P[`qual.c${n}.stamps`]);
+    });
+    if (P['qual.note']) setText(S['qual.note'], P['qual.note']);
+    if (P['qual.cta1']) setText(S['qual.cta1'], P['qual.cta1']);
+    if (P['qual.cta2']) setText(S['qual.cta2'], P['qual.cta2']);
+  }
+    const flagUrl = fi => `https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/1x1/${fi}.svg`;
+
+
+  /* ===== FAB hookup (reuse your existing markup) ===== */
+  const btn  = document.getElementById('langFabBtn');
+  const menu = document.getElementById('langMenu');
+  const wrap = document.getElementById('langFab');
+  function setFab(fi, label){
+    btn.innerHTML = `<img class="flag-img" alt="" src="${flagUrl(fi)}">`;
+    if (label) { btn.title = label; btn.setAttribute('aria-label', label); }
+  }
+  if (!menu.dataset.built){
+    LANGS.forEach(l=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.code = l.code;
+    b.innerHTML = `<img class="flag-img" alt="" src="${flagUrl(l.fi)}"><span>${l.label}</span>`;
+    b.onclick = ()=>{
+      localStorage.setItem('site_lang', l.code);     // shared across pages
+      setFab(l.fi, l.label);
+      wrap.classList.remove('open');
+      apply(l.code);                                  // your page-specific translator
+      menu.querySelectorAll('button').forEach(x=> x.classList.toggle('active', x===b));
+    };
+    menu.appendChild(b);
+  });
+    menu.dataset.built='1';
+  }
+  
+btn.addEventListener('click', ()=> wrap.classList.toggle('open'));
+  document.addEventListener('click', e=>{ if(!wrap.contains(e.target)) wrap.classList.remove('open'); });
+
+  // init from storage / browser
+  const saved = localStorage.getItem('site_lang') || (navigator.language||'fr').slice(0,2);
+  const init  = LANGS.find(x=>x.code===saved) ? saved : 'fr';
+  const initLang = LANGS.find(x=>x.code===init) || LANGS[0];
+  setFab(initLang.fi, initLang.label);
+  apply(init);
+  menu.querySelectorAll('button').forEach(x=> x.classList.toggle('active', x.dataset.code===init));
+})();
+
+
+</script>

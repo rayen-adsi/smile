@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Devis Smile Tunisia</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lav:#EDE6F7; --turq:#5AC3CC; --blue:#3B5BA7; --vio:#7A5FA7;
+    --text:#0f172a; --muted:#64748b; --bg:#f8fafc; --ok:#16a34a; --warn:#b45309;
+    --chip:#eef2ff; --chipb:#475569; --line:#e5e7eb; --card:#fff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  .container{max-width:1200px;margin:0 auto;padding:24px}
+  h1{margin:4px 0 14px;font-size:36px;letter-spacing:.2px}
+
+  /* Badges / toolbar */
+  .belt{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 16px}
+  .badge{background:#0f172a;color:#e5e7eb;border-radius:999px;padding:7px 12px;font-weight:700;font-size:12px}
+  .toolbar{position:sticky;top:0;z-index:3;background:transparent;padding-top:6px}
+  .toolbox{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  select,input,button{font:inherit;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}
+  .btn{background:var(--turq);color:#063b3f;border:none;font-weight:800;cursor:pointer}
+  .btn.secondary{background:#fff;border:2px solid var(--vio);color:var(--vio)}
+  .btn.icon{display:inline-flex;align-items:center;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--chip);color:var(--chipb);border:1px solid #dbeafe;border-radius:999px;padding:6px 10px;font-weight:700}
+  .chip small{font-weight:600;color:var(--muted)}
+
+  /* List */
+  .list{margin-top:12px}
+  .empty{padding:22px;text-align:center;color:var(--muted)}
+  .rowcard{display:grid;grid-template-columns:1.3fr .9fr .7fr .7fr .2fr;gap:14px;align-items:center;
+           padding:14px;background:#fff;border:1px solid var(--line);border-radius:16px;margin:10px 0;
+           box-shadow:0 8px 22px rgba(0,0,0,.06); cursor:pointer}
+  .rowcard:hover{transform:translateY(-2px);box-shadow:0 16px 28px rgba(0,0,0,.08)}
+  .name{display:flex;flex-direction:column}
+  .name small{color:var(--muted);font-weight:600}
+  .pill{background:var(--lav);color:var(--blue);border:1px solid rgba(59,91,167,.18);border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px;display:inline-block}
+  .urg{background:#f1f5f9;color:#0f172a;border:1px dashed #cbd5e1;border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px;display:inline-block}
+  .country{font-size:12px;color:var(--muted)}
+  .status{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px;border:1px solid var(--line)}
+  .s-pending{background:#f1f5f9;color:#334155}
+  .s-reviewing{background:#fef9c3;color:#854d0e}
+  .s-quoted{background:#dcfce7;color:#065f46}
+  .s-scheduled{background:#dbeafe;color:#1e40af}
+  .s-closed{background:#e5e7eb;color:#111827}
+  .s-cancelled{background:#fee2e2;color:#991b1b}
+  .meta{font-size:12px;color:var(--muted)}
+
+  /* Drawer */
+  .drawer{position:fixed;inset:0;display:none;z-index:40;background:rgba(0,0,0,.45)}
+  .drawer .panel{position:absolute;right:0;top:0;bottom:0;width:min(560px,96vw);background:#fff;padding:18px;border-left:1px solid var(--line);overflow:auto}
+  .close{position:absolute;right:10px;top:10px;border:none;background:#eee;border-radius:999px;width:32px;height:32px;cursor:pointer}
+  .title{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:2px 34px 10px 0}
+  .title .acts{display:flex;gap:8px}
+  .acts a{border:1px solid var(--line);border-radius:10px;padding:6px 10px;text-decoration:none;color:#334155;background:#f8fafc;font-weight:700}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;font-size:14px}
+  .kv b{color:#0f172a}
+  .note{font-size:12px;color:var(--muted)}
+  .file{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px;border:1px solid var(--line);border-radius:12px}
+  .file .left{display:flex;gap:10px;align-items:center}
+  .thumb{width:44px;height:44px;border-radius:8px;border:1px solid var(--line);object-fit:cover;background:#f8fafc}
+  .ok{color:var(--ok);font-weight:700}
+  .toast{position:fixed;bottom:14px;right:14px;background:#0f172a;color:#fff;padding:10px 12px;border-radius:12px;display:none}
+  @media (max-width: 980px){ .rowcard{grid-template-columns:1fr .9fr .7fr .7fr .2fr} .g2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Admin — Devis</h1>
+
+  <div class="belt">
+    <span class="badge" id="apiBadge">API:</span>
+    <span class="badge" id="healthBadge">Connexion: inconnue</span>
+    <span class="badge" id="countBadge">0 devis (page)</span>
+  </div>
+
+  <!-- LOGIN -->
+  <section id="loginCard" class="card" style="max-width:460px;display:none">
+    <h3 style="margin:0 0 8px">Connexion</h3>
+    <p class="note">Email & mot de passe admin (variables d’environnement).</p>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <input id="email" placeholder="admin@smile.tn" autocomplete="username" style="flex:1">
+      <input id="password" placeholder="Mot de passe" type="password" autocomplete="current-password" style="flex:1">
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="btn" id="loginBtn">Se connecter</button>
+      <button class="btn secondary" id="clearBtn" type="button">Effacer</button>
+    </div>
+    <div id="loginMsg" class="note" style="margin-top:6px"></div>
+  </section>
+
+  <!-- APP -->
+  <section id="app" style="display:none">
+    <div class="toolbar">
+      <div class="toolbox">
+        <select id="statusFilter" title="Statut">
+          <option value="">Tous les statuts</option>
+          <option value="pending">En attente</option>
+          <option value="reviewing">En cours d’étude</option>
+          <option value="quoted">Devis envoyé</option>
+          <option value="scheduled">Programmé</option>
+          <option value="closed">Clôturé</option>
+          <option value="cancelled">Annulé</option>
+        </select>
+        <input id="search" placeholder="Rechercher (nom, email, notes)…" style="min-width:260px">
+        <select id="limit"><option>20</option><option>50</option><option>100</option></select>
+        <button class="btn icon" id="refreshBtn">🔄 Actualiser</button>
+        <button class="btn secondary" id="exportBtn">Exporter CSV (page)</button>
+        <div style="flex:1"></div>
+        <button class="btn secondary" id="logoutBtn">Déconnexion</button>
+      </div>
+    </div>
+
+    <div id="list" class="list"></div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button id="prev" class="btn secondary">‹ Précédent</button>
+      <button id="next" class="btn">Suivant ›</button>
+    </div>
+  </section>
+</div>
+
+<!-- Drawer -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <div class="panel">
+    <button class="close" id="closeDrawer">✕</button>
+
+    <div class="title">
+      <h3 id="dName" style="margin:0">Devis</h3>
+      <div class="acts">
+        <a href="#" id="actCopyMail" title="Copier l’email">📧 Copier l’email</a>
+        <a href="#" id="actWhats" title="WhatsApp">💬 WhatsApp</a>
+        <a href="#" id="actMailto" title="Envoyer un email">✉️ Email</a>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-bottom:12px">
+      <div class="card">
+        <b>Détails</b>
+        <div class="kv" id="dMeta" style="margin-top:8px"></div>
+        <div id="dNotes" class="card" style="margin-top:10px;white-space:pre-wrap"></div>
+      </div>
+      <div class="card">
+        <b>Statut</b>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+          <select id="dStatus">
+            <option value="pending">En attente</option>
+            <option value="reviewing">En cours d’étude</option>
+            <option value="quoted">Devis envoyé</option>
+            <option value="scheduled">Programmé</option>
+            <option value="closed">Clôturé</option>
+            <option value="cancelled">Annulé</option>
+          </select>
+          <button class="btn" id="saveStatus">Mettre à jour</button>
+          <span id="saveMsg" class="note"></span>
+        </div>
+        <div style="margin-top:14px">
+          <b>Fichiers</b>
+          <div id="dFiles" style="display:flex;flex-direction:column;gap:8px;margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ------- Configurable BASE from ?base=... or previous choice ------- */
+function resolveBase(){
+  const p = new URLSearchParams(location.search);
+  const fromQuery = p.get('base');
+  if (fromQuery) { localStorage.setItem('adm_base', fromQuery); return fromQuery; }
+  return localStorage.getItem('adm_base') || 'http://localhost:3000';
+}
+let BASE = resolveBase();
+
+const els = {
+  loginCard: document.getElementById('loginCard'),
+  app: document.getElementById('app'),
+  apiBadge: document.getElementById('apiBadge'),
+  healthBadge: document.getElementById('healthBadge'),
+  email: document.getElementById('email'),
+  password: document.getElementById('password'),
+  loginBtn: document.getElementById('loginBtn'),
+  clearBtn: document.getElementById('clearBtn'),
+  loginMsg: document.getElementById('loginMsg'),
+  statusFilter: document.getElementById('statusFilter'),
+  search: document.getElementById('search'),
+  limit: document.getElementById('limit'),
+  refreshBtn: document.getElementById('refreshBtn'),
+  exportBtn: document.getElementById('exportBtn'),
+  logoutBtn: document.getElementById('logoutBtn'),
+  list: document.getElementById('list'),
+  prev: document.getElementById('prev'),
+  next: document.getElementById('next'),
+  countBadge: document.getElementById('countBadge'),
+  drawer: document.getElementById('drawer'),
+  closeDrawer: document.getElementById('closeDrawer'),
+  dName: document.getElementById('dName'),
+  dMeta: document.getElementById('dMeta'),
+  dNotes: document.getElementById('dNotes'),
+  dFiles: document.getElementById('dFiles'),
+  dStatus: document.getElementById('dStatus'),
+  saveStatus: document.getElementById('saveStatus'),
+  saveMsg: document.getElementById('saveMsg'),
+  actCopyMail: document.getElementById('actCopyMail'),
+  actWhats: document.getElementById('actWhats'),
+  actMailto: document.getElementById('actMailto'),
+  toast: document.getElementById('toast'),
+};
+
+els.apiBadge.textContent = 'API: ' + BASE;
+
+let token = localStorage.getItem('adm_token') || '';
+let offset = 0;
+let lastRows = [];
+let currentId = null;
+let currentQuote = null;
+
+function statusClass(s){
+  return {
+    pending: 's-pending',
+    reviewing: 's-reviewing',
+    quoted: 's-quoted',
+    scheduled: 's-scheduled',
+    closed: 's-closed',
+    cancelled: 's-cancelled'
+  }[s] || 's-pending';
+}
+function fmtDate(iso){
+  const d = new Date(iso);
+  return d.toLocaleString('fr-FR', { dateStyle:'medium', timeStyle:'short' });
+}
+function show(view){
+  els.loginCard.style.display = (view==='login') ? '' : 'none';
+  els.app.style.display = (view==='app') ? '' : 'none';
+}
+function toast(msg){
+  els.toast.textContent = msg;
+  els.toast.style.display = 'block';
+  setTimeout(()=> els.toast.style.display='none', 1600);
+}
+
+async function api(path, opts = {}){
+  const res = await fetch(BASE + path, {
+    ...opts,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: 'Bearer ' + token } : {}),
+      ...(opts.headers || {})
+    }
+  });
+  if (res.status === 401) { logout(); throw new Error('401'); }
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function probe(){
+  try{
+    const h = await fetch(BASE + '/api/health').then(r => r.json());
+    els.healthBadge.textContent = 'Connexion: ' + (h.ok ? 'OK' : 'Non');
+    return !!h.ok;
+  }catch(e){
+    els.healthBadge.textContent = 'Connexion: échec';
+    return false;
+  }
+}
+
+/* --------- Auth --------- */
+async function login(){
+  els.loginMsg.textContent = 'Connexion…';
+  try{
+    const out = await api('/api/auth/login', {
+      method:'POST',
+      body: JSON.stringify({ email: els.email.value.trim(), password: els.password.value })
+    });
+    token = out.token;
+    localStorage.setItem('adm_token', token);
+    show('app');
+    await load();
+  }catch(e){
+    console.error(e);
+    els.loginMsg.textContent = 'Échec de connexion';
+  }
+}
+function logout(){
+  token = '';
+  localStorage.removeItem('adm_token');
+  show('login');
+}
+
+/* --------- Data --------- */
+async function load(){
+  const qs = new URLSearchParams();
+  if (els.statusFilter.value) qs.set('status', els.statusFilter.value);
+  if (els.search.value.trim()) qs.set('q', els.search.value.trim());
+  qs.set('limit', els.limit.value);
+  qs.set('offset', offset);
+
+  const data = await api('/api/admin/quotes?' + qs.toString());
+  lastRows = data;
+  els.countBadge.textContent = `${data.length} devis (page)`;
+  renderRows(data);
+}
+
+function renderRows(rows){
+  els.list.innerHTML = '';
+  if (!rows.length){
+    els.list.innerHTML = '<div class="empty">Aucun résultat.</div>';
+    return;
+  }
+  rows.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'rowcard';
+    card.addEventListener('click', ()=> openDrawer(r.id));
+
+    // name + snippet + email
+    const name = document.createElement('div');
+    name.className = 'name';
+    name.innerHTML =
+      `<b style="font-size:18px">${escapeHtml(r.name || '—')}</b>
+       <small>${escapeHtml((r.snippet||'').replace(/\n/g,' '))}</small>`;
+
+    // treatment pill
+    const trt = document.createElement('div');
+    trt.innerHTML = r.treatment ? `<span class="pill">${escapeHtml(r.treatment)}</span>` : `<span class="meta">—</span>`;
+
+    // urgency chip
+    const urg = document.createElement('div');
+    urg.innerHTML = r.urgency ? `<span class="urg">${escapeHtml(r.urgency)}</span>` : `<span class="meta">—</span>`;
+
+    // status chip
+    const st = document.createElement('div');
+    st.innerHTML = `<span class="status ${statusClass(r.status)}">${escapeHtml(r.status)}</span>`;
+
+    // date + country + email
+    const dt = document.createElement('div');
+    dt.innerHTML =
+      `<div class="meta">${fmtDate(r.created_at)}</div>
+       <div class="country">${escapeHtml(r.country || '')} ${r.email ? '· ' + escapeHtml(r.email) : ''}</div>`;
+
+    // arrow
+    const arrow = document.createElement('div');
+    arrow.textContent = '›';
+    arrow.style.textAlign = 'right';
+    arrow.style.fontWeight = '800';
+
+    card.append(name, trt, urg, st, dt, arrow);
+    els.list.append(card);
+  });
+}
+
+async function openDrawer(id){
+  currentId = id;
+  els.saveMsg.textContent = '';
+  const data = await api('/api/admin/quotes/' + id);
+  const q = data.quote; currentQuote = q;
+
+  // Title + quick actions
+  els.dName.textContent = `${q.name || '—'} — ${q.email || ''}`;
+  els.actCopyMail.onclick = (e)=>{ e.preventDefault(); if(q.email){ navigator.clipboard.writeText(q.email); toast('Email copié ✔'); } };
+  els.actMailto.href = q.email ? `mailto:${encodeURIComponent(q.email)}` : '#';
+  els.actWhats.href = q.phone ? `https://wa.me/${encodeURIComponent(q.phone.replace(/[^\d]/g,''))}` : '#';
+  els.actWhats.target = '_blank';
+
+  // Meta block
+  els.dMeta.innerHTML = '';
+  const meta = [
+    ['Traitement:', q.treatment || '—'],
+    ['Disponibilité:', q.urgency || '—'],
+    ['Téléphone:', q.phone || '—'],
+    ['WhatsApp:', q.whatsapp || '—'],
+    ['Pays:', q.country || '—'],
+    ['Créé:', fmtDate(q.created_at)],
+    ['MAJ:', fmtDate(q.updated_at)],
+    ['Email:', q.email || '—']
+  ];
+  meta.forEach(([k,v])=>{
+    const kb = document.createElement('b'); kb.textContent = k;
+    const val = document.createElement('div'); val.textContent = v;
+    els.dMeta.append(kb,val);
+  });
+
+  els.dNotes.textContent = q.notes || '—';
+  els.dStatus.value = q.status;
+
+  // Files
+  els.dFiles.innerHTML = '';
+  (data.files || []).forEach(f=>{
+    const row = document.createElement('div'); row.className = 'file';
+    const left = document.createElement('div'); left.className = 'left';
+    // thumb (images only)
+    let thumb;
+    if ((f.mime_type||'').startsWith('image/')){
+      thumb = document.createElement('img');
+      thumb.className = 'thumb';
+      thumb.loading = 'lazy';
+      thumb.src = `${BASE}/api/admin/files/${f.id}?token=${encodeURIComponent(token)}`;
+    } else {
+      thumb = document.createElement('div'); thumb.className = 'thumb'; thumb.style.display='flex'; thumb.style.alignItems='center'; thumb.style.justifyContent='center'; thumb.textContent='📄';
+    }
+    const txt = document.createElement('div');
+    txt.innerHTML = `<b>${escapeHtml(f.original_name)}</b><div class="note">${escapeHtml(f.mime_type||'file')} — ${(f.size/1024).toFixed(1)} KB</div>`;
+    left.append(thumb, txt);
+
+    const a = document.createElement('a');
+    a.className = 'btn secondary'; a.textContent = 'Ouvrir';
+    a.href = `${BASE}/api/admin/files/${f.id}?token=${encodeURIComponent(token)}`; a.target = '_blank';
+
+    row.append(left, a);
+    els.dFiles.append(row);
+  });
+
+  els.drawer.style.display = 'block';
+}
+
+async function saveStatus(){
+  if (!currentId) return;
+  els.saveMsg.textContent = 'Mise à jour…';
+  await api('/api/admin/quotes/' + currentId + '/status', {
+    method:'PATCH',
+    body: JSON.stringify({ status: els.dStatus.value })
+  });
+  els.saveMsg.textContent = 'OK';
+  await load();
+}
+
+/* --------- CSV Export (current page) --------- */
+function toCsvCell(v){
+  if (v==null) return '';
+  const s = String(v).replace(/"/g,'""');
+  return `"${s}"`;
+}
+function exportCsv(){
+  if (!lastRows.length){ toast('Rien à exporter'); return; }
+  const headers = ['id','name','email','country','treatment','urgency','status','created_at','snippet'];
+  const lines = [headers.join(',')];
+  lastRows.forEach(r=>{
+    lines.push([
+      r.id, r.name, r.email, r.country, r.treatment, r.urgency, r.status, r.created_at, (r.snippet||'').replace(/\n/g,' ')
+    ].map(toCsvCell).join(','));
+  });
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'devis-page.csv'; a.click();
+  setTimeout(()=> URL.revokeObjectURL(url), 500);
+}
+
+/* --------- Small utils --------- */
+function escapeHtml(s){
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function closeDrawer(){ els.drawer.style.display = 'none'; currentId = null; }
+
+/* --------- Events --------- */
+els.loginBtn.addEventListener('click', login);
+els.clearBtn.addEventListener('click', ()=>{ els.email.value=''; els.password.value=''; });
+els.logoutBtn.addEventListener('click', logout);
+els.refreshBtn.addEventListener('click', ()=>{ offset=0; load(); });
+els.exportBtn.addEventListener('click', exportCsv);
+els.statusFilter.addEventListener('change', ()=>{ offset=0; load(); });
+els.search.addEventListener('keydown', e=>{ if(e.key==='Enter'){ offset=0; load(); }});
+els.limit.addEventListener('change', ()=>{ offset=0; load(); });
+els.prev.addEventListener('click', ()=>{ offset=Math.max(0, offset-parseInt(els.limit.value)); load(); });
+els.next.addEventListener('click', ()=>{ offset += parseInt(els.limit.value); load(); });
+els.closeDrawer.addEventListener('click', closeDrawer);
+els.drawer.addEventListener('click', e=>{ if(e.target===els.drawer) closeDrawer(); });
+els.saveStatus.addEventListener('click', saveStatus);
+
+/* --------- Boot --------- */
+(async function start(){
+  show('app'); // show app so the belt is visible
+  const ok = await probe();
+  if (!ok) els.healthBadge.textContent += ' — vérifiez que l’API tourne';
+  if (localStorage.getItem('adm_token')) {
+    token = localStorage.getItem('adm_token');
+    try { await load(); }
+    catch { show('login'); }
+  } else {
+    show('login');
+  }
+})();
+</script>
+</body>
+</html>

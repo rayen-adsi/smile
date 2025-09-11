@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Devis Smile Tunisia</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lav:#EDE6F7; --turq:#5AC3CC; --blue:#3B5BA7; --vio:#7A5FA7;
+    --text:#0f172a; --muted:#64748b; --bg:#f8fafc; --card:#ffffff;
+    --ok:#16a34a; --warn:#ca8a04; --info:#2563eb; --gray:#e5e7eb; --danger:#dc2626;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Poppins,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  .container{max-width:1200px;margin:0 auto;padding:20px}
+  h1{margin:8px 0 12px;font-size:28px;letter-spacing:.2px}
+  .sub{color:var(--muted);font-size:13px;margin-top:-4px}
+  .card{background:var(--card);border:1px solid var(--gray);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .toolbar{position:sticky;top:12px;z-index:10;display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 16px;padding:12px;background:var(--card);border:1px solid var(--gray);border-radius:14px;backdrop-filter:saturate(140%) blur(4px)}
+  select,input,button{font:inherit;border:1px solid var(--gray);border-radius:12px;padding:10px 12px;background:#fff}
+/* Buttons (works for <a> and <button>) */
+a.btn, button.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--turq); color:#063b3f;
+  border:none; font-weight:700; cursor:pointer;
+  padding:10px 12px; border-radius:12px;
+  text-decoration:none; transition:transform .04s ease, filter .12s ease;
+}
+a.btn:visited{ color:#063b3f; }
+a.btn:hover, button.btn:hover{ filter:brightness(0.97); }
+a.btn:active, button.btn:active{ transform:translateY(1px); }
+
+/* (only if you use outlined variants elsewhere) */
+a.btn.secondary, button.btn.secondary{
+  background:#fff; border:2px solid var(--vio); color:var(--vio);
+}
+
+  .login{max-width:420px;margin:60px auto;padding:18px}
+  .row{display:flex;gap:10px}
+  .row > *{flex:1}
+  .note{font-size:12px;color:var(--muted)}
+  .belt{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+  .badge{background:#0f172a;color:#e5e7eb;border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px}
+  .kpis{display:grid;grid-template-columns:repeat(5,minmax(140px,1fr));gap:10px;margin:10px 0}
+  .kpi{padding:12px;border:1px solid var(--gray);border-radius:14px;background:var(--card)}
+  .kpi b{display:block;font-size:22px;margin-bottom:2px}
+  .kpi small{color:var(--muted)}
+  .chips{display:flex;gap:8px;overflow:auto;padding-bottom:2px}
+  .chip{border:1px solid var(--gray);background:#fff;padding:8px 12px;border-radius:999px;font-size:13px;cursor:pointer;white-space:nowrap}
+  .chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+  .table{width:100%;border-collapse:separate;border-spacing:0 8px}
+  .table th{font-size:12px;color:var(--muted);text-align:left;padding:0 10px}
+  .rowcard{display:grid;grid-template-columns:auto 1fr .8fr .6fr .14fr;gap:10px;align-items:center;
+           padding:12px;background:#fff;border:1px solid var(--gray);border-radius:14px;transition:box-shadow .15s ease,transform .02s}
+  .rowcard:hover{box-shadow:0 8px 20px rgba(59,91,167,.10)}
+  .avatar{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:var(--lav);color:var(--blue);font-weight:800}
+  .status{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;text-transform:capitalize}
+  .s-pending{background:#f1f5f9;color:#334155}
+  .s-reviewing{background:#fef9c3;color:#854d0e}
+  .s-quoted{background:#dcfce7;color:#065f46}
+  .s-scheduled{background:#dbeafe;color:#1e40af}
+  .s-closed{background:#e5e7eb;color:#111827}
+  .s-cancelled{background:#fee2e2;color:#991b1b}
+  .pill{background:var(--lav);color:var(--blue);border:1px solid rgba(59,91,167,.18);border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px}
+  .click{cursor:pointer}
+  .empty{padding:24px;text-align:center;color:var(--muted)}
+  .file{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border:1px solid var(--gray);border-radius:10px}
+  .file img{max-height:90px;border-radius:8px;display:block}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .stack{display:flex;flex-direction:column;gap:8px}
+  .row-actions{display:flex;gap:8px;align-items:center}
+  .tiny{font-size:11px;color:var(--muted)}
+  .toast{position:fixed;right:16px;bottom:16px;background:#111827;color:#fff;padding:10px 12px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.25);display:none}
+  .close{position:absolute;right:10px;top:10px;border:none;background:#eee;border-radius:999px;width:32px;height:32px;cursor:pointer}
+
+  /* ===== Drawer layouts: right (wide), center (page), full ===== */
+  .drawer{position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.45); display:none;}
+  .drawer.show{display:flex;}
+  .drawer .panel{position:relative; background:#fff; padding:16px 18px; overflow:auto;}
+
+  /* Docked right (wide) */
+  .drawer.mode-right{ justify-content:flex-end; align-items:stretch; }
+  .drawer.mode-right .panel{
+    width:min(860px,96vw); height:100%;
+    border-left:1px solid var(--gray); border-radius:0;
+  }
+
+  /* Centered “page” modal */
+  .drawer.mode-center{ justify-content:center; align-items:center; }
+  .drawer.mode-center .panel{
+    width:min(980px,96vw); height:min(92vh, 920px);
+    border:1px solid var(--gray); border-radius:16px;
+    box-shadow:0 24px 80px rgba(0,0,0,.25);
+  }
+
+  /* Full-screen */
+  .drawer.mode-full{ justify-content:center; align-items:center; }
+  .drawer.mode-full .panel{ width:100vw; height:100vh; border:none; border-radius:0; }
+
+  /* Header actions */
+  .head{ display:flex; align-items:center; gap:8px; }
+  .head h3{ flex:1; margin:0; }
+  .iconbtn{
+    border:none; background:#eef2f7; width:34px; height:34px;
+    border-radius:10px; cursor:pointer; font-weight:700;
+  }
+
+  @media (max-width: 980px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .rowcard{grid-template-columns:auto 1fr .8fr .6fr .14fr}
+    .grid2{grid-template-columns:1fr}
+  }
+  /* ---- Login card polish ---- */
+.login{
+  max-width: 540px;
+  margin: 64px auto;
+  padding: 22px;
+  background: linear-gradient(180deg,#ffffff, #f9fbff);
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(59,91,167,.12);
+}
+
+.login .title{
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+
+.login .subtitle{
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.login .stack{ gap: 12px; }
+
+.input-group{
+  position: relative;
+}
+
+.input-group input{
+  width: 100%;
+  padding: 12px 40px 12px 40px; /* room for icons on both sides */
+  border: 1.5px solid var(--gray);
+  border-radius: 12px;
+  background: #fff;
+  outline: none;
+  transition: border-color .12s ease, box-shadow .12s ease;
+}
+.input-group input:focus{
+  border-color: var(--vio);
+  box-shadow: 0 0 0 4px rgba(122,95,167,.12);
+}
+
+.field-icon{
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  opacity: .6; font-size: 16px; user-select: none;
+}
+.toggle-eye{
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 12px; color: var(--muted); cursor: pointer; user-select: none;
+}
+
+/* Top row with the back button */
+.login-head{
+  display:flex; align-items:center; gap:10px; margin-bottom:8px;
+}
+a.btn.ghost{
+  background:#fff; border:1.5px solid var(--vio); color: var(--vio);
+  text-decoration:none; padding:8px 12px; border-radius:12px;
+}
+a.btn.ghost:hover{ background: var(--lav); }
+
+/* Make the 3 buttons wrap nicely on small screens */
+.login .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Admin — Devis</h1>
+  <div class="sub">Recherchez, filtrez et gérez les demandes en un coup d’œil.</div>
+
+  <!-- LOGIN CARD -->
+  <section id="loginCard" class="card login" style="display:none">
+  <div class="login-head">
+    <!-- If your homepage is in the parent folder, keep ../index.html.
+         If it’s in the same folder, change to index.html -->
+    <a href="../index.html" class="btn ghost" id="backBtn">← Retour au site</a>
+    <h3 class="title">Connexion</h3>
+  </div>
+  <p class="subtitle">Utilisez l’email et le mot de passe admin définis dans vos variables d’environnement.</p>
+
+  <div class="stack" style="margin-top:8px">
+    <div class="input-group">
+      <span class="field-icon">📧</span>
+      <input id="email" placeholder="adresse email" autocomplete="username">
+    </div>
+
+    <div class="input-group">
+      <span class="field-icon">🔒</span>
+      <input id="password" placeholder="Mot de passe" type="password" autocomplete="current-password">
+      <span class="toggle-eye" id="togglePwd"></span>
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:12px">
+    <button class="btn" id="loginBtn">Se connecter</button>
+    <button class="btn secondary" id="clearBtn" type="button">Effacer</button>
+    <!-- Optional second Retour button inside the card (kept for convenience).
+         Remove if you only want the top-left one. -->
+    <a href="../index.html" class="btn ghost">Retour</a>
+  </div>
+
+  <div id="loginMsg" class="note" style="margin-top:10px"></div>
+</section>
+
+
+  <!-- MAIN UI -->
+  <section id="app" style="display:none">
+    <div class="belt">
+      <span class="badge" id="apiBadge">API:</span>
+      <span class="badge" id="healthBadge">Connexion: inconnue</span>
+      <span class="badge" id="countBadge">0 devis</span>
+    </div>
+
+    <!-- Quick filters -->
+    <div class="chips" id="chips">
+      <div class="chip active" data-status="">Tous</div>
+      <div class="chip" data-status="pending">En attente</div>
+      <div class="chip" data-status="reviewing">En cours d’étude</div>
+      <div class="chip" data-status="quoted">Devis envoyé</div>
+      <div class="chip" data-status="scheduled">Programmé</div>
+      <div class="chip" data-status="closed">Clôturé</div>
+      <div class="chip" data-status="cancelled">Annulé</div>
+    </div>
+
+    <div class="toolbar">
+      <select id="statusFilter" title="Statut">
+        <option value="">Tous les statuts</option>
+        <option value="pending">En attente</option>
+        <option value="reviewing">En cours d’étude</option>
+        <option value="quoted">Devis envoyé</option>
+        <option value="scheduled">Programmé</option>
+        <option value="closed">Clôturé</option>
+        <option value="cancelled">Annulé</option>
+      </select>
+      <input id="search" placeholder="Rechercher (nom, email, notes)…" style="min-width:260px">
+      <select id="limit"><option>20</option><option>50</option><option>100</option></select>
+      <button class="btn" id="refreshBtn" title="Actualiser (F5)">Actualiser</button>
+      <div style="flex:1"></div>
+      <button class="btn secondary" id="logoutBtn">Déconnexion</button>
+    </div>
+
+    <!-- Page KPIs (computed on current page) -->
+    <div class="kpis" id="kpis">
+      <div class="kpi"><b id="kpiTotal">0</b><small>Devis (page)</small></div>
+      <div class="kpi"><b id="kpiPending">0</b><small>En attente</small></div>
+      <div class="kpi"><b id="kpiReviewing">0</b><small>En cours d’étude</small></div>
+      <div class="kpi"><b id="kpiScheduled">0</b><small>Programmés</small></div>
+      <div class="kpi"><b id="kpiQuoted">0</b><small>Devis envoyés</small></div>
+    </div>
+
+    <div id="list" class="card" style="padding:12px">
+      <table class="table" aria-label="Devis">
+        <thead>
+          <tr><th></th><th>Nom & aperçu</th><th>Traitement</th><th>Statut</th><th>Date</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="empty" class="empty" style="display:none">Aucun résultat. Modifiez votre recherche ou statut.</div>
+      <div class="row" style="justify-content:flex-end;margin-top:6px">
+        <button id="prev" class="btn secondary">‹ Précédent</button>
+        <button id="next" class="btn">Suivant ›</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Drawer -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <div class="panel">
+    <button class="close" id="closeDrawer" title="Fermer (Esc)">✕</button>
+    <div class="head" style="margin:4px 28px 8px 0">
+      <h3 id="dName">Devis</h3>
+      <button class="iconbtn" id="toggleMode" title="Changer d’affichage (docké → centré → plein écran)">⤢</button>
+    </div>
+
+    <div class="grid2" style="margin-bottom:12px">
+      <div class="card" style="padding:12px">
+        <b>Détails</b>
+        <div id="dMeta" class="note" style="margin-top:6px"></div>
+        <div class="row-actions" style="margin-top:10px">
+          <a id="actWa" class="btn" href="#" target="_blank">WhatsApp</a>
+          <button id="copyEmail" class="btn" type="button">Copier email</button>
+        </div>
+        <div id="dNotes" class="stack" style="margin-top:12px">
+          <b>Notes</b>
+          <div id="dNotesText" style="white-space:pre-wrap"></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:12px">
+        <b>Statut</b>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+          <select id="dStatus">
+            <option value="pending">En attente</option>
+            <option value="reviewing">En cours d’étude</option>
+            <option value="quoted">Devis envoyé</option>
+            <option value="scheduled">Programmé</option>
+            <option value="closed">Clôturé</option>
+            <option value="cancelled">Annulé</option>
+          </select>
+          <button class="btn" id="saveStatus">Mettre à jour</button>
+          <span id="saveMsg" class="note"></span>
+        </div>
+
+        <div style="margin-top:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <b>Fichiers</b>
+            <button id="openAll" class="btn secondary" type="button">Tout ouvrir</button>
+          </div>
+          <div id="dFiles" class="stack" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ------- Configurable BASE from ?base=... or previous choice ------- */
+function resolveBase(){
+  const p = new URLSearchParams(location.search);
+  const fromQuery = p.get('base');
+  if (fromQuery) { localStorage.setItem('adm_base', fromQuery); return fromQuery; }
+  return localStorage.getItem('adm_base') || 'http://localhost:3000';
+}
+let BASE = resolveBase();
+
+const els = {
+  loginCard: document.getElementById('loginCard'),
+  app: document.getElementById('app'),
+  apiBadge: document.getElementById('apiBadge'),
+  healthBadge: document.getElementById('healthBadge'),
+  email: document.getElementById('email'),
+  password: document.getElementById('password'),
+  loginBtn: document.getElementById('loginBtn'),
+  clearBtn: document.getElementById('clearBtn'),
+  loginMsg: document.getElementById('loginMsg'),
+  statusFilter: document.getElementById('statusFilter'),
+  chips: document.getElementById('chips'),
+  search: document.getElementById('search'),
+  limit: document.getElementById('limit'),
+  refreshBtn: document.getElementById('refreshBtn'),
+  logoutBtn: document.getElementById('logoutBtn'),
+  rows: document.getElementById('rows'),
+  empty: document.getElementById('empty'),
+  prev: document.getElementById('prev'),
+  next: document.getElementById('next'),
+  countBadge: document.getElementById('countBadge'),
+  drawer: document.getElementById('drawer'),
+  closeDrawer: document.getElementById('closeDrawer'),
+  dName: document.getElementById('dName'),
+  dMeta: document.getElementById('dMeta'),
+  dNotesText: document.getElementById('dNotesText'),
+  dFiles: document.getElementById('dFiles'),
+  dStatus: document.getElementById('dStatus'),
+  saveStatus: document.getElementById('saveStatus'),
+  saveMsg: document.getElementById('saveMsg'),
+  actWa: document.getElementById('actWa'),
+  copyEmail: document.getElementById('copyEmail'),
+  openAll: document.getElementById('openAll'),
+  toast: document.getElementById('toast'),
+  kpiTotal: document.getElementById('kpiTotal'),
+  kpiPending: document.getElementById('kpiPending'),
+  kpiReviewing: document.getElementById('kpiReviewing'),
+  kpiScheduled: document.getElementById('kpiScheduled'),
+  kpiQuoted: document.getElementById('kpiQuoted'),
+  toggleMode: document.getElementById('toggleMode'),
+};
+
+els.apiBadge.textContent = 'API: ' + BASE;
+
+let token = localStorage.getItem('adm_token') || '';
+let offset = 0, lastCount = 0;
+let currentId = null;
+
+/* ---------- Drawer mode ---------- */
+// 'mode-right' | 'mode-center' | 'mode-full'
+let drawerMode = localStorage.getItem('adm_drawer_mode') || 'mode-center'; // default centered
+
+function applyDrawerMode(){
+  els.drawer.classList.remove('mode-right','mode-center','mode-full');
+  els.drawer.classList.add(drawerMode);
+}
+
+/* ---------- Helpers ---------- */
+function statusClass(s){
+  return { pending:'s-pending', reviewing:'s-reviewing', quoted:'s-quoted',
+           scheduled:'s-scheduled', closed:'s-closed', cancelled:'s-cancelled' }[s] || 's-pending';
+}
+function statusLabel(s){
+  return { pending:'En attente', reviewing:'En cours d’étude', quoted:'Devis envoyé',
+           scheduled:'Programmé', closed:'Clôturé', cancelled:'Annulé' }[s] || s;
+}
+function fmtDate(iso){
+  const d = new Date(iso);
+  return d.toLocaleString('fr-FR', { dateStyle:'medium', timeStyle:'short' });
+}
+function relTime(iso){
+  const rtf = new Intl.RelativeTimeFormat('fr-FR',{numeric:'auto'});
+  const ms = new Date(iso) - new Date();
+  const abs = Math.abs(ms);
+  const units = [
+    ['year',   1000*60*60*24*365],
+    ['month',  1000*60*60*24*30],
+    ['day',    1000*60*60*24],
+    ['hour',   1000*60*60],
+    ['minute', 1000*60],
+    ['second', 1000],
+  ];
+  for (const [u, size] of units){
+    if (abs >= size || u==='second') return rtf.format(Math.round(ms/size), u);
+  }
+}
+function fmtBytes(n){
+  if (!n && n!==0) return '—';
+  const kb = n/1024, mb = kb/1024;
+  return mb>=1 ? mb.toFixed(1)+' MB' : kb.toFixed(1)+' KB';
+}
+function toastMsg(msg){
+  els.toast.textContent = msg;
+  els.toast.style.display='block';
+  setTimeout(()=> els.toast.style.display='none', 1800);
+}
+function phoneLink(num){ if(!num) return '#'; const d = (''+num).replace(/\D/g,''); return 'tel:+'+d; }
+function waLink(num){ if(!num) return '#'; const d = (''+num).replace(/\D/g,''); return 'https://wa.me/'+d; }
+
+/* ---------- View switch ---------- */
+function show(view){
+  els.loginCard.style.display = (view==='login') ? '' : 'none';
+  els.app.style.display = (view==='app') ? '' : 'none';
+}
+
+/* ---------- API ---------- */
+async function api(path, opts = {}){
+  const res = await fetch(BASE + path, {
+    ...opts,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: 'Bearer ' + token } : {}),
+      ...(opts.headers || {})
+    }
+  });
+  if (res.status === 401) { logout(); throw new Error('401'); }
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function probe(){
+  try{
+    const h = await fetch(BASE + '/api/health').then(r => r.json());
+    els.healthBadge.textContent = 'Connexion: ' + (h.ok ? 'OK' : 'Non');
+    return !!h.ok;
+  }catch(e){
+    els.healthBadge.textContent = 'Connexion: échec';
+    return false;
+  }
+}
+
+/* ---------- Auth ---------- */
+async function login(){
+  els.loginMsg.textContent = 'Connexion…';
+  try{
+    const out = await api('/api/auth/login', {
+      method:'POST',
+      body: JSON.stringify({ email: els.email.value.trim(), password: els.password.value })
+    });
+    token = out.token;
+    localStorage.setItem('adm_token', token);
+    show('app');
+    await load();
+  }catch(e){
+    console.error(e);
+    els.loginMsg.textContent = 'Échec de connexion';
+  }
+}
+function logout(){
+  token = '';
+  localStorage.removeItem('adm_token');
+  show('login');
+}
+
+/* ---------- Data ---------- */
+async function load(){
+  const qs = new URLSearchParams();
+  if (els.statusFilter.value) qs.set('status', els.statusFilter.value);
+  if (els.search.value.trim()) qs.set('q', els.search.value.trim());
+  qs.set('limit', els.limit.value);
+  qs.set('offset', offset);
+
+  const data = await api('/api/admin/quotes?' + qs.toString());
+  lastCount = data.length;
+  els.countBadge.textContent = `${lastCount} devis (page)`;
+  renderRows(data);
+  updateKpis(data);
+}
+
+function updateKpis(rows){
+  const by = (k)=> rows.filter(r=> r.status===k).length;
+  els.kpiTotal.textContent = rows.length;
+  els.kpiPending.textContent = by('pending');
+  els.kpiReviewing.textContent = by('reviewing');
+  els.kpiScheduled.textContent = by('scheduled');
+  els.kpiQuoted.textContent = by('quoted');
+}
+
+function renderRows(rows){
+  els.rows.innerHTML = '';
+  els.empty.style.display = rows.length ? 'none' : '';
+  rows.forEach(r=>{
+    const tr = document.createElement('tr');
+    const td = document.createElement('td'); td.colSpan = 5;
+
+    const wrap = document.createElement('div'); wrap.className = 'rowcard click';
+    wrap.addEventListener('click', ()=> openDrawer(r.id));
+
+    const avatar = document.createElement('div'); avatar.className='avatar';
+    avatar.textContent = (r.name||'?').trim().charAt(0).toUpperCase();
+
+    const name = document.createElement('div');
+    name.innerHTML = `<b>${r.name||'—'}</b>
+      <div class="tiny">${r.email||''}</div>
+      <div class="note">${(r.snippet||'').replace(/\n/g,' ')}</div>`;
+
+    const trt = document.createElement('div');
+    trt.innerHTML = r.treatment ? `<span class="pill">${r.treatment}</span>` : `<span class="note">—</span>`;
+
+    const st = document.createElement('div');
+    st.innerHTML = `<span class="status ${statusClass(r.status)}">${statusLabel(r.status)}</span>`;
+
+    const dt = document.createElement('div');
+    dt.innerHTML = `<span class="note" title="${fmtDate(r.created_at)}">${relTime(r.created_at)}</span>`;
+
+    const arrow = document.createElement('div'); arrow.textContent = '›'; arrow.style.textAlign='right'; arrow.style.fontWeight='700';
+
+    wrap.append(avatar,name,trt,st,dt);
+    td.append(wrap); tr.append(td);
+    els.rows.append(tr);
+  });
+}
+
+/* ---------- Drawer ---------- */
+async function openDrawer(id){
+  currentId = id;
+  els.saveMsg.textContent = '';
+  const data = await api('/api/admin/quotes/' + id);
+  const q = data.quote;
+
+  els.dName.textContent = `${q.name || '—'} — ${q.email || ''}`;
+  els.dMeta.innerHTML = `
+    <div><b>Traitement:</b> ${q.treatment || '—'}</div>
+    <div><b>Disponibilité:</b> ${q.urgency || '—'}</div>
+    <div><b>Téléphone:</b> ${q.phone || '—'} ${q.whatsapp ? ' | WhatsApp: '+q.whatsapp : ''}</div>
+    <div><b>Pays:</b> ${q.country || '—'}</div>
+    <div><b>Créé:</b> ${fmtDate(q.created_at)} <span class="note">(${relTime(q.created_at)})</span> | <b>MAJ:</b> ${fmtDate(q.updated_at)}</div>
+  `;
+  els.dNotesText.textContent = q.notes || '—';
+  els.dStatus.value = q.status;
+
+  // actions
+  els.actWa.href = waLink(q.whatsapp||q.phone);
+  els.copyEmail.onclick = async ()=>{ try{ await navigator.clipboard.writeText(q.email||''); toastMsg('Email copié'); }catch{} };
+
+  // files
+  els.dFiles.innerHTML = '';
+  (data.files || []).forEach(f=>{
+    const row = document.createElement('div'); row.className = 'file';
+    const left = document.createElement('div');
+    const isImg = (f.mime_type||'').startsWith('image/');
+    left.innerHTML = `<div><b>${f.original_name}</b></div>
+      <div class="note">${f.mime_type||'fichier'} — ${fmtBytes(f.size)}</div>`;
+    if (isImg){
+      const pre = document.createElement('img');
+      pre.loading = 'lazy';
+      pre.src = `${BASE}/api/admin/files/${f.id}?token=${encodeURIComponent(token)}`;
+      left.prepend(pre);
+    }
+    const a = document.createElement('a');
+    a.className = 'btn'; a.textContent = 'Ouvrir';
+    a.href = `${BASE}/api/admin/files/${f.id}?token=${encodeURIComponent(token)}`;
+    a.target = '_blank';
+    row.append(left,a);
+    els.dFiles.append(row);
+  });
+
+  els.openAll.onclick = ()=>{
+    const anchors = els.dFiles.querySelectorAll('a.btn');
+    anchors.forEach(a => window.open(a.href,'_blank'));
+  };
+
+  applyDrawerMode();                 // apply current mode
+  els.drawer.classList.add('show');  // show
+}
+
+function closeDrawer(){
+  els.drawer.classList.remove('show');
+  currentId = null;
+}
+
+/* ---------- Events ---------- */
+document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('clearBtn').addEventListener('click', ()=>{ els.email.value=''; els.password.value=''; });
+els.logoutBtn.addEventListener('click', logout);
+els.refreshBtn.addEventListener('click', ()=>{ offset=0; load(); });
+els.statusFilter.addEventListener('change', ()=>{ syncChips(); offset=0; load(); });
+els.chips.addEventListener('click', (e)=>{
+  const chip = e.target.closest('.chip'); if(!chip) return;
+  els.statusFilter.value = chip.dataset.status || '';
+  syncChips(); offset=0; load();
+});
+function syncChips(){
+  els.chips.querySelectorAll('.chip').forEach(c=> c.classList.toggle('active', c.dataset.status===els.statusFilter.value));
+}
+els.search.addEventListener('keydown', e=>{ if(e.key==='Enter'){ offset=0; load(); }});
+els.limit.addEventListener('change', ()=>{ offset=0; load(); });
+els.prev.addEventListener('click', ()=>{ offset=Math.max(0, offset-parseInt(els.limit.value)); load(); });
+els.next.addEventListener('click', ()=>{ offset += parseInt(els.limit.value); load(); });
+els.closeDrawer.addEventListener('click', closeDrawer);
+els.drawer.addEventListener('click', e=>{ if(e.target===els.drawer) closeDrawer(); });
+
+// keyboard shortcuts
+window.addEventListener('keydown', (e)=>{
+  if (e.key==='/' && document.activeElement!==els.search){ e.preventDefault(); els.search.focus(); }
+  if (e.key==='Escape' && els.drawer.classList.contains('show')){ closeDrawer(); }
+});
+
+// toggle drawer layout
+els.toggleMode.addEventListener('click', ()=>{
+  drawerMode = (drawerMode === 'mode-right') ? 'mode-center'
+            : (drawerMode === 'mode-center') ? 'mode-full'
+            : 'mode-right';
+  localStorage.setItem('adm_drawer_mode', drawerMode);
+  applyDrawerMode();
+});
+/* ---------- Save status (drawer) ---------- */
+async function saveQuoteStatus() {
+  if (!currentId) return;
+
+  const newStatus = els.dStatus.value;
+  els.saveStatus.disabled = true;
+  els.saveMsg.textContent = 'Enregistrement…';
+
+  try {
+    // Try PATCH /api/admin/quotes/:id with {status}
+    let out;
+    try {
+      out = await api(`/api/admin/quotes/${currentId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: newStatus })
+      });
+    } catch (e1) {
+      // Fallback: PATCH /api/admin/quotes/:id/status
+      out = await api(`/api/admin/quotes/${currentId}/status`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: newStatus })
+      });
+    }
+
+    els.saveMsg.textContent = 'Statut mis à jour ✔';
+    toastMsg('Statut mis à jour');
+
+    // Refresh table + KPIs
+    await load();
+
+    // Optionally refresh the drawer details so updated_at changes
+    await openDrawer(currentId);
+
+  } catch (err) {
+    console.error(err);
+    els.saveMsg.textContent = 'Échec de la mise à jour';
+    toastMsg('Erreur de mise à jour');
+  } finally {
+    els.saveStatus.disabled = false;
+  }
+}
+
+// Hook the button and clear the inline message when the select changes
+els.saveStatus.addEventListener('click', saveQuoteStatus);
+els.dStatus.addEventListener('change', () => { els.saveMsg.textContent = ''; });
+
+/* ---------- Boot ---------- */
+(async function start(){
+  show('app'); // show app so the belt is visible
+  applyDrawerMode();
+  const ok = await probe();
+  if (!ok) els.healthBadge.textContent += ' — vérifiez que l’API tourne';
+  if (localStorage.getItem('adm_token')) {
+    token = localStorage.getItem('adm_token');
+    try { await load(); }
+    catch { show('login'); }
+  } else {
+    show('login');
+  }
+})();
+</script>
+</body>
+</html>

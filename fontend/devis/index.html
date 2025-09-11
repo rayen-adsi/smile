@@ -1,0 +1,1490 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devis dentaire — Smile Tunisia</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <style>
+    /* --- Layout shell --- */
+    .wrap{max-width:1100px;margin:28px auto}
+    .qgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+    @media (max-width: 980px){ .qgrid{grid-template-columns:1fr} }
+
+    /* --- Trust belt --- */
+    .trust-rail{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+    .t-badge{
+      background:#0f172a; color:#e5e7eb; border-radius:999px; padding:8px 12px; font-weight:700; font-size:12px;
+      box-shadow:0 8px 22px rgba(15,23,42,.18);
+    }
+
+    /* --- Left: form --- */
+    .form{background:#fff;border:1px solid #eee;border-radius:16px;padding:18px;box-shadow:0 8px 26px rgba(0,0,0,.06)}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    form .full{grid-column:1/-1}
+    textarea{min-height:140px}
+
+    /* Inputs */
+    input, select, textarea{
+      width:100%; padding:10px 12px; border:1px solid #e6e6f0; border-radius:12px; font:inherit; background:#fff;
+      transition:border-color .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    input:focus, select:focus, textarea:focus{ outline:none; border-color:var(--turq); box-shadow:0 0 0 3px rgba(90,195,204,.25) }
+
+    /* Notice */
+    .notice{padding:10px 12px;background:#f7f7fb;border-left:3px solid var(--turq);border-radius:8px;margin:8px 0}
+    .notice.error{ background:#fef2f2; border-left-color:#ef4444; color:#7f1d1d }
+    .notice.success{ background:#ecfdf5; border-left-color:#10b981; color:#064e3b }
+
+    /* Drag & drop area */
+    .files{grid-column:1/-1;border:1px dashed #d1d5db;padding:14px;border-radius:12px;background:#fafafa}
+    .drop{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .drop .help{color:var(--muted)}
+    .drop .btn-mini{border:1px solid #e6e6f0;background:#fff;border-radius:999px;padding:8px 12px;font-weight:700}
+    .dropzone{
+      margin-top:8px; background:#fff; border:1px dashed #cbd5e1; border-radius:12px; padding:16px; text-align:center;
+      color:#475569; transition:border-color .15s ease, background-color .15s ease;
+    }
+    .dropzone.drag{ background:#f0fbfc; border-color:var(--turq); }
+    .gallery{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .gallery .thumb{position:relative}
+    .gallery img{height:64px;width:auto;border-radius:10px;border:1px solid #e6e6f0;display:block}
+    .thumb button{
+      position:absolute;top:-6px;right:-6px;border:0;background:#ef4444;color:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;
+      font-weight:800; line-height:0; box-shadow:0 6px 14px rgba(239,68,68,.35);
+    }
+
+    /* Treatment radio cards */
+    .treat-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    @media (max-width: 900px){ .treat-grid{grid-template-columns:1fr 1fr} }
+    .tcard{position:relative}
+    .tcard input{position:absolute;inset:0;opacity:0}
+    .tcard .visual{
+      display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #e6e6f0;border-radius:14px;padding:10px 12px;min-height:58px;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background-color .15s ease;
+      box-shadow:0 4px 14px rgba(0,0,0,.04)
+    }
+    .tcard .visual:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(59,91,167,.14); border-color:rgba(59,91,167,.25)}
+    .tcard input:checked + .visual{background:var(--lav); border-color:var(--turq); box-shadow:0 12px 30px rgba(90,195,204,.28); color:#0a2d30}
+
+    /* Segmented control (urgency) */
+    .seg{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+    .seg label{position:relative}
+    .seg input{position:absolute;inset:0;opacity:0}
+    .seg span{display:inline-block;padding:8px 12px;border:1px solid #e6e6f0;border-radius:999px;background:#fff;font-weight:700}
+    .seg span:hover{background:#f8fafc;border-color:rgba(59,91,167,.22)}
+    .seg input:checked + span{background:var(--turq);color:#063b3f;border-color:var(--turq);box-shadow:0 10px 24px rgba(90,195,204,.28)}
+
+    /* Actions */
+    .actions{grid-column:1/-1;display:flex;gap:12px;align-items:center}
+    progress{width:220px;height:16px}
+
+    /* Live completion */
+    .meter{height:10px;background:#f1f5f9;border-radius:999px;overflow:hidden}
+    .meter > span{display:block;height:100%;background:linear-gradient(90deg,var(--turq),#7ad0d7);width:0%}
+
+    /* Consent (checkbox left, text right) */
+    .consent{
+      grid-column:1/-1;
+      display:grid;
+      grid-template-columns:20px 1fr;
+      gap:12px;
+      align-items:start;
+      cursor:pointer;
+    }
+    .consent input[type="checkbox"]{ width:20px;height:20px;margin:0 }
+    .consent span{ line-height:1.35 }
+
+    /* Reassurance column */
+    .reassure{position:sticky;top:84px;height:max-content;display:flex;flex-direction:column;gap:12px}
+    .r-card{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;box-shadow:0 8px 26px rgba(0,0,0,.06)}
+    .r-card.doctor{display:flex;gap:12px;align-items:center}
+    .r-card.doctor img{width:64px;height:64px;border-radius:12px;object-fit:cover;border:1px solid #e6e6f0}
+
+    /* Mini reviews */
+    .stars{color:var(--turq);font-weight:800}
+    .mini-reviews{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .review-mini{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #eee;border-radius:999px;padding:6px 10px}
+    .avatar{width:26px;height:26px;border-radius:50%;background:var(--turq,#06b6d4);color:#063b3f;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+    /* FAQ */
+    .r-faq{background:#0f172a;color:#e5e7eb;border-radius:12px;padding:10px 12px}
+    .r-faq summary{cursor:pointer;font-weight:700}
+
+    /* Honeypot */
+    .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+
+    /* Icon images in treatment cards */
+    .ticon{
+      width:28px;height:28px;border-radius:6px;object-fit:cover;flex:0 0 28px;display:block;box-shadow:0 1px 0 rgba(0,0,0,.04)
+    }
+    @media (min-width: 900px){ .ticon{ width:32px;height:32px } }
+
+    /* --- Success modal (clean) --- */
+    dialog.modal{ border:0;border-radius:16px;padding:18px;width:min(520px,92vw);box-shadow:0 24px 60px rgba(15,23,42,.35);animation:pop .16s ease-out;background:#fff }
+    dialog::backdrop{ background:rgba(15,23,42,.55) }
+    @keyframes pop{ from{transform:scale(.98);opacity:0} to{transform:scale(1);opacity:1} }
+
+    .modal-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .modal-head .badge{background:#10b981;color:#063b3f;font-weight:800;font-size:12px;padding:6px 10px;border-radius:999px}
+
+    .checkwrap{
+      width:44px;height:44px;border-radius:50%;
+      background:radial-gradient( circle at 30% 30%, #b3f7da, #10b981 );
+      display:grid;place-items:center;color:#053b2e;flex:0 0 44px;font-weight:900
+    }
+    .ref{font-weight:700;color:#065f46}
+    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+    .small{font-size:12px;color:#64748b;margin-top:6px}
+    .copy-btn{border:1px solid #10b981;background:#ecfdf5;color:#065f46;border-radius:999px;padding:6px 10px;font-weight:700}
+    
+    /* Country autocomplete */
+    .ac{ position:relative }
+    .ac::after{
+      content:""; position:absolute; right:12px; top:50%; width:10px; height:10px;
+      transform:translateY(-50%) rotate(45deg);
+      border-right:2px solid #94a3b8; border-bottom:2px solid #94a3b8; pointer-events:none;
+    }
+    .ac-list{
+      position:absolute; left:0; right:0; top:calc(100% + 8px);
+      background:#0f172a; color:#e5e7eb; border:1px solid rgba(255,255,255,.06);
+      border-radius:14px; padding:6px; box-shadow:0 20px 48px rgba(15,23,42,.35);
+      max-height:260px; overflow:auto; z-index:9999;
+    }
+    .ac-list::-webkit-scrollbar{ width:8px } 
+    .ac-list::-webkit-scrollbar-thumb{ background:#1f2937; border-radius:999px }
+    .ac-item{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:600;
+    }
+    .ac-item .dot{
+      width:10px; height:10px; border-radius:50%;
+      background:linear-gradient(90deg,var(--turq,#06b6d4),#7ad0d7);
+      box-shadow:0 0 0 3px rgba(90,195,204,.18);
+    }
+    .ac-item:hover, .ac-item.is-active{ background:#111827 }
+    .ac-empty{ padding:8px 10px; color:#9ca3af; font-size:12px }
+  </style>
+</head>
+
+<body data-whatsapp="21600000000">
+  <header>
+    <nav>
+      <div class="container">
+        <a class="brand" href="../"><img src="../assets/img/logo-horiz.jpg" alt="Smile Tunisia" /></a>
+        <div class="spacer"></div>
+        <a class="btn btn-outline" href="../">← Retour</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container wrap">
+    <h1>Devis dentaire gratuit</h1>
+    <p class="lead">Réponse <b>sous 24 h</b>, sans engagement. Transmission <b>sécurisée</b>.</p>
+
+    <!-- Trust belt -->
+    <div class="trust-rail" aria-label="Indicateurs de confiance">
+      <span class="t-badge">★★★★★ Avis vérifiés</span>
+      <span class="t-badge">+500 patients accompagnés</span>
+      <span class="t-badge">Réseau de cliniques certifiées</span>
+      <span class="t-badge">Planification 3D (CBCT)</span>
+      <span class="t-badge">Devis clair · 0 frais cachés</span>
+    </div>
+
+    <div class="qgrid">
+      <!-- LEFT: FORM -->
+      <section class="form" aria-label="Formulaire de demande de devis">
+        <div class="meter full" aria-hidden="true"><span id="meter"></span></div>
+
+        <form id="qform" novalidate>
+          <div>
+            <label>Nom et prénom *</label>
+            <input name="name" required maxlength="120" placeholder="Votre nom complet" />
+          </div>
+          <div>
+            <label>Email *</label>
+            <input name="email" type="email" required placeholder="vous@example.com" />
+          </div>
+
+          <div>
+            <label>Téléphone / WhatsApp *</label>
+            <input name="phone" required placeholder="+216 ..." inputmode="tel" />
+          </div>
+
+          <!-- PAYS (custom autocomplete; no 'Autre') -->
+          <div id="countryField">
+            <label for="countryInput">Pays</label>
+            <div class="ac" id="countryAC">
+              <input id="countryInput" name="country"
+                     placeholder="Commencez à taper…"
+                     autocomplete="off" autocapitalize="none" spellcheck="false"
+                     role="combobox" aria-autocomplete="list" aria-expanded="false"
+                     aria-controls="countryList" aria-activedescendant="">
+              <ul class="ac-list" id="countryList" role="listbox" hidden></ul>
+            </div>
+          </div>
+
+          <!-- Treatments -->
+          <input type="hidden" name="treatment" id="treatHidden" />
+          <div class="treat-grid">
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Implant dentaire">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/implant.png"
+                     srcset="../assets/img/icons/implant.png 1x, ../assets/img/icons/implant@2x.png 2x" alt="Implant dentaire">
+                <b>Implant</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Arcade complète — All-on-4/6">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/all-on-4-6.png"
+                     srcset="../assets/img/icons/all-on-4-6.png 1x, ../assets/img/icons/all-on-4-6@2x.png 2x" alt="All-on-4/6">
+                <b>All-on-4/6</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Facettes dentaires">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/facettes.png"
+                     srcset="../assets/img/icons/facettes.png 1x, ../assets/img/icons/facettes@2x.png 2x" alt="Facettes dentaires" loading="lazy">
+                <b>Facettes</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Orthodontie (aligneurs)">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/aligneurs.png"
+                     srcset="../assets/img/icons/aligneurs.png 1x, ../assets/img/icons/aligneurs@2x.png 2x" alt="Orthodontie (aligneurs)" loading="lazy">
+                <b>Aligneurs</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Couronnes / Bridges">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/crowns-bridge.png"
+                     srcset="../assets/img/icons/crowns-bridge.png 1x, ../assets/img/icons/crowns-bridge@2x.png 2x" alt="Couronnes / Bridges">
+                <b>Couronnes / Bridges</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Prothèses dentaires">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/protheses.png"
+                     srcset="../assets/img/icons/protheses.png 1x, ../assets/img/icons/protheses@2x.png 2x" alt="Prothèses dentaires">
+                <b>Prothèses dentaires</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Endodontie (dévitalisation)">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/endodontie.png"
+                     srcset="../assets/img/icons/endodontie.png 1x, ../assets/img/icons/endodontie@2x.png 2x" alt="Endodontie (dévitalisation)">
+                <b>Endodontie</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Traitement des caries">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/caries.png"
+                     srcset="../assets/img/icons/caries.png 1x, ../assets/img/icons/caries@2x.png 2x" alt="Traitement des caries">
+                <b>Caries</b>
+              </span>
+            </label>
+
+            <label class="tcard">
+              <input type="radio" name="treatChoice" value="Blanchiment dentaire">
+              <span class="visual">
+                <img class="ticon" src="../assets/img/icons/whitening.png"
+                     srcset="../assets/img/icons/whitening.png 1x, ../assets/img/icons/whitening@2x.png 2x" alt="Blanchiment dentaire">
+                <b>Blanchiment</b>
+              </span>
+            </label>
+          </div>
+
+          <!-- Urgency -->
+          <div class="seg" role="group" aria-label="Disponibilité">
+            <label><input type="radio" name="urgency" value="Dès que possible"><span>📅 Dès que possible</span></label>
+            <label><input type="radio" name="urgency" value="Dans 1–3 mois"><span>🗓️ 1–3 mois</span></label>
+            <label><input type="radio" name="urgency" value="Plus tard"><span>⏳ Plus tard</span></label>
+          </div>
+
+          <!-- Files -->
+          <div class="files">
+            <div class="drop">
+              <div class="help">Téléversez une <b>photo de vos dents</b> (smartphone ok) ou une <b>radio panoramique</b>.</div>
+              <button type="button" id="chooseBtn" class="btn-mini">Choisir des fichiers</button>
+            </div>
+            <div id="dz" class="dropzone">Glissez-déposez ici vos photos / PDF (max 10, 10&nbsp;MB chacun)</div>
+            <input id="files" name="files" type="file" multiple accept="image/*,.pdf" hidden />
+            <div id="gallery" class="gallery" aria-live="polite"></div>
+            <p class="note">Conseil : une photo bouche ouverte + un selfie sourire aident à estimer votre cas.</p>
+          </div>
+
+          <textarea class="full" name="notes" maxlength="5000"
+            placeholder="Votre objectif : dents manquantes, esthétique, douleur… Ajoutez tout détail utile."></textarea>
+
+          <!-- Consent -->
+          <label class="consent">
+            <input type="checkbox" id="consent" required>
+            <span>J’accepte de recevoir mon devis et des informations par WhatsApp et email (confidentiel, pas de spam).</span>
+          </label>
+          <p class="note full">Transmission chiffrée (HTTPS). Accès restreint à l’équipe soignante. <a href="../legal/confidentialite.html">Politique de confidentialité</a>.</p>
+
+          <div id="msg" class="notice full" style="display:none"></div>
+
+          <div class="actions">
+            <button class="btn btn-turq" id="submitBtn" type="button">Envoyer ma demande</button>
+            <progress id="prog" value="0" max="100" style="display:none"></progress>
+            <span id="status" class="note"></span>
+          </div>
+
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        </form>
+      </section>
+
+      <!-- RIGHT: reassurance -->
+      <aside class="reassure" aria-label="Rassurance">
+        <div class="r-card doctor">
+          <picture class="doc-photo">
+            <source srcset="../assets/img/illustrations/team-avatar@2x.webp 2x, ../assets/img/illustrations/team-avatar.webp 1x" type="image/webp">
+            <img class="team-avatar" src="../assets/img/illustrations/team-avatar.jpg" width="72" height="72" alt="Équipe médicale certifiée">
+          </picture>
+          <div>
+            <b>Équipe médicale certifiée</b><br>
+            Implantologie & esthétique — réseau de cliniques auditées.<br>
+            <span class="note">“Protocoles sûrs, matériaux CE/FDA, résultat naturel.”</span>
+          </div>
+        </div>
+
+        <div class="r-card">
+          <b>Ce que vous recevez</b>
+          <ul class="list">
+            <li>Un <b>devis clair</b> avec options & délais</li>
+            <li>Une <b>explication du protocole</b> proposé</li>
+            <li>Un <b>conseiller dédié</b> sur WhatsApp</li>
+          </ul>
+        </div>
+
+        <div class="r-card">
+          <b>Données & confidentialité</b>
+          <ul class="list">
+            <li>Envoi via <b>connexion sécurisée (HTTPS)</b></li>
+            <li>Accès limité à l’équipe soignante</li>
+            <li><b>Suppression sur demande</b> (RGPD)</li>
+          </ul>
+        </div>
+
+        <div class="r-card">
+          <b>Et après ?</b>
+          <ol class="list">
+            <li>Étude de vos photos/radio</li>
+            <li>Devis sous 24 h avec options</li>
+            <li>Organisation du séjour si souhaité</li>
+          </ol>
+        </div>
+
+        <div class="r-card">
+          <div class="stars">★★★★★</div>
+          <div class="mini-reviews">
+            <div class="review-mini"><div class="avatar">SB</div><div class="txt"><b>“Facettes impeccables.”</b></div></div>
+            <div class="review-mini"><div class="avatar">ML</div><div class="txt"><b>“All-on-4 en 5 jours.”</b></div></div>
+            <div class="review-mini"><div class="avatar">AK</div><div class="txt"><b>“Suivi WhatsApp rassurant.”</b></div></div>
+          </div>
+        </div>
+
+        <details class="r-faq"><summary>Le devis est-il payant ?</summary><p>Non, il est <b>gratuit</b> et sans engagement.</p></details>
+        <details class="r-faq"><summary>Dois-je avancer des frais ?</summary><p>Aucun frais avant la première visite. Vols/hôtel à votre charge si vous organisez seul.</p></details>
+        <details class="r-faq"><summary>Et si je n’ai pas de radio ?</summary><p>Envoyez juste des <b>photos</b>. Une radio pourra être prescrite ensuite si besoin.</p></details>
+
+        <a class="btn btn-outline" href="javascript:void(0)" onclick="openWhatsApp()">Parler à un conseiller</a>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // --- Config ---
+    const API_URL =
+      (location.port === '5500' || location.hostname === '127.0.0.1' || location.hostname === 'localhost')
+        ? 'http://localhost:3000/api/quotes/multipart'
+        : '/api/quotes/multipart';
+
+    const MAX_FILES = 10, MAX_SIZE = 10 * 1024 * 1024;
+
+    // --- Helpers ---
+    function $(sel, el=document){ return el.querySelector(sel); }
+    function $all(sel, el=document){ return Array.from(el.querySelectorAll(sel)); }
+
+   function showMessage(text, type = 'info', durationMs = 0) {
+  const msg = document.getElementById('msg');
+  msg.innerHTML = text;
+  msg.className = 'notice full ' + (type === 'success' ? 'success' : type === 'error' ? 'error' : '');
+  msg.style.display = 'block';
+  msg.setAttribute('role', 'alert');
+  msg.setAttribute('aria-live', 'polite');
+
+  // optional auto-hide only if a duration is provided
+  clearTimeout(msg.__hideTimer);
+  if (durationMs > 0) {
+    msg.__hideTimer = setTimeout(() => { msg.style.display = 'none'; }, durationMs);
+  }
+}
+
+
+    function openWhatsApp(){
+      const phone = document.body.dataset.whatsapp || '';
+      const msg = encodeURIComponent("Bonjour, je souhaite des informations pour un devis dentaire.");
+      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    }
+    window.openWhatsApp = window.openWhatsApp || openWhatsApp;
+
+    // --- Treatment: radio -> hidden field ---
+    (function(){
+      const hidden = $('#treatHidden');
+      const radios = $all('input[name="treatChoice"]');
+      function sync(){ const r = radios.find(x=>x.checked); hidden.value = r ? r.value : ''; }
+      radios.forEach(r => r.addEventListener('change', sync)); sync();
+    })();
+
+    // --- Drag & drop uploader with previews & remove ---
+    (function(){
+      const dz = $('#dz'), input = $('#files'), gal = $('#gallery'), chooseBtn = $('#chooseBtn');
+      chooseBtn.addEventListener('click', ()=> input.click());
+      dz.addEventListener('click', ()=> input.click());
+
+      const setDrag = on => dz.classList.toggle('drag', !!on);
+      ['dragenter','dragover'].forEach(ev => dz.addEventListener(ev, e => {
+        e.preventDefault(); setDrag(true);
+        if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
+      }));
+      ['dragleave','drop'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); setDrag(false); }));
+
+      dz.addEventListener('drop', e=>{
+        const files = Array.from(e.dataTransfer.files || []);
+        pushFiles(files);
+      });
+      input.addEventListener('change', ()=> pushFiles(Array.from(input.files)));
+
+      const bag = [];
+      function pushFiles(files){
+        for(const f of files){
+          if (bag.length >= MAX_FILES) break;
+          if (f.size > MAX_SIZE){ showMessage('Un fichier dépasse 10 MB et a été ignoré.', true); continue; }
+          bag.push(f);
+        }
+        render(); syncInput();
+      }
+      function removeAt(i){ bag.splice(i,1); render(); syncInput(); }
+      function syncInput(){
+        const dt = new DataTransfer();
+        bag.forEach(f => dt.items.add(f));
+        input.files = dt.files;
+      }
+      function render(){
+        gal.innerHTML = '';
+        bag.forEach((f,i)=>{
+          const holder = document.createElement('div'); holder.className='thumb';
+          const img = document.createElement('img');
+          if (f.type.startsWith('image/')) img.src = URL.createObjectURL(f);
+          else {
+            img.alt = f.name;
+            img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="96" height="64"><rect width="96" height="64" rx="8" fill="%23eef2ff"/><text x="48" y="38" text-anchor="middle" font-family="sans-serif" font-size="12" fill="%236b7280">PDF</text></svg>';
+          }
+          const x = document.createElement('button'); x.type='button'; x.textContent='×'; x.title='Supprimer';
+          x.addEventListener('click', ()=> removeAt(i));
+          holder.append(img,x); gal.append(holder);
+        });
+      }
+      window.__getFiles = ()=> bag.slice();
+      window.__resetFiles = ()=> { bag.length = 0; render(); syncInput(); };
+    })();
+
+    // --- Live completion meter ---
+    (function(){
+      const meter = $('#meter'), form = $('#qform');
+      const tests = [
+        f => !!f.name.value.trim(),
+        f => !!f.email.value && f.email.validity.valid,
+        f => !!f.phone.value.trim(),
+        _ => (window.__getFiles?.().length || 0) > 0,
+        _ => $('#consent').checked
+      ];
+      function update(){
+        const f = form; let ok = 0; tests.forEach(t => ok += t(f) ? 1 : 0);
+        const pct = Math.round((ok / tests.length) * 100);
+        meter.style.width = pct + '%';
+      }
+      form.addEventListener('input', update);
+      form.addEventListener('change', update);
+      setInterval(update, 800);
+    })();
+
+    // ----- Country list (FR labels) -----
+    const COUNTRIES = [
+      "Afghanistan","Afrique du Sud","Albanie","Algérie","Allemagne","Andorre","Angola","Antigua-et-Barbuda","Arabie saoudite",
+      "Argentine","Arménie","Australie","Autriche","Azerbaïdjan","Bahamas","Bahreïn","Bangladesh","Barbade","Belgique",
+      "Belize","Bénin","Bhoutan","Biélorussie","Birmanie","Bolivie","Bosnie-Herzégovine","Botswana","Brésil","Brunei",
+      "Bulgarie","Burkina Faso","Burundi","Cambodge","Cameroun","Canada","Cap-Vert","Chili","Chine","Chypre","Colombie",
+      "Comores","Congo (Brazzaville)","Congo (RDC)","Corée du Nord","Corée du Sud","Costa Rica","Côte d’Ivoire","Croatie",
+      "Cuba","Danemark","Djibouti","Dominique","Égypte","Émirats arabes unis","Équateur","Érythrée","Espagne","Estonie",
+      "Eswatini","États-Unis","Éthiopie","Fidji","Finlande","France","Gabon","Gambie","Géorgie","Ghana","Grèce",
+      "Grenade","Guatemala","Guinée","Guinée-Bissau","Guinée équatoriale","Guyana","Haïti","Honduras","Hongrie","Inde",
+      "Indonésie","Irak","Iran","Irlande","Islande","Italie","Jamaïque","Japon","Jordanie","Kazakhstan",
+      "Kenya","Kirghizistan","Kiribati","Kosovo","Koweït","Laos","Lesotho","Lettonie","Liban","Libéria","Libye",
+      "Liechtenstein","Lituanie","Luxembourg","Macédoine du Nord","Madagascar","Malaisie","Malawi","Maldives","Mali",
+      "Malte","Maroc","Marshall","Maurice","Mauritanie","Mexique","Micronésie","Moldavie","Monaco","Mongolie","Monténégro",
+      "Mozambique","Namibie","Nauru","Népal","Nicaragua","Niger","Nigéria","Norvège","Nouvelle-Zélande","Oman","Ouganda",
+      "Ouzbékistan","Palestine","Pakistan","Palaos","Panama","Papouasie-Nouvelle-Guinée","Paraguay","Pays-Bas","Pérou","Philippines",
+      "Pologne","Portugal","Qatar","République centrafricaine","République dominicaine","République tchèque","Roumanie",
+      "Royaume-Uni","Russie","Rwanda","Saint-Christophe-et-Niévès","Sainte-Lucie","Saint-Marin","Saint-Vincent-et-les-Grenadines",
+      "Salomon","Salvador","Samoa","São Tomé-et-Principe","Sénégal","Serbie","Seychelles","Sierra Leone","Singapour",
+      "Slovaquie","Slovénie","Somalie","Soudan","Soudan du Sud","Sri Lanka","Suède","Suisse","Suriname","Syrie","Tadjikistan",
+      "Tanzanie","Tchad","Thaïlande","Timor oriental","Togo","Tonga","Trinité-et-Tobago","Tunisie","Turkménistan","Turquie",
+      "Tuvalu","Ukraine","Uruguay","Vanuatu","Vatican","Venezuela","Viêt Nam","Yémen","Zambie","Zimbabwe"
+    ];
+
+    // ----- Pretty, keyboard-friendly autocomplete -----
+    (function countryAutocomplete(){
+      const input = document.getElementById('countryInput');
+      const list  = document.getElementById('countryList');
+
+      const norm = s => (s||"").normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+      let items = [], active = -1;
+
+      function render(results){
+        list.innerHTML = '';
+        if (!results.length){
+          list.innerHTML = `<li class="ac-empty">Aucun résultat</li>`;
+          list.hidden = false; input.setAttribute('aria-expanded','true'); return;
+        }
+        results.forEach((name, i)=>{
+          const li = document.createElement('li');
+          li.className = 'ac-item';
+          li.id = 'ac-item-'+i;
+          li.role = 'option';
+          li.innerHTML = `<span class="dot" aria-hidden="true"></span><span>${name}</span>`;
+          li.addEventListener('mousedown', e=> e.preventDefault());
+          li.addEventListener('click', ()=> select(i));
+          list.appendChild(li);
+        });
+        list.hidden = false;
+        input.setAttribute('aria-expanded','true');
+        active = -1;
+        items = Array.from(list.querySelectorAll('.ac-item'));
+      }
+
+      function select(i){
+        if (i<0 || i>=items.length) return hide();
+        const val = items[i].innerText.trim();
+        input.value = val;
+        hide();
+        input.dispatchEvent(new Event('input', {bubbles:true}));
+        input.dispatchEvent(new Event('change', {bubbles:true}));
+      }
+
+      function hide(){
+        list.hidden = true;
+        input.setAttribute('aria-expanded','false');
+        active = -1; items = [];
+      }
+
+      input.addEventListener('input', ()=>{
+        const q = norm(input.value);
+        if (!q){ hide(); return; }
+        const results = COUNTRIES.filter(c => norm(c).includes(q)).slice(0, 12);
+        render(results);
+      });
+
+      input.addEventListener('keydown', (e)=>{
+        if (list.hidden) return;
+        if (e.key === 'ArrowDown'){ e.preventDefault(); move(1); }
+        else if (e.key === 'ArrowUp'){ e.preventDefault(); move(-1); }
+        else if (e.key === 'Enter'){ e.preventDefault(); select(active); }
+        else if (e.key === 'Escape'){ hide(); }
+      });
+
+      function move(step){
+        if (!items.length) return;
+        active = (active + step + items.length) % items.length;
+        items.forEach((el,idx)=> el.classList.toggle('is-active', idx===active));
+        const id = items[active].id;
+        input.setAttribute('aria-activedescendant', id);
+        items[active].scrollIntoView({block:'nearest'});
+      }
+
+      input.addEventListener('blur', ()=> setTimeout(hide, 80));
+      input.setAttribute('autocomplete','off');
+    })();
+
+    // --- Submit with XHR + progress (click-only; no native submit) ---
+    (function(){
+      const form = $('#qform');
+      const submitBtn = $('#submitBtn');
+      const bar = $('#prog');
+      const statusEl = $('#status');
+
+      // Prevent Enter from native submit (except textarea)
+      form.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA'){
+          e.preventDefault();
+          submitBtn.click();
+        }
+      });
+
+      submitBtn.addEventListener('click', async ()=>{
+        $('#msg').style.display='none'; statusEl.textContent=''; bar.style.display='none';
+
+        // Honeypot
+        if (form.querySelector('.hp')?.value.trim()){ return; }
+
+        // Required checks
+        if (!$('#consent').checked){ showMessage('Veuillez accepter la case de consentement pour continuer.', 'error'); return; }
+        const bag = window.__getFiles?.() || [];
+        if (bag.length === 0){ showMessage('Veuillez joindre au moins une photo ou une radio panoramique.', 'error'); return; }
+        if (bag.length > MAX_FILES){ showMessage('Trop de fichiers (max 10).', 'error'); return; }
+
+        // Build FormData
+        const fd = new FormData(form);
+        fd.set('consent','true'); fd.delete('files');
+        bag.forEach(f => fd.append('files', f));
+
+        submitBtn.disabled = true; bar.style.display='inline-block'; bar.value = 0; statusEl.textContent='Téléversement…';
+
+        try{
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', API_URL, true);
+          xhr.upload.onprogress = ev => { if (ev.lengthComputable) bar.value = Math.round((ev.loaded/ev.total)*100); };
+          const done = new Promise((res,rej)=>{
+            xhr.onreadystatechange = () => {
+              if (xhr.readyState === 4){
+                (xhr.status>=200 && xhr.status<300) ? res(xhr.responseText) : rej(new Error(xhr.responseText||'Échec de l’envoi'));
+              }
+            };
+            xhr.onerror = () => rej(new Error('Erreur réseau'));
+          });
+          xhr.send(fd);
+
+          const raw = await done; const out = JSON.parse(raw||'{}');
+          const ref = out.id || 'N/A';
+          sessionStorage.setItem('quoteSuccess', JSON.stringify({ id: ref, t: Date.now() }));
+
+          // Clean form state immediately on success
+          resetFormUI(form);
+
+          // Show the clean success modal
+          showSuccessModal(ref);
+
+          statusEl.textContent='Terminé';
+          bar.value = 0;
+
+        }catch(err){
+          console.error(err);
+          showMessage('Désolé, une erreur est survenue. Réessayez.', 'error');
+          statusEl.textContent='Erreur';
+        }finally{
+          submitBtn.disabled = false;
+          setTimeout(()=> bar.style.display='none', 800);
+        }
+      });
+
+      // Clean phone inputs
+      $all('input[inputmode="tel"]').forEach(inp => inp.addEventListener('input', ()=> inp.value = inp.value.replace(/[^\d+ ]/g,'')));
+    })();
+
+    function resetFormUI(form){
+      try{
+        form.reset();
+        window.__resetFiles?.();
+        $('#treatHidden').value = '';
+        // Nudge the progress meter back to 0
+        $('#meter').style.width = '0%';
+       showMessage('Votre demande a été envoyée. Vous pouvez fermer ce message.', 'success'); // no 3rd arg
+      }catch(_e){}
+    }
+
+    // Success Modal helper (clean + accessible)
+    function showSuccessModal(refId) {
+      const dlg = document.getElementById('successDialog');
+      const txt = document.getElementById('successText');
+      const refEl = document.getElementById('successRef');
+      const copyBtn = document.getElementById('copyRefBtn');
+      const ok  = document.getElementById('successCloseBtn');
+
+      refEl.textContent = refId || 'N/A';
+      txt.textContent = 'Merci ! Votre demande a bien été envoyée. Un conseiller vous répond sous 24 h.';
+
+      // Copy reference
+      copyBtn.onclick = async () => {
+        try { await navigator.clipboard.writeText(refEl.textContent); copyBtn.textContent='Copié'; setTimeout(()=>copyBtn.textContent='Copier la référence', 1500); }
+        catch(_e){ /* ignore */ }
+      };
+
+      // Lock ESC close so the user uses buttons (still accessible)
+      const preventCancel = (e) => e.preventDefault();
+      dlg.addEventListener('cancel', preventCancel);
+
+      // Prevent backdrop click from closing
+      dlg.addEventListener('click', (e)=>{
+        const r = dlg.getBoundingClientRect();
+        const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!inside) e.preventDefault();
+      });
+
+      ok.onclick = () => {
+        dlg.removeEventListener('cancel', preventCancel);
+        sessionStorage.removeItem('quoteSuccess');
+        if (dlg.close) dlg.close(); else dlg.removeAttribute('open');
+      };
+
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+      ok.focus();
+    }
+    (function () {
+  try {
+    const raw = sessionStorage.getItem('quoteSuccess');
+    if (!raw) return;
+    const { id, t } = JSON.parse(raw);
+    if (Date.now() - (t || 0) < 10 * 60 * 1000) { // 10 min window
+      showSuccessModal(id);
+    } else {
+      sessionStorage.removeItem('quoteSuccess');
+    }
+  } catch (_) {}
+})();
+
+  </script>
+
+  <!-- Success dialog (clean) -->
+  <dialog id="successDialog" class="modal" aria-labelledby="successTitle" aria-modal="true">
+    <div class="modal-head">
+      <div class="checkwrap" aria-hidden="true">✓</div>
+      <div>
+        <span class="badge">Succès</span><br/>
+        <b id="successTitle">Demande envoyée</b>
+      </div>
+    </div>
+
+    <p id="successText" style="margin:6px 0 8px 0"></p>
+    <p class="small">Référence : <span class="ref" id="successRef">N/A</span></p>
+    <button type="button" id="copyRefBtn" class="copy-btn" style="margin:6px 0 12px 0">Copier la référence</button>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline" onclick="openWhatsApp()">Parler sur WhatsApp</button>
+      <button type="button" class="btn btn-turq" id="successCloseBtn">OK</button>
+    </div>
+  </dialog>
+  <!-- Language FAB + i18n -->
+<style>
+  #langFab{position:fixed;right:16px;bottom:16px;z-index:50}
+  #langFab .fab{
+    width:52px;height:52px;border-radius:50%;
+    background:#fff;border:2px solid #e5e7eb;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    display:flex;align-items:center;justify-content:center;cursor:pointer
+  }
+  #langFab .menu{
+    position:absolute;right:0;bottom:60px;background:#111827;color:#fff;
+    border-radius:12px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.35);
+    opacity:0;transform:translateY(8px);transition:.15s;pointer-events:none
+  }
+  #langFab.open .menu{opacity:1;transform:translateY(0);pointer-events:auto}
+  #langFab .menu button{
+    display:flex;align-items:center;gap:8px;background:transparent;color:#fff;
+    border:0;padding:8px 10px;border-radius:10px;cursor:pointer;font-weight:700
+  }
+  #langFab .menu button:hover{background:#1f2937}
+  #langFab .menu .active{background:#0f172a}
+
+  /* fallback <img> size for the FAB + menu */
+  #langFab .flag-img{width:24px;height:24px;border-radius:50%;display:inline-block;vertical-align:middle}
+  #langFab .menu .flag-img{width:18px;height:18px}
+
+
+</style>
+
+<div id="langFab" aria-label="Choose language">
+  <button class="fab" id="langFabBtn" title="Language">🌐</button>
+  <div class="menu" id="langMenu" role="menu" aria-label="Languages"></div>
+</div>
+
+<script>
+
+(function ensureFlagsShow(){
+  // if a .fi element has no background-image, swap it with an <img>
+  document.querySelectorAll('#langFab .flag.fi').forEach(sp => {
+    const bg = getComputedStyle(sp).backgroundImage;
+    if (!bg || bg === 'none') {
+      const m = sp.className.match(/fi-([a-z]{2})\b/i);
+      const code = m && m[1] ? m[1].toLowerCase() : null;
+      if (!code) return;
+      const img = document.createElement('img');
+      img.className = 'flag-img';
+      // square (1x1) looks best inside a circle FAB
+      img.src = `https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/1x1/${code}.svg`;
+      img.alt = '';
+      sp.replaceWith(img);
+    }
+  });
+})();
+
+(function(){
+  /* ============ Languages & translations ============ */
+  const LANGS = [
+    { code:'fr', label:'Français', dir:'ltr' },
+    { code:'en', label:'English',  dir:'ltr' },
+    { code:'es', label:'Español',  dir:'ltr' },
+    { code:'de', label:'Deutsch',  dir:'ltr' },
+    { code:'it', label:'Italiano', dir:'ltr' },
+    { code:'ar', label:'العربية',  dir:'rtl' },
+  ];
+
+  const T = {
+    fr:{
+      title:'Devis dentaire — Smile Tunisia',
+      'nav.back':'← Retour',
+
+      h1:'Devis dentaire gratuit',
+      lead:'Réponse <b>sous 24 h</b>, sans engagement. Transmission <b>sécurisée</b>.',
+      'trust.badges':['★★★★★ Avis vérifiés','+500 patients accompagnés','Réseau de cliniques certifiées','Planification 3D (CBCT)','Devis clair · 0 frais cachés'],
+
+      // form labels / placeholders
+      'form.name':'Nom et prénom *','ph.name':'Votre nom complet',
+      'form.email':'Email *','ph.email':'vous@example.com',
+      'form.phone':'Téléphone / WhatsApp *','ph.phone':'+216 ...',
+      'form.country':'Pays','ph.country':'Commencez à taper…',
+
+      // treatments
+      tImplant:'Implant', tAllOn:'All-on-4/6', tVeneers:'Facettes', tAligners:'Aligneurs',
+      tCrowns:'Couronnes / Bridges', tDentures:'Prothèses dentaires', tEndo:'Endodontie', tCaries:'Caries', tWhitening:'Blanchiment',
+
+      // urgency
+      uNow:'📅 Dès que possible', uSoon:'🗓️ 1–3 mois', uLater:'⏳ Plus tard',
+
+      // files / text area
+      filesHelp:'Téléversez une <b>photo de vos dents</b> (smartphone ok) ou une <b>radio panoramique</b>.',
+      filesBtn:'Choisir des fichiers',
+      filesDZ:'Glissez-déposez ici vos photos / PDF (max 10, 10 MB chacun)',
+      filesNote:'Conseil : une photo bouche ouverte + un selfie sourire aident à estimer votre cas.',
+      'ph.notes':'Votre objectif : dents manquantes, esthétique, douleur… Ajoutez tout détail utile.',
+
+      // consent + privacy
+      consent:'J’accepte de recevoir mon devis et des informations par WhatsApp et email (confidentiel, pas de spam).',
+      privacy:'Transmission chiffrée (HTTPS). Accès restreint à l’équipe soignante. <a href="../legal/confidentialite.html">Politique de confidentialité</a>.',
+
+      // actions
+      submit:'Envoyer ma demande',
+      statusUploading:'Téléversement…', statusDone:'Terminé', statusError:'Erreur',
+
+      // reassurance column
+      rDoctorTitle:'Équipe médicale certifiée',
+      rDoctorLine:'Implantologie & esthétique — réseau de cliniques auditées.',
+      rDoctorQuote:'“Protocoles sûrs, matériaux CE/FDA, résultat naturel.”',
+
+      rGet:'Ce que vous recevez',
+      rGetList:['Un <b>devis clair</b> avec options & délais','Une <b>explication du protocole</b> proposé','Un <b>conseiller dédié</b> sur WhatsApp'],
+
+      rData:'Données & confidentialité',
+      rDataList:['Envoi via <b>connexion sécurisée (HTTPS)</b>','Accès limité à l’équipe soignante','<b>Suppression sur demande</b> (RGPD)'],
+
+      rNext:'Et après ?',
+      rNextList:['Étude de vos photos/radio','Devis sous 24 h avec options','Organisation du séjour si souhaité'],
+
+      stars:'★★★★★',
+      'reviews.r1':'Suivi WhatsApp rassurant.',
+      'reviews.r2':'All-on-4 en 5 jours.',
+      'reviews.r3':'Facettes impeccables.',
+
+      // FAQ
+      faq1q:'Le devis est-il payant ?', faq1a:'Non, il est <b>gratuit</b> et sans engagement.',
+      faq2q:'Dois-je avancer des frais ?', faq2a:'Aucun frais avant la première visite. Vols/hôtel à votre charge si vous organisez seul.',
+      faq3q:'Et si je n’ai pas de radio ?', faq3a:'Envoyez juste des <b>photos</b>. Une radio pourra être prescrite ensuite si besoin.',
+      advisorBtn:'Parler à un conseiller',
+
+      // WhatsApp message
+      waMsg:'Bonjour, je souhaite des informations pour un devis dentaire.',
+
+      // Modal
+      'm.badge':'Succès', 'm.title':'Demande envoyée',
+      'm.text':'Merci ! Votre demande a bien été envoyée. Un conseiller vous répond sous 24 h.',
+      'm.ref':'Référence :', 'm.copy':'Copier la référence', 'm.copied':'Copié',
+      'm.wa':'Parler sur WhatsApp', 'm.ok':'OK',
+
+      // Runtime messages (shim)
+      errTooBig:'Un fichier dépasse 10 MB et a été ignoré.',
+      errConsent:'Veuillez accepter la case de consentement pour continuer.',
+      errNeedFiles:'Veuillez joindre au moins une photo ou une radio panoramique.',
+      errTooMany:'Trop de fichiers (max 10).',
+      errGeneric:'Désolé, une erreur est survenue. Réessayez.'
+    },
+
+    en:{
+      title:'Dental quote — Smile Tunisia',
+      'nav.back':'← Back',
+      h1:'Free dental quote',
+      lead:'Reply <b>within 24 h</b>, no obligation. <b>Secure</b> transfer.',
+      'trust.badges':['★★★★★ Verified reviews','500+ patients assisted','Network of certified clinics','3D planning (CBCT)','Clear quote · no hidden fees'],
+
+      'form.name':'Full name *','ph.name':'Your full name',
+      'form.email':'Email *','ph.email':'you@example.com',
+      'form.phone':'Phone / WhatsApp *','ph.phone':'+216 ...',
+      'form.country':'Country','ph.country':'Start typing…',
+
+      tImplant:'Implant', tAllOn:'All-on-4/6', tVeneers:'Veneers', tAligners:'Aligners',
+      tCrowns:'Crowns / Bridges', tDentures:'Dentures', tEndo:'Endodontics', tCaries:'Cavities', tWhitening:'Whitening',
+
+      uNow:'📅 As soon as possible', uSoon:'🗓️ 1–3 months', uLater:'⏳ Later',
+
+      filesHelp:'Upload a <b>photo of your teeth</b> (phone is fine) or a <b>panoramic X-ray</b>.',
+      filesBtn:'Choose files',
+      filesDZ:'Drag & drop your photos / PDFs here (max 10, 10 MB each)',
+      filesNote:'Tip: one open-mouth photo + a smiling selfie help estimate your case.',
+      'ph.notes':'Your goal: missing teeth, aesthetics, pain… Add any useful details.',
+
+      consent:'I agree to receive my quote and information by WhatsApp and email (confidential, no spam).',
+      privacy:'Encrypted transfer (HTTPS). Access restricted to the care team. <a href="../legal/confidentialite.html">Privacy policy</a>.',
+
+      submit:'Send my request',
+      statusUploading:'Uploading…', statusDone:'Done', statusError:'Error',
+
+      rDoctorTitle:'Certified medical team',
+      rDoctorLine:'Implantology & aesthetics — network of audited clinics.',
+      rDoctorQuote:'“Safe protocols, CE/FDA materials, natural result.”',
+
+      rGet:'What you receive',
+      rGetList:['A <b>clear quote</b> with options & timelines','An <b>explanation of the proposed protocol</b>','A <b>dedicated advisor</b> on WhatsApp'],
+
+      rData:'Data & privacy',
+      rDataList:['Sent via <b>secure connection (HTTPS)</b>','Limited access for the care team','<b>Deletion on request</b> (GDPR)'],
+
+      rNext:'What happens next?',
+      rNextList:['Review of your photos/X-ray','Quote within 24 h with options','Trip organization if desired'],
+
+      stars:'★★★★★',
+      'reviews.r1':'Reassuring WhatsApp follow-up.',
+      'reviews.r2':'All-on-4 in 5 days.',
+      'reviews.r3':'Impeccable veneers.',
+
+      faq1q:'Is the quote paid?', faq1a:'No, it is <b>free</b> and without obligation.',
+      faq2q:'Do I need to pay upfront?', faq2a:'No fees before the first visit. Flights/hotel at your expense if you book yourself.',
+      faq3q:'What if I don’t have an X-ray?', faq3a:'Just send <b>photos</b>. An X-ray can be prescribed later if needed.',
+      advisorBtn:'Talk to an advisor',
+
+      waMsg:'Hello, I’d like information about a dental quote.',
+
+      "m.badge":'Success', "m.title":'Request sent',
+      "m.text":'Thank you! Your request has been sent. An advisor will reply within 24 h.',
+      "m.ref":'Reference:', "m.copy":'Copy reference', "m.copied":'Copied',
+      "m.wa":'Chat on WhatsApp', "m.ok":'OK',
+
+      errTooBig:'A file exceeds 10 MB and was ignored.',
+      errConsent:'Please accept the consent checkbox to continue.',
+      errNeedFiles:'Please attach at least one photo or a panoramic X-ray.',
+      errTooMany:'Too many files (max 10).',
+      errGeneric:'Sorry, an error occurred. Please try again.'
+    },
+
+    es:{
+      title:'Presupuesto dental — Smile Tunisia',
+      'nav.back':'← Volver',
+      h1:'Presupuesto dental gratis',
+      lead:'Respuesta <b>en 24 h</b>, sin compromiso. Transferencia <b>segura</b>.',
+      'trust.badges':['★★★★★ Reseñas verificadas','500+ pacientes acompañados','Red de clínicas certificadas','Planificación 3D (CBCT)','Presupuesto claro · sin costes ocultos'],
+
+      'form.name':'Nombre y apellidos *','ph.name':'Tu nombre completo',
+      'form.email':'Email *','ph.email':'tu@ejemplo.com',
+      'form.phone':'Teléfono / WhatsApp *','ph.phone':'+216 ...',
+      'form.country':'País','ph.country':'Empieza a escribir…',
+
+      tImplant:'Implante', tAllOn:'All-on-4/6', tVeneers:'Carillas', tAligners:'Alineadores',
+      tCrowns:'Coronas / Puentes', tDentures:'Prótesis', tEndo:'Endodoncia', tCaries:'Caries', tWhitening:'Blanqueamiento',
+
+      uNow:'📅 Lo antes posible', uSoon:'🗓️ 1–3 meses', uLater:'⏳ Más tarde',
+
+      filesHelp:'Sube una <b>foto de tus dientes</b> (móvil vale) o una <b>radiografía panorámica</b>.',
+      filesBtn:'Elegir archivos',
+      filesDZ:'Arrastra y suelta aquí tus fotos / PDF (máx. 10, 10 MB cada uno)',
+      filesNote:'Consejo: una foto con boca abierta + un selfie sonriendo ayudan a estimar tu caso.',
+      'ph.notes':'Tu objetivo: dientes ausentes, estética, dolor… Añade detalles útiles.',
+
+      consent:'Acepto recibir mi presupuesto e información por WhatsApp y email (confidencial, sin spam).',
+      privacy:'Transmisión cifrada (HTTPS). Acceso restringido al equipo médico. <a href="../legal/confidentialite.html">Política de privacidad</a>.',
+
+      submit:'Enviar mi solicitud',
+      statusUploading:'Subiendo…', statusDone:'Hecho', statusError:'Error',
+
+      rDoctorTitle:'Equipo médico certificado',
+      rDoctorLine:'Implantología y estética — red de clínicas auditadas.',
+      rDoctorQuote:'“Protocolos seguros, materiales CE/FDA, resultado natural.”',
+
+      rGet:'Lo que recibes',
+      rGetList:['Un <b>presupuesto claro</b> con opciones y plazos','Una <b>explicación del protocolo</b> propuesto','Un <b>asesor dedicado</b> por WhatsApp'],
+
+      rData:'Datos y privacidad',
+      rDataList:['Envío por <b>conexión segura (HTTPS)</b>','Acceso limitado al equipo médico','<b>Eliminación a solicitud</b> (RGPD)'],
+
+      rNext:'¿Y después?',
+      rNextList:['Estudio de tus fotos/radiografía','Presupuesto en 24 h con opciones','Organización del viaje si se desea'],
+
+      stars:'★★★★★',
+      'reviews.r1':'Seguimiento por WhatsApp tranquilizador.',
+      'reviews.r2':'All-on-4 en 5 días.',
+      'reviews.r3':'Carillas impecables.',
+
+      faq1q:'¿El presupuesto es de pago?', faq1a:'No, es <b>gratis</b> y sin compromiso.',
+      faq2q:'¿Debo adelantar gastos?', faq2a:'Ningún pago antes de la primera visita. Vuelos/hotel a tu cargo si los gestionas tú.',
+      faq3q:'¿Y si no tengo radiografía?', faq3a:'Envía solo <b>fotos</b>. La radiografía podrá pedirse después si hace falta.',
+      advisorBtn:'Hablar con un asesor',
+
+      waMsg:'Hola, quisiera información para un presupuesto dental.',
+
+      "m.badge":'Éxito', "m.title":'Solicitud enviada',
+      "m.text":'¡Gracias! Hemos recibido tu solicitud. Un asesor responderá en 24 h.',
+      "m.ref":'Referencia:', "m.copy":'Copiar referencia', "m.copied":'Copiado',
+      "m.wa":'Hablar por WhatsApp', "m.ok":'OK',
+
+      errTooBig:'Un archivo supera 10 MB y se ignoró.',
+      errConsent:'Acepta la casilla de consentimiento para continuar.',
+      errNeedFiles:'Adjunta al menos una foto o una radiografía panorámica.',
+      errTooMany:'Demasiados archivos (máx. 10).',
+      errGeneric:'Lo sentimos, ocurrió un error. Inténtalo de nuevo.'
+    },
+
+    de:{
+      title:'Zahn-Kostenvoranschlag — Smile Tunisia',
+      'nav.back':'← Zurück',
+      h1:'Kostenloser Kostenvoranschlag',
+      lead:'Antwort <b>innerhalb von 24 Std.</b>, unverbindlich. <b>Sichere</b> Übertragung.',
+      'trust.badges':['★★★★★ Verifizierte Bewertungen','500+ begleitete Patienten','Netz zertifizierter Kliniken','3D-Planung (CBCT)','Klares Angebot · keine versteckten Kosten'],
+
+      'form.name':'Vor- und Nachname *','ph.name':'Ihr vollständiger Name',
+      'form.email':'E-Mail *','ph.email':'sie@beispiel.de',
+      'form.phone':'Telefon / WhatsApp *','ph.phone':'+216 ...',
+      'form.country':'Land','ph.country':'Tippen Sie…',
+
+      tImplant:'Implantat', tAllOn:'All-on-4/6', tVeneers:'Veneers', tAligners:'Aligner',
+      tCrowns:'Kronen / Brücken', tDentures:'Prothesen', tEndo:'Endodontie', tCaries:'Karies', tWhitening:'Bleaching',
+
+      uNow:'📅 So bald wie möglich', uSoon:'🗓️ 1–3 Monate', uLater:'⏳ Später',
+
+      filesHelp:'Laden Sie ein <b>Foto Ihrer Zähne</b> (Handy ok) oder ein <b>Panorama-Röntgen</b> hoch.',
+      filesBtn:'Dateien wählen',
+      filesDZ:'Ziehen Sie Fotos / PDFs hierher (max. 10, je 10 MB)',
+      filesNote:'Tipp: ein Foto mit offenem Mund + ein lächelndes Selfie helfen bei der Einschätzung.',
+      'ph.notes':'Ihr Ziel: fehlende Zähne, Ästhetik, Schmerz … Weitere Details willkommen.',
+
+      consent:'Ich stimme zu, mein Angebot und Infos per WhatsApp und E-Mail zu erhalten (vertraulich, kein Spam).',
+      privacy:'Verschlüsselte Übertragung (HTTPS). Zugriff nur für das Behandlungsteam. <a href="../legal/confidentialite.html">Datenschutz</a>.',
+
+      submit:'Anfrage senden',
+      statusUploading:'Upload läuft…', statusDone:'Fertig', statusError:'Fehler',
+
+      rDoctorTitle:'Zertifiziertes Ärzteteam',
+      rDoctorLine:'Implantologie & Ästhetik — Netzwerk geprüfter Kliniken.',
+      rDoctorQuote:'„Sichere Protokolle, CE/FDA-Materialien, natürliches Ergebnis.“',
+
+      rGet:'Was Sie erhalten',
+      rGetList:['Einen <b>klaren Kostenvoranschlag</b> mit Optionen & Zeitrahmen','Eine <b>Erklärung des vorgeschlagenen Protokolls</b>','Einen <b>persönlichen Berater</b> via WhatsApp'],
+
+      rData:'Daten & Datenschutz',
+      rDataList:['Versand über <b>gesicherte Verbindung (HTTPS)</b>','Beschränkter Zugriff für das Team','<b>Löschung auf Anfrage</b> (DSGVO)'],
+
+      rNext:'Wie geht es weiter?',
+      rNextList:['Sichtung Ihrer Fotos/Röntgen','Angebot binnen 24 Std. mit Optionen','Reiseorganisation auf Wunsch'],
+
+      stars:'★★★★★',
+      'reviews.r1':'Beruhigende WhatsApp-Nachsorge.',
+      'reviews.r2':'All-on-4 in 5 Tagen.',
+      'reviews.r3':'Makellose Veneers.',
+
+      faq1q:'Ist das Angebot kostenpflichtig?', faq1a:'Nein, es ist <b>kostenlos</b> und unverbindlich.',
+      faq2q:'Muss ich vorab zahlen?', faq2a:'Keine Gebühren vor dem ersten Termin. Flüge/Hotel bei Selbstbuchung eigenständig.',
+      faq3q:'Kein Röntgen vorhanden?', faq3a:'Senden Sie einfach <b>Fotos</b>. Ein Röntgen kann später veranlasst werden.',
+      advisorBtn:'Mit Berater sprechen',
+
+      waMsg:'Hallo, ich hätte gern Infos zu einem Zahnarzt-Kostenvoranschlag.',
+
+      "m.badge":'Erfolg', "m.title":'Anfrage gesendet',
+      "m.text":'Danke! Ihre Anfrage wurde gesendet. Ein Berater meldet sich innerhalb von 24 Std.',
+      "m.ref":'Referenz:', "m.copy":'Referenz kopieren', "m.copied":'Kopiert',
+      "m.wa":'Auf WhatsApp chatten', "m.ok":'OK',
+
+      errTooBig:'Eine Datei ist größer als 10 MB und wurde ignoriert.',
+      errConsent:'Bitte stimmen Sie der Einwilligung zu, um fortzufahren.',
+      errNeedFiles:'Bitte fügen Sie mindestens ein Foto oder ein Panorama-Röntgen hinzu.',
+      errTooMany:'Zu viele Dateien (max. 10).',
+      errGeneric:'Leider ist ein Fehler aufgetreten. Bitte erneut versuchen.'
+    },
+
+    it:{
+      title:'Preventivo dentale — Smile Tunisia',
+      'nav.back':'← Indietro',
+      h1:'Preventivo dentale gratuito',
+      lead:'Risposta <b>entro 24 h</b>, senza impegno. Trasmissione <b>sicura</b>.',
+      'trust.badges':['★★★★★ Recensioni verificate','500+ pazienti assistiti','Rete di cliniche certificate','Pianificazione 3D (CBCT)','Preventivo chiaro · zero costi nascosti'],
+
+      'form.name':'Nome e cognome *','ph.name':'Il tuo nome completo',
+      'form.email':'Email *','ph.email':'tu@example.com',
+      'form.phone':'Telefono / WhatsApp *','ph.phone':'+216 ...',
+      'form.country':'Paese','ph.country':'Inizia a digitare…',
+
+      tImplant:'Impianto', tAllOn:'All-on-4/6', tVeneers:'Faccette', tAligners:'Aligner',
+      tCrowns:'Corone / Ponti', tDentures:'Protesi', tEndo:'Endodonzia', tCaries:'Carie', tWhitening:'Sbiancamento',
+
+      uNow:'📅 Il prima possibile', uSoon:'🗓️ 1–3 mesi', uLater:'⏳ Più tardi',
+
+      filesHelp:'Carica una <b>foto dei denti</b> (va bene lo smartphone) o una <b>panoramica</b>.',
+      filesBtn:'Scegli file',
+      filesDZ:'Trascina qui foto / PDF (max 10, 10 MB ciascuno)',
+      filesNote:'Consiglio: una foto a bocca aperta + un selfie col sorriso aiutano la stima.',
+      'ph.notes':'Obiettivo: denti mancanti, estetica, dolore… Aggiungi dettagli utili.',
+
+      consent:'Accetto di ricevere il preventivo e le info via WhatsApp ed email (riservato, no spam).',
+      privacy:'Trasmissione cifrata (HTTPS). Accesso limitato al team clinico. <a href="../legal/confidentialite.html">Privacy policy</a>.',
+
+      submit:'Invia la richiesta',
+      statusUploading:'Caricamento…', statusDone:'Fatto', statusError:'Errore',
+
+      rDoctorTitle:'Team medico certificato',
+      rDoctorLine:'Implantologia & estetica — rete di cliniche verificate.',
+      rDoctorQuote:'“Protocolli sicuri, materiali CE/FDA, risultato naturale.”',
+
+      rGet:'Cosa ricevi',
+      rGetList:['Un <b>preventivo chiaro</b> con opzioni e tempi','Una <b>spiegazione del protocollo</b> proposto','Un <b>consulente dedicato</b> su WhatsApp'],
+
+      rData:'Dati & privacy',
+      rDataList:['Invio tramite <b>connessione sicura (HTTPS)</b>','Accesso limitato al team','<b>Cancellazione su richiesta</b> (GDPR)'],
+
+      rNext:'E poi?',
+      rNextList:['Studio di foto/radiografia','Preventivo entro 24 h con opzioni','Organizzazione del viaggio se desiderato'],
+
+      stars:'★★★★★',
+      'reviews.r1':'Follow-up WhatsApp rassicurante.',
+      'reviews.r2':'All-on-4 in 5 giorni.',
+      'reviews.r3':'Faccette impeccabili.',
+
+      faq1q:'Il preventivo è a pagamento?', faq1a:'No, è <b>gratuito</b> e senza impegno.',
+      faq2q:'Devo anticipare dei costi?', faq2a:'Nessun costo prima della prima visita. Voli/hotel a tuo carico se gestiti in autonomia.',
+      faq3q:'E se non ho la panoramica?', faq3a:'Invia solo <b>foto</b>. La panoramica potrà essere prescritta in seguito.',
+      advisorBtn:'Parla con un consulente',
+
+      waMsg:'Ciao, vorrei info per un preventivo dentale.',
+
+      "m.badge":'Successo', "m.title":'Richiesta inviata',
+      "m.text":'Grazie! La tua richiesta è stata inviata. Un consulente risponderà entro 24 h.',
+      "m.ref":'Riferimento:', "m.copy":'Copia riferimento', "m.copied":'Copiato',
+      "m.wa":'Parla su WhatsApp', "m.ok":'OK',
+
+      errTooBig:'Un file supera 10 MB ed è stato ignorato.',
+      errConsent:'Accetta la casella di consenso per continuare.',
+      errNeedFiles:'Allega almeno una foto o una panoramica.',
+      errTooMany:'Troppi file (max 10).',
+      errGeneric:'Si è verificato un errore. Riprova.'
+    },
+
+    ar:{
+      title:'عرض أسعار الأسنان — Smile Tunisia',
+      'nav.back':'← رجوع',
+      h1:'عرض أسعار أسنان مجاني',
+      lead:'رد <b>خلال 24 ساعة</b> بدون التزام. نقل <b>آمن</b>.',
+      'trust.badges':['★★★★★ تقييمات موثّقة','+500 مريضًا مُرافَقًا','شبكة عيادات معتمدة','تخطيط ثلاثي الأبعاد (CBCT)','عرض واضح · بدون رسوم مخفية'],
+
+      'form.name':'الاسم الكامل *','ph.name':'اسمك الكامل',
+      'form.email':'البريد الإلكتروني *','ph.email':'you@example.com',
+      'form.phone':'الهاتف / واتساب *','ph.phone':'+216 ...',
+      'form.country':'الدولة','ph.country':'ابدأ بالكتابة…',
+
+      tImplant:'زرعة', tAllOn:'All-on-4/6', tVeneers:'فينيرات', tAligners:'مقومات شفافة',
+      tCrowns:'تيجان / جسور', tDentures:'أطقم أسنان', tEndo:'علاج جذور', tCaries:'تسوس', tWhitening:'تبييض',
+
+      uNow:'📅 في أقرب وقت', uSoon:'🗓️ خلال 1–3 أشهر', uLater:'⏳ لاحقًا',
+
+      filesHelp:'ارفَع <b>صورة لأسنانك</b> (الهاتف يكفي) أو <b>أشعة بانورامية</b>.',
+      filesBtn:'اختيار ملفات',
+      filesDZ:'اسحب وأسقط الصور / PDF هنا (بحد أقصى 10، 10 MB لكل ملف)',
+      filesNote:'نصيحة: صورة فم مفتوح + سيلفي ابتسامة تساعد على التقدير.',
+      'ph.notes':'هدفك: أسنان مفقودة، جمالية، ألم… أضف أي تفاصيل مفيدة.',
+
+      consent:'أوافق على استلام العرض والمعلومات عبر واتساب والبريد (بسرية، دون إزعاج).',
+      privacy:'نقل مشفّر (HTTPS). وصول محدود لفريق الرعاية. <a href="../legal/confidentialite.html">سياسة الخصوصية</a>.',
+
+      submit:'إرسال طلبي',
+      statusUploading:'جارٍ الرفع…', statusDone:'تم', statusError:'خطأ',
+
+      rDoctorTitle:'فريق طبي معتمد',
+      rDoctorLine:'زراعة وتجميل — شبكة عيادات مُدقَّقة.',
+      rDoctorQuote:'“بروتوكولات آمنة، مواد CE/FDA، نتيجة طبيعية.”',
+
+      rGet:'ماذا ستتلقّى',
+      rGetList:['<b>عرض واضح</b> مع الخيارات والمواعيد','<b>شرح البروتوكول</b> المقترح','<b>مستشار مخصص</b> على واتساب'],
+
+      rData:'البيانات والخصوصية',
+      rDataList:['إرسال عبر <b>اتصال آمن (HTTPS)</b>','وصول محدود لفريق الرعاية','<b>حذف عند الطلب</b> (GDPR)'],
+
+      rNext:'وماذا بعد؟',
+      rNextList:['دراسة الصور/الأشعة','عرض خلال 24 ساعة مع الخيارات','تنظيم الرحلة إن رغبت'],
+
+      stars:'★★★★★',
+      'reviews.r1':'متابعة عبر واتساب مطمئنة.',
+      'reviews.r2':'All-on-4 خلال 5 أيام.',
+      'reviews.r3':'فينيرات متقنة.',
+
+      faq1q:'هل العرض مدفوع؟', faq1a:'لا، إنه <b>مجاني</b> وبدون التزام.',
+      faq2q:'هل عليّ دفع أي رسوم؟', faq2a:'لا توجد رسوم قبل الزيارة الأولى. الرحلات/الفندق على نفقتك إذا حجزتها بنفسك.',
+      faq3q:'وماذا لو لم تكن لديّ أشعة؟', faq3a:'أرسل <b>صورًا</b> فقط. يمكن طلب الأشعة لاحقًا إذا لزم الأمر.',
+      advisorBtn:'التحدث مع مستشار',
+
+      waMsg:'مرحبًا، أود معلومات حول عرض أسعار للأسنان.',
+
+      "m.badge":'نجاح', "m.title":'تم إرسال الطلب',
+      "m.text":'شكرًا! تم إرسال طلبك. سيردّ عليك مستشار خلال 24 ساعة.',
+      "m.ref":'المرجع:', "m.copy":'نسخ المرجع', "m.copied":'تم النسخ',
+      "m.wa":'الدردشة على واتساب', "m.ok":'حسنًا',
+
+      errTooBig:'ملف أكبر من 10 MB وقد تم تجاهله.',
+      errConsent:'يرجى قبول مربع الموافقة للمتابعة.',
+      errNeedFiles:'يرجى إرفاق صورة واحدة على الأقل أو أشعة بانورامية.',
+      errTooMany:'عدد كبير من الملفات (الحد 10).',
+      errGeneric:'عذرًا، حدث خطأ. حاول مرة أخرى.'
+    }
+  };
+
+  /* ============ tiny helpers ============ */
+  const $ = (s,el=document)=>el.querySelector(s);
+  const setText = (sel, txt)=>{ const el=$(sel); if(el && typeof txt==='string') el.textContent=txt; };
+  const setHTML = (sel, html)=>{ const el=$(sel); if(el && typeof html==='string') el.innerHTML=html; };
+  const setList = (sel, arr)=>{ const el=$(sel); if(el && Array.isArray(arr)) el.innerHTML=arr.map(x=>`<li>${x}</li>`).join(''); };
+  const setPlaceholder = (sel, txt)=>{ const el=$(sel); if(el) el.setAttribute('placeholder', txt); };
+  const setLabelForInputName = (name, txt)=>{
+    const input = document.querySelector(`[name="${name}"]`); if(!input) return;
+    const label = input.closest('div')?.querySelector('label'); if(label) label.textContent = txt;
+  };
+
+  /* ============ Apply language ============ */
+  function apply(lang){
+    const P = T[lang] || T.fr;
+
+    // lang + dir
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang==='ar') ? 'rtl' : 'ltr';
+    document.body.style.direction = document.documentElement.dir;
+
+    document.title = P.title;
+
+    // top
+    setText('header nav .btn.btn-outline', P['nav.back']);
+    setText('h1', P.h1);
+    setHTML('.lead', P.lead);
+
+    // trust belt
+    const rail = $('.trust-rail');
+    if (rail && P['trust.badges']) rail.innerHTML = P['trust.badges'].map(x=>`<span class="t-badge">${x}</span>`).join('');
+
+    // form labels / PH
+    setLabelForInputName('name',  P['form.name']); setPlaceholder('input[name="name"]',  P['ph.name']);
+    setLabelForInputName('email', P['form.email']); setPlaceholder('input[name="email"]', P['ph.email']);
+    setLabelForInputName('phone', P['form.phone']); setPlaceholder('input[name="phone"]', P['ph.phone']);
+    setText('label[for="countryInput"]', P['form.country']); setPlaceholder('#countryInput', P['ph.country']);
+
+    // treatments
+    const t = [
+      ['.tcard:nth-child(1) .visual b', 'tImplant'],
+      ['.tcard:nth-child(2) .visual b', 'tAllOn'],
+      ['.tcard:nth-child(3) .visual b', 'tVeneers'],
+      ['.tcard:nth-child(4) .visual b', 'tAligners'],
+      ['.tcard:nth-child(5) .visual b', 'tCrowns'],
+      ['.tcard:nth-child(6) .visual b', 'tDentures'],
+      ['.tcard:nth-child(7) .visual b', 'tEndo'],
+      ['.tcard:nth-child(8) .visual b', 'tCaries'],
+      ['.tcard:nth-child(9) .visual b', 'tWhitening'],
+    ];
+    t.forEach(([sel,key])=> setText(sel, P[key]));
+
+    // urgency
+    setText('.seg label:nth-child(1) span', P.uNow);
+    setText('.seg label:nth-child(2) span', P.uSoon);
+    setText('.seg label:nth-child(3) span', P.uLater);
+
+    // files
+    setHTML('.files .drop .help', P.filesHelp);
+    setText('#chooseBtn', P.filesBtn);
+    setText('#dz', P.filesDZ);
+    setText('.files .note', P.filesNote);
+    setPlaceholder('textarea[name="notes"]', P['ph.notes']);
+
+    // consent + privacy + submit
+    setText('.consent span', P.consent);
+    setHTML('.consent ~ .note', P.privacy);
+    setText('#submitBtn', P.submit);
+
+    // reassurance column
+    const docCard = $('.r-card.doctor');
+    if (docCard){
+      setText('.r-card.doctor b', P.rDoctorTitle);
+      const lines = $('.r-card.doctor b').parentNode;
+      // replace the two following text nodes/line:
+      const p = $('.r-card.doctor .note').parentNode;
+      lines.childNodes[2].nodeValue = ''; // clear old
+      $('.r-card.doctor .note').textContent = P.rDoctorQuote;
+      // main line:
+      const textHolder = $('.r-card.doctor b').nextSibling;
+      if (textHolder && textHolder.nodeType===3) textHolder.nodeValue = ' ';
+      $('.r-card.doctor b').parentElement.childNodes.forEach(n=>{
+        /* noop, handled below with setText to a new element if needed */
+      });
+      // ensure main line text
+      const afterB = $('.r-card.doctor b').parentElement.querySelector('br').nextSibling;
+      if (afterB && afterB.nodeType===3) afterB.nodeValue = P.rDoctorLine + '\n';
+    }
+    setText('.r-card:nth-of-type(2) > b', P.rGet);
+    setList('.r-card:nth-of-type(2) ul', P.rGetList);
+
+    setText('.r-card:nth-of-type(3) > b', P.rData);
+    setList('.r-card:nth-of-type(3) ul', P.rDataList);
+
+    setText('.r-card:nth-of-type(4) > b', P.rNext);
+    setList('.r-card:nth-of-type(4) ol', P.rNextList);
+
+    setText('.r-card:nth-of-type(5) .stars', P.stars);
+    // mini-reviews (order: SB, ML, AK) → r3, r2, r1 (to match your avatars)
+    const rBoxes = document.querySelectorAll('.mini-reviews .review-mini .txt');
+    if (rBoxes[0]) rBoxes[0].innerHTML = `<b>“${P['reviews.r3']}”</b>`;
+    if (rBoxes[1]) rBoxes[1].innerHTML = `<b>“${P['reviews.r2']}”</b>`;
+    if (rBoxes[2]) rBoxes[2].innerHTML = `<b>“${P['reviews.r1']}”</b>`;
+
+    // FAQ
+    const faqs = document.querySelectorAll('.r-faq');
+    if (faqs[0]){ faqs[0].querySelector('summary').textContent = P.faq1q; faqs[0].querySelector('p').innerHTML = P.faq1a; }
+    if (faqs[1]){ faqs[1].querySelector('summary').textContent = P.faq2q; faqs[1].querySelector('p').innerHTML = P.faq2a; }
+    if (faqs[2]){ faqs[2].querySelector('summary').textContent = P.faq3q; faqs[2].querySelector('p').innerHTML = P.faq3a; }
+    setText('aside .btn.btn-outline', P.advisorBtn);
+
+    // WhatsApp opener (override to localized default message)
+    window.openWhatsApp = function(){
+      const phone = document.body.dataset.whatsapp || '';
+      const msg = encodeURIComponent(P.waMsg);
+      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    };
+
+    // modal static labels
+    setText('#successDialog .badge', P['m.badge']);
+    setText('#successTitle', P['m.title']);
+    setText('#successCloseBtn', P['m.ok']);
+    setText('#copyRefBtn', P['m.copy']);
+    setText('.modal-actions .btn.btn-outline', P['m.wa']); // WA button label
+
+    // expose current strings for shims
+    window.__I18N_Q = P;
+
+    // status text shim (translate whenever it changes)
+    const status = document.getElementById('status');
+    if (!status.__i18nObs){
+      const map = {
+        'Téléversement…':'statusUploading','Terminé':'statusDone','Erreur':'statusError',
+        'Uploading…':'statusUploading','Done':'statusDone','Error':'statusError'
+      };
+      const mo = new MutationObserver(()=> {
+        const val = status.textContent.trim();
+        const key = map[val]; if (key && __I18N_Q[key]) status.textContent = __I18N_Q[key];
+      });
+      mo.observe(status, {childList:true, subtree:true, characterData:true});
+      status.__i18nObs = mo;
+    }
+  }
+
+  /* ====== Shim showMessage so existing code shows localized text ====== */
+  const _origShowMessage = window.showMessage;
+  window.showMessage = function(text, type, ms){
+    const P = window.__I18N_Q || T.fr;
+    const map = {};
+    // map French & English fallbacks to keys
+    map[T.fr.errTooBig]   = 'errTooBig';
+    map[T.en.errTooBig]   = 'errTooBig';
+    map[T.fr.errConsent]  = 'errConsent';
+    map[T.en.errConsent]  = 'errConsent';
+    map[T.fr.errNeedFiles]= 'errNeedFiles';
+    map[T.en.errNeedFiles]= 'errNeedFiles';
+    map[T.fr.errTooMany]  = 'errTooMany';
+    map[T.en.errTooMany]  = 'errTooMany';
+    map[T.fr.errGeneric]  = 'errGeneric';
+    map[T.en.errGeneric]  = 'errGeneric';
+
+    const k = map[text];
+    const localized = k ? (P[k] || text) : text;
+    return _origShowMessage(localized, type, ms);
+  };
+
+  // When the success modal is shown by your code, adjust its dynamic texts
+  const dlg = document.getElementById('successDialog');
+  if (dlg){
+    dlg.addEventListener('close', ()=>{ /* noop */ });
+    dlg.addEventListener('toggle', ()=>{ /* noop */ });
+    // patch open to always localize contents
+    const obs = new MutationObserver(()=>{
+      const P = window.__I18N_Q || T.fr;
+      const txt = document.getElementById('successText');
+      const copyBtn = document.getElementById('copyRefBtn');
+      if (txt) txt.textContent = P['m.text'];
+      if (copyBtn){
+        copyBtn.textContent = P['m.copy'];
+        copyBtn.onclick = async ()=> {
+          try{ await navigator.clipboard.writeText(document.getElementById('successRef').textContent);
+               copyBtn.textContent = P['m.copied']; setTimeout(()=>copyBtn.textContent=P['m.copy'],1500);
+          }catch(_){}
+        };
+      }
+    });
+    obs.observe(dlg, {attributes:true, attributeFilter:['open']});
+  }
+
+  /* ===== Build FAB ===== */
+  const btn = document.getElementById('langFabBtn');
+  const menu = document.getElementById('langMenu');
+  const FLAG = { fr:'fr', en:'gb', es:'es', de:'de', it:'it', ar:'tn' }; // change 'gb'->'us' if you prefer
+const flagUrl = lang => `https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/1x1/${FLAG[lang]||lang}.svg`;
+
+function setFabFlag(lang){
+  const label = (LANGS.find(x=>x.code===lang)||{}).label || 'Language';
+  btn.innerHTML = `<img class="flag-img" alt="" src="${flagUrl(lang)}">`;
+  btn.title = label; btn.setAttribute('aria-label', label);
+}
+
+  LANGS.forEach(l=>{
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.code = l.code;
+  b.innerHTML = `<img class="flag-img" alt="" src="${flagUrl(l.code)}"><span>${l.label}</span>`;
+  b.onclick = ()=>{
+    localStorage.setItem('quote_lang', l.code);
+    apply(l.code);
+    setFabFlag(l.code);
+    menu.querySelectorAll('button').forEach(x=> x.classList.toggle('active', x===b));
+    document.getElementById('langFab').classList.remove('open');
+  };
+  menu.appendChild(b);
+});
+
+  btn.addEventListener('click', ()=> document.getElementById('langFab').classList.toggle('open'));
+  document.addEventListener('click', e=>{ const w=document.getElementById('langFab'); if(!w.contains(e.target)) w.classList.remove('open'); });
+
+  // init
+  const saved = localStorage.getItem('quote_lang') || (navigator.language||'fr').slice(0,2);
+  const init = LANGS.find(x=>x.code===saved) ? saved : 'fr';
+  apply(init);
+  setFabFlag(init);
+  menu.querySelectorAll('button').forEach(x=> x.classList.toggle('active', x.dataset.code===init));
+})();
+</script>
+
+</body>
+</html>
